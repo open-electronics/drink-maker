@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller {
+    /**
+     * Return the admin index with a list of the orders and the ingredients with the relative info
+     * @return $this
+     */
     public function adminIndex(){
         $ingredients=DB::table("ingredients")->select("ingredient","stock")->get();
         $orders=DB::table("orders")->join("drinks","drinks.id","=","orders.drink_id")
@@ -17,6 +21,10 @@ class UserController extends Controller {
         return view('admin')->with('ingredients',$ingredients)->with('orders',$orders);
     }
 
+    /**
+     * Return a view to the user with all the cocktails, their ingredients and their availability
+     * @return $this
+     */
     public function userIndex(){
         $result=DB::table("drinks")
             ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")

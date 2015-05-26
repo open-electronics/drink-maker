@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 
 class OrderController extends Controller {
+    /**
+     * Get the drink with the specified name and add it to the orders queue, decrease stock of items
+     * @param $name
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
     public function add($name){
         $result=DB::table("drinks")
             ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
@@ -22,6 +27,12 @@ class OrderController extends Controller {
         DB::table("orders")->insert(['drink_id'=>$id,'status'=>0]);
         return redirect("user");
     }
+
+    /**
+     * Find order with given id, put back in stock the various ingredients and delete the order
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
     public function delete($id){
         $ingredients=DB::table("orders")->where("orders.id",$id)
             ->join("drinks_ingredients","orders.drink_id","=","drinks_ingredients.drink_id")

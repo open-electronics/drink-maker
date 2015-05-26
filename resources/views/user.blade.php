@@ -15,11 +15,14 @@
                 @forelse($drinks as $n=>$d)
                     <li>
                         <div class="collapsible-header">
-                            <i class="mdi-maps-local-bar medium"></i> {{$n}}
+                            <i class="mdi-maps-local-bar medium"></i> <span>{{$n}}</span>
                             @if($d["available"])
-                            <a href="{{url("orders/".$n)}}">
-                                <i class="mdi-social-notifications medium right"></i>
-                            </a>
+                                <a href="#" onclick="$(this).next('form').trigger('submit')" >
+                                    <i class="mdi-social-notifications medium right"></i>
+                                </a>
+                                <form style="display: none" method="post" action="{{url("orders/".$n)}}">
+                                    {{--<input aria-hidden="true" name="_method" type="hidden" value="post" />--}}
+                                </form>
                             @else
                                 <i class="mdi-av-not-interested medium right"></i>
                             @endif

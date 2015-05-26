@@ -29,6 +29,18 @@ class OrderController extends Controller {
     }
 
     /**
+     * Sets a drink in production mode
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
+    public function produce($id){
+        if(DB::table('orders')->where('status',1)->count()==0){
+            DB::table('orders')->where('id',$id)->update(['status'=>1]);
+        }
+        return redirect("admin");
+    }
+
+    /**
      * Find order with given id, put back in stock the various ingredients and delete the order
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
@@ -38,7 +50,7 @@ class OrderController extends Controller {
             ->join("drinks_ingredients","orders.drink_id","=","drinks_ingredients.drink_id")
             ->select("ingredient_id","needed")->get();
         foreach($ingredients as $i){
-            DB::table("ingredients")->increment("stock",$i["needed"]);
+            DB::table("ingredients")->where('id',$i["ingredient_id"])->increment("stock",$i["needed"]);
         }
         DB::table("orders")->where("id",$id)->delete();
         return redirect("admin");

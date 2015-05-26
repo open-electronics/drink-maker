@@ -12,13 +12,13 @@
 */
 
 
-use Illuminate\Support\Facades\DB;
 
 $app->get('/', function()  {
 
     return view('landing');
 });
-$app->get('admin','UserController@adminIndex');
-$app->get('user','UserController@userIndex');
-$app->get('orders/{name}','OrderController@add');
-$app->delete('orders/{id}','OrderController@delete');
+$app->get('admin','App\Http\Controllers\UserController@adminIndex');
+$app->get('user','App\Http\Controllers\UserController@userIndex');
+$app->post('orders/{name}','App\Http\Controllers\OrderController@add');
+$app->patch('orders/{id}','App\Http\Controllers\OrderController@produce');
+$app->delete('orders/{id}','App\Http\Controllers\OrderController@delete');

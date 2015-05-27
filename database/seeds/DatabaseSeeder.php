@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder {
         DB::table('drinks')->truncate();
         DB::statement('SET foreign_key_checks=1');
         //Seed ingredients
-        DB::insert('INSERT INTO ingredients (ingredient,stock) values("Ice",5)');
-        DB::insert('INSERT INTO ingredients (ingredient,stock) values("Rum",5)');
-        DB::insert('INSERT INTO ingredients (ingredient,stock) values("Vodka",5)');
-        DB::insert('INSERT INTO ingredients (ingredient,stock) values("Gin",5)');
-        DB::insert('INSERT INTO ingredients (ingredient,stock) values("Jack",5)');
+        DB::insert('INSERT INTO ingredients (ingredient,stock,position ) values("Ice",5,1)');
+        DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Rum",5,3)');
+        DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Vodka",5,4)');
+        DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Gin",5,5)');
+        DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Jack",5,7)');
         //Seed drinks
         $r=rand(3,10);
         for($i=0;$i<$r;$i++){

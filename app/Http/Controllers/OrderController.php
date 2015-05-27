@@ -29,17 +29,30 @@ class OrderController extends Controller {
     }
 
     /**
-     * Sets a drink in production mode
+     * Sets a drink in approved mode
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
-    public function produce($id){
+    public function approve($id){
         if(DB::table('orders')->where('status',1)->count()==0){
             DB::table('orders')->where('id',$id)->update(['status'=>1]);
         }
         return redirect("admin");
     }
 
+    public function waiting(){
+        $result=DB::table('orders')->where('status',1)
+            ->join('drinks_ingredients','orders.drink_id','=','drinks_ingredients.drink_id')
+            ->join('ingredients','drinks_ingredients.ingredient_id','=','ingredients.id')
+            ->select('orders.drink_id','drinks_ingredients.needed','ingredients.position')->get();
+        if(count($result)==0) return response("none");
+        $resp["id"]=$result[0]["drink_id"];
+        foreach($result as $r){
+            $resp['ingredients'][$r['position']]=$r['needed'];
+        }
+        $result=DB::table('orders')->where('status',1)->update(['status'=>2]);
+        return response()->json($resp);
+    }
     /**
      * Find order with given id, put back in stock the various ingredients and delete the order
      * @param $id
@@ -52,7 +65,7 @@ class OrderController extends Controller {
         foreach($ingredients as $i){
             DB::table("ingredients")->where('id',$i["ingredient_id"])->increment("stock",$i["needed"]);
         }
-        DB::table("orders")->where("id",$id)->delete();
+        DB::table("orders")->where("id",$id)->update(['status'=>4]);
         return redirect("admin");
     }
 }

@@ -47,7 +47,7 @@
                     <td>{{$o["name"]}}</td>
                         @if($o["status"]==0)
                             <td>
-                            Waiting
+                            Waiting approval
                             </td>
                             <td>
                                 <form action="{{url("orders/".$o["id"])}}" method="post" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete">
@@ -59,9 +59,19 @@
                                     <i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-send"></i>
                                 </form>
                             </td>
+                        @elseif($o["status"]==1)
+                            <td>
+                            Approved
+                            </td>
+                            <td>
+                                <form action="{{url("orders/".$o["id"])}}" method="post" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete">
+                                    <input name="_method" type="hidden" value="delete"/>
+                                    <i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-clear"></i>
+                                </form>
+                            </td>
                         @else
                             <td>
-                            Making
+                                Making
                             </td>
                             <td>
 

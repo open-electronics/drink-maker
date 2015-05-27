@@ -18,7 +18,7 @@ class CreateIngredients extends Migration {
 		{
 			$table->increments('id');
             $table->char('ingredient',50);
-            $table->decimal('stock',3,1);
+            $table->tinyInteger('stock')->unsigned();
             $table->tinyInteger('position')->nullable();
 			$table->timestamps();
 		});

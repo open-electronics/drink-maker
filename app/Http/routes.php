@@ -19,6 +19,7 @@ $app->get('/', function()  {
 });
 $app->get('admin','App\Http\Controllers\UserController@adminIndex');
 $app->get('user','App\Http\Controllers\UserController@userIndex');
+$app->get('orders/waiting','App\Http\Controllers\OrderController@waiting');
 $app->post('orders/{name}','App\Http\Controllers\OrderController@add');
 $app->patch('orders/{id}','App\Http\Controllers\OrderController@produce');
 $app->delete('orders/{id}','App\Http\Controllers\OrderController@delete');

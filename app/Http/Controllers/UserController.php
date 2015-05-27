@@ -17,7 +17,7 @@ class UserController extends Controller {
     public function adminIndex(){
         $ingredients=DB::table("ingredients")->select("ingredient","stock")->get();
         $orders=DB::table("orders")->join("drinks","drinks.id","=","orders.drink_id")
-            ->select("drinks.name","orders.status","orders.id")->whereIn("orders.status",[0,1])->get();
+            ->select("drinks.name","orders.status","orders.id")->whereIn("orders.status",[0,1,2])->get();
         return view('admin')->with('ingredients',$ingredients)->with('orders',$orders);
     }
 

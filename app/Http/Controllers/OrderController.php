@@ -43,15 +43,20 @@ class OrderController extends Controller {
     public function approve($id){
         if(DB::table('orders')->where('status',1)->count()==0){
             DB::table('orders')->where('id',$id)->update(['status'=>1]);
-        }
+        }//TODO: implement errors
         return redirect("admin");
     }
 
+    /**
+     * Gets the cocktail queued for Python
+     * @return \Laravel\Lumen\Http\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function waiting(){
         $result=DB::table('orders')->where('status',1)
             ->join('drinks_ingredients','orders.drink_id','=','drinks_ingredients.drink_id')
             ->join('ingredients','drinks_ingredients.ingredient_id','=','ingredients.id')
-            ->select('orders.drink_id','drinks_ingredients.needed','ingredients.position')->get();
+            ->select('orders.drink_id','drinks_ingredients.needed','ingredients.position')
+            ->orderBy('position','asc')->get();
         if(count($result)==0) return response("none");
         $resp["id"]=$result[0]["drink_id"];
         foreach($result as $r){

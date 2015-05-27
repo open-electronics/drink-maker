@@ -18,8 +18,15 @@ class OrderController extends Controller {
     public function add($name){
         $result=DB::table("drinks")
             ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
-            ->select("drinks.id","drinks_ingredients.needed","drinks_ingredients.ingredient_id")
+            ->join("ingredients","ingredients.id","=","drinks_ingredients.ingredient_id")
+            ->select("drinks.id","drinks_ingredients.needed","ingredients.stock","drinks_ingredients.ingredient_id")
             ->where("drinks.name","=",$name)->get();
+        $score=0;
+        foreach($result as $r){
+            if($r["needed"]<$r["stock"])$score++;
+        }
+        if($score!=count($result)) return redirect("user"); //TODO:implement error
+
         $id=$result[0]["id"];
         foreach($result as $r){
             DB::table("ingredients")->where("id","=",$r["ingredient_id"])->decrement("stock",$r["needed"]);

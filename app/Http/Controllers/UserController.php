@@ -15,10 +15,14 @@ class UserController extends Controller {
      * @return $this
      */
     public function adminIndex(){
-        $ingredients=DB::table("ingredients")->select("ingredient","stock")->get();
+        $ingredients=DB::table("ingredients")->select("ingredient","stock","position")->get();
         $orders=DB::table("orders")->join("drinks","drinks.id","=","orders.drink_id")
             ->select("drinks.name","orders.status","orders.id")->whereIn("orders.status",[0,1,2])->get();
-        return view('admin')->with('ingredients',$ingredients)->with('orders',$orders);
+        $status=false;
+        foreach($orders as $o){
+            if($o['status']==2) $status=true;
+        }
+        return view('admin')->with('ingredients',$ingredients)->with('orders',$orders)->with('status',$status);
     }
 
     /**

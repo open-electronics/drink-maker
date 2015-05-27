@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ab04fa0-e877-4f90-8b1f-e800b210be84" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="lumen.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+      <file leaf-file-name="admin.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79640716" vertical-offset="336" max-vertical-offset="1540">
-              <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.33532935" vertical-offset="476" max-vertical-offset="2744">
+              <caret line="25" column="52" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -59,9 +62,9 @@
         <option value="$PROJECT_DIR$/database/migrations/2015_05_22_185758_create_drinks_ingredients.php" />
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_05_24_211228_create_orders.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin.blade.php" />
       </list>
     </option>
   </component>
@@ -445,13 +448,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9161677" vertical-offset="1516" max-vertical-offset="2632">
-          <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_24_211228_create_orders.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6287425" vertical-offset="84" max-vertical-offset="1120">
@@ -471,39 +467,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrderController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0838324" vertical-offset="60" max-vertical-offset="2100">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.66467065" vertical-offset="256" max-vertical-offset="2296">
+          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
           <folding>
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder=" Created by PhpStorm. ..." />
-            <marker date="1432735886163" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder=" Get the drink with the specified name and add it to the orders queue, decrease stock of items ..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder=" Sets a drink in approved mode ..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder=" Find order with given id, put back in stock the various ingredients and delete the order ..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1432735886163" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder=" Created by PhpStorm. ..." />
+            <marker date="1432750745542" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder=" Get the drink with the specified name and add it to the orders queue, decrease stock of items ..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder=" Sets a drink in approved mode ..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder=" Find order with given id, put back in stock the various ingredients and delete the order ..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432750745542" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79640716" vertical-offset="336" max-vertical-offset="1540">
-          <caret line="32" column="55" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.37125748" vertical-offset="200" max-vertical-offset="1652">
+          <caret line="17" column="84" selection-start-line="17" selection-start-column="84" selection-end-line="17" selection-end-column="84" />
+          <folding>
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder=" Created by PhpStorm. ..." />
+            <marker date="1432751076302" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder=" Return the admin index with a list of the orders and the ingredients with the relative info ..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder=" Return a view to the user with all the cocktails, their ingredients and their availability ..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1432751076302" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33532935" vertical-offset="476" max-vertical-offset="2744">
+          <caret line="25" column="52" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
           <folding />
         </state>
       </provider>

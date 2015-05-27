@@ -30,6 +30,7 @@ class UserController extends Controller {
             ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
             ->join("ingredients","ingredients.id","=","drinks_ingredients.ingredient_id")
             ->select("drinks.name","ingredients.ingredient","ingredients.stock","drinks_ingredients.needed")
+            ->where("ingredients.position","<>","null")
             ->get();
         $drinks=[];
         foreach($result as  $r){

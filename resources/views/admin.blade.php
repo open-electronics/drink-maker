@@ -12,6 +12,8 @@
     <div class="row">
         <div class="col s6" align="center">
             <h4>Ingredients:</h4>
+            <form method="post" action="{{url('ingredients')}}">
+            <input name="_method" type="hidden" value="patch"/>
             <table>
                 <thead>
                     <tr>
@@ -22,15 +24,20 @@
                 </thead>
                 <tbody>
                     @forelse($ingredients as $i)
-                            <td>{{$i["ingredient"]}}</td>
-                            <td>{{$i["stock"]}}</td>
-                            <td>{{$i["position"]}}</td>
+                        <tr>
+                            <td>{{$i["ingredient"]}}<input value="{{$i["id"]}}" name="id[]" type="hidden"></td>
+                            <td><input value="{{$i["stock"]}}" name="stock[]" type="number" class="validate"></td>
+                            <td><input value="{{$i["position"]}}" name="position[]" type="number" class="validate"></td>
                         </tr>
                     @empty
                         There are no ingredients yet!
                     @endforelse
                 </tbody>
             </table>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </form>
         </div>
         <div class="col s6" align="center">
             <h4>Orders:</h4>

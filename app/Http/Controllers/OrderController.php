@@ -23,7 +23,7 @@ class OrderController extends Controller {
             ->where("drinks.name","=",$name)->get();
         $score=0;
         foreach($result as $r){
-            if($r["needed"]<$r["stock"])$score++;
+            if($r["needed"]<=$r["stock"])$score++;
         }
         if($score!=count($result)) return redirect("user"); //TODO:implement error
 

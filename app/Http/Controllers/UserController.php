@@ -15,7 +15,7 @@ class UserController extends Controller {
      * @return $this
      */
     public function adminIndex(){
-        $ingredients=DB::table("ingredients")->select("ingredient","stock","position")->get();
+        $ingredients=DB::table("ingredients")->select("id","ingredient","stock","position")->get();
         $orders=DB::table("orders")->join("drinks","drinks.id","=","orders.drink_id")
             ->select("drinks.name","orders.status","orders.id")->whereIn("orders.status",[0,1,2])->get();
         $status=false;
@@ -34,7 +34,7 @@ class UserController extends Controller {
             ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
             ->join("ingredients","ingredients.id","=","drinks_ingredients.ingredient_id")
             ->select("drinks.name","ingredients.ingredient","ingredients.stock","drinks_ingredients.needed")
-            ->where("ingredients.position","<>","null")
+            ->where("ingredients.position",">","-1")
             ->get();
         $drinks=[];
         foreach($result as  $r){

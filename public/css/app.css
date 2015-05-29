@@ -1,0 +1,16 @@
+.dismisser:hover{
+    color: #039BE5;
+    cursor: pointer;
+}
+.error{
+    background-color:#ff4a4a;
+}
+.warning{
+    background-color:#fcfc8b;
+}
+.info{
+    background-color: lightskyblue;
+}
+.success{
+    background-color: lawngreen;
+}

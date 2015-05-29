@@ -57,13 +57,13 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
+$app->middleware([
 //     // 'Illuminate\Cookie\Middleware\EncryptCookies',
 //     // 'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
-//     // 'Illuminate\Session\Middleware\StartSession',
-//     // 'Illuminate\View\Middleware\ShareErrorsFromSession',
+      'Illuminate\Session\Middleware\StartSession',
+      'Illuminate\View\Middleware\ShareErrorsFromSession',
 //     // 'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
-// ]);
+ ]);
 
 // $app->routeMiddleware([
 
@@ -81,6 +81,8 @@ $app->singleton(
 */
 
 // $app->register('App\Providers\AppServiceProvider');
+$app->register('Laracasts\Flash\FlashServiceProvider');
+$app->alias('flash','Laracasts\Flash\Flash');
 
 /*
 |--------------------------------------------------------------------------

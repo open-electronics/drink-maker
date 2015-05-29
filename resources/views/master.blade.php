@@ -9,6 +9,8 @@
     <script src="js/jquery-2.1.4.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="js/materialize.min.js"></script>
+    {{--App related--}}
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
     <div class="container">

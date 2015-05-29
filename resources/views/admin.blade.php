@@ -9,6 +9,7 @@
             <h3>Admin</h3>
         </div>
     </div>
+    @include('messages')
     <div class="row">
         <div class="col s6" align="center">
             <h4>Ingredients:</h4>

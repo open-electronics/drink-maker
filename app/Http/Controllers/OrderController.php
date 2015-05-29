@@ -5,6 +5,7 @@
  * Date: 26/05/15
  * Time: 17:49
  */
+use App\flasher;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
@@ -25,13 +26,18 @@ class OrderController extends Controller {
         foreach($result as $r){
             if($r["needed"]<=$r["stock"])$score++;
         }
-        if($score!=count($result)) return redirect("user"); //TODO:implement error
+        if($score!=count($result)){
+            flasher::error('An error occured, please retry later');
+            return redirect("user");
+        }
 
         $id=$result[0]["id"];
         foreach($result as $r){
             DB::table("ingredients")->where("id","=",$r["ingredient_id"])->decrement("stock",$r["needed"]);
         }
         DB::table("orders")->insert(['drink_id'=>$id,'status'=>0]);
+        $number=DB::table('orders')->whereIn('status',[0,1,2])->count();
+        flasher::success('We\'re taking care of your order, which is the number '.$number);
         return redirect("user");
     }
 
@@ -43,7 +49,10 @@ class OrderController extends Controller {
     public function approve($id){
         if(DB::table('orders')->where('status',1)->count()==0){
             DB::table('orders')->where('id',$id)->update(['status'=>1]);
-        }//TODO: implement errors
+            flasher::success('Order set waiting to checkout');
+        }else{
+            flasher::success('An order has already been taken in charge');
+        }
         return redirect("admin");
     }
 
@@ -92,6 +101,7 @@ class OrderController extends Controller {
             DB::table("ingredients")->where('id',$i["ingredient_id"])->increment("stock",$i["needed"]);
         }
         DB::table("orders")->where("id",$id)->update(['status'=>4]);
+        flasher::success('Order deleted correctly');
         return redirect("admin");
     }
 }

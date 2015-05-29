@@ -6,7 +6,9 @@
  * Time: 17:49
  */
 use App\Http\Controllers\Controller;
+use App\flasher;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class UserController extends Controller {

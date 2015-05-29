@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\DB;
 
 
 class IngredientController extends Controller {
+
+    /**
+     * Updates ingredients positions and stock quantities
+     * @param Request $r
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
     public function update(Request $r){
         $ids=$r->input('id');
         $stocks=$r->input('stock');

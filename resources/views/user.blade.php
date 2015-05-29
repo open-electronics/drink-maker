@@ -9,6 +9,7 @@
             <h3>User</h3>
         </div>
     </div>
+    @include('messages')
     <div class="row">
         <div class="col s8 offset-s2">
             <ul class="collapsible" data-collapsible="accordion">

@@ -51,7 +51,7 @@ class OrderController extends Controller {
             DB::table('orders')->where('id',$id)->update(['status'=>1]);
             flasher::success('Order set waiting to checkout');
         }else{
-            flasher::success('An order has already been taken in charge');
+            flasher::error('An order has already been taken in charge');
         }
         return redirect("admin");
     }

@@ -5,6 +5,8 @@ sudo apt-get upgrade -y >> /dev/null
 
 echo "Installing dependencies"
 sudo apt-get install nginx curl php5-fpm php5-cgi php5-cli php5-common php5-mcrypt sqlite sqlite3 libsqlite3-dev php5-sqlite -y >/dev/null
+
+echo "Creating usergroup www-data"
 sudo useradd www-data 
 sudo groupadd www-data 
 sudo usermod -g www-data www-data 
@@ -40,7 +42,7 @@ sudo cp ../.env.deploy ../.env
 
 echo "Move all"
 sudo mkdir /var/www/barobot
-sudo cp -R ../* /var/www/barobot
+sudo cp -R ../. /var/www/barobot
 sudo chown www-data:www-data /var/www/barobot -R
 sudo chmod 0775 /var/www/barobot/storage -R
 

@@ -39,6 +39,7 @@ sudo rm ../.env
 sudo cp ../.env.deploy ../.env
 
 echo "Move all"
+sudo mkdir /var/www/barobot
 sudo cp -R ../* /var/www/barobot
 sudo chown www-data:www-data /var/www/barobot -R
 sudo chmod 0775 /var/www/barobot/storage -R

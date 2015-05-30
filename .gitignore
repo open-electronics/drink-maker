@@ -1,5 +1,6 @@
 /lumen.log
 /vendor
+/storage/*.sqlite
 .env
 .idea
 .idea/workspace.xml

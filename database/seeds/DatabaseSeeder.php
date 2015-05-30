@@ -12,12 +12,15 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
+        $unguard=[['SET foreign_key_checks=0','SET foreign_key_checks=1'],
+            ['PRAGMA foreign_keys=OFF','PRAGMA foreign_keys=ON']];
+        $driver=env('DB_CONNECTION')=='sqlite';
 		Model::unguard();
-        DB::statement('SET foreign_key_checks=0');
+        DB::statement($unguard[$driver][0]);
         DB::table('drinks_ingredients')->truncate();
         DB::table('ingredients')->truncate();
         DB::table('drinks')->truncate();
-        DB::statement('SET foreign_key_checks=1');
+        DB::statement($unguard[$driver][1]);
         //Seed ingredients
         DB::insert('INSERT INTO ingredients (ingredient,stock,position ) values("Ice",5,1)');
         DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Rum",5,3)');

@@ -1,10 +1,10 @@
 #!/bin/bash
 echo "Updating"
-sudo apt-get update -qq
+sudo apt-get update -qq >/dev/null
 sudo apt-get upgrade -y >> /dev/null
 
 echo "Installing dependencies"
-sudo apt-get install nginx curl php5-fpm php5-cgi php5-cli php5-common php5-mcrypt sqlite sqlite3 libsqlite3-dev php5-sqlite -y
+sudo apt-get install nginx curl php5-fpm php5-cgi php5-cli php5-common php5-mcrypt sqlite sqlite3 libsqlite3-dev php5-sqlite -y >/dev/null
 sudo useradd www-data 
 sudo groupadd www-data 
 sudo usermod -g www-data www-data 

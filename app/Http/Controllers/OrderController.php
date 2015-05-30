@@ -74,7 +74,7 @@ class OrderController extends Controller {
         foreach($result as $r){
             $resp['ingredients'][$r['position']]=$r['needed'];
         }
-//        DB::table('orders')->where('status',1)->update(['status'=>2]);
+        DB::table('orders')->where('status',1)->update(['status'=>2]);
         return response()->json($resp);
     }
 

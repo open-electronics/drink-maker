@@ -11,7 +11,7 @@
     </div>
     @include('messages')
     <div class="row">
-        <div class="col s6" align="center">
+        <div class="col s4" align="center">
             <h4>Ingredients:</h4>
             <form method="post" action="{{url('ingredients')}}">
             <input name="_method" type="hidden" value="patch"/>
@@ -40,13 +40,14 @@
                 </button>
             </form>
         </div>
-        <div class="col s6" align="center">
+        <div class="col offset-s1 s7" align="center">
             <h4>Orders:</h4>
             @if(count($orders)!=0)
             <table>
                 <thead>
                 <tr>
                     <th data-field="name">Name</th>
+                    <th data-field="customer">Customer</th>
                     <th data-field="status">Status</th>
                     <th data-field="action">Action</th>
                 </tr>
@@ -55,6 +56,7 @@
                 @foreach($orders as $o)
                     <tr>
                     <td>{{$o["name"]}}</td>
+                    <td>{{$o["customer"]}}</td>
                         @if($o["status"]==0)
                             <td>
                             Waiting approval

@@ -1,7 +1,7 @@
 import json
 import urllib.request
 import time
-#import serial
+import serial
 
 global data,ser,base_url
 
@@ -14,7 +14,7 @@ def main_loop():
 		time.sleep(2)
 	#dictate ingredients
 	for i in data["ingredients"]:
-		serial.write(i+"|"+str(data["ingredients"][i]))
+		ser.write(i+"|"+str(data["ingredients"][i]))
 		wait_answer()
 	#update db
 	fetch_url(base_url+"completed/"+str(data["id"]))
@@ -35,5 +35,6 @@ def wait_answer():
 
 data="null"
 base_url="http://robot.app/orders/"
-#ser=serial.Serial(port="dev/tty0",baudrate=9600)
-main_loop()
+ser=serial.Serial(port="dev/tty0",baudrate=9600)
+while True:
+	main_loop()

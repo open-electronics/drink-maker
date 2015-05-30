@@ -19,7 +19,7 @@ class UserController extends Controller {
     public function adminIndex(){
         $ingredients=DB::table("ingredients")->select("id","ingredient","stock","position")->get();
         $orders=DB::table("orders")->join("drinks","drinks.id","=","orders.drink_id")
-            ->select("drinks.name","orders.status","orders.id")->whereIn("orders.status",[0,1,2])->get();
+            ->select("drinks.name","orders.name AS customer","orders.status","orders.id")->whereIn("orders.status",[0,1,2])->get();
         $status=false;
         foreach($orders as $o){
             if($o['status']==2) $status=true;
@@ -35,11 +35,12 @@ class UserController extends Controller {
         $result=DB::table("drinks")
             ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
             ->join("ingredients","ingredients.id","=","drinks_ingredients.ingredient_id")
-            ->select("drinks.name","ingredients.ingredient","ingredients.stock","drinks_ingredients.needed")
+            ->select("drinks.id","drinks.name","ingredients.ingredient","ingredients.stock","drinks_ingredients.needed")
             ->where("ingredients.position",">","-1")
             ->get();
         $drinks=[];
         foreach($result as  $r){
+            $drinks[$r["name"]]["id"]=$r["id"];
             $drinks[$r["name"]]["ingredients"][$r["ingredient"]]["needed"]=$r["needed"];
             $drinks[$r["name"]]["ingredients"][$r["ingredient"]]["stock"]=$r["stock"];
         }

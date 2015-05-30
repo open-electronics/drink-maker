@@ -7,7 +7,9 @@
  */
 use App\flasher;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 
 class OrderController extends Controller {
@@ -16,26 +18,27 @@ class OrderController extends Controller {
      * @param $name
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
-    public function add($name){
+    public function add(Request $req){
+        $id=$req->input('id');
+        $name=$req->input('name');
         $result=DB::table("drinks")
             ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
             ->join("ingredients","ingredients.id","=","drinks_ingredients.ingredient_id")
             ->select("drinks.id","drinks_ingredients.needed","ingredients.stock","drinks_ingredients.ingredient_id")
-            ->where("drinks.name","=",$name)->get();
+            ->where("drinks.id","=",$id)->get();
         $score=0;
-        foreach($result as $r){
+        foreach($result as $r){//Count in stock ingredients
             if($r["needed"]<=$r["stock"])$score++;
         }
-        if($score!=count($result)){
+        if($score!=count($result)){//If we have all
             flasher::error('An error occured, please retry later');
             return redirect("user");
         }
 
-        $id=$result[0]["id"];
-        foreach($result as $r){
+        foreach($result as $r){//Decrement stock quantities
             DB::table("ingredients")->where("id","=",$r["ingredient_id"])->decrement("stock",$r["needed"]);
         }
-        DB::table("orders")->insert(['drink_id'=>$id,'status'=>0]);
+        DB::table("orders")->insert(['drink_id'=>$id,'status'=>0,'name'=>$name]);//Insert order
         $number=DB::table('orders')->whereIn('status',[0,1,2])->count();
         flasher::success('We\'re taking care of your order, which is the number '.$number);
         return redirect("user");
@@ -71,7 +74,7 @@ class OrderController extends Controller {
         foreach($result as $r){
             $resp['ingredients'][$r['position']]=$r['needed'];
         }
-        DB::table('orders')->where('status',1)->update(['status'=>2]);
+//        DB::table('orders')->where('status',1)->update(['status'=>2]);
         return response()->json($resp);
     }
 

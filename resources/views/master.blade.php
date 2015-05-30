@@ -11,6 +11,7 @@
     <script src="js/materialize.min.js"></script>
     {{--App related--}}
     <link rel="stylesheet" href="css/app.css">
+    <script src="js/app.js"></script>
 </head>
 <body>
     <div class="container">

@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers;
+use App\flasher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,6 +28,7 @@ class IngredientController extends Controller {
             DB::table('ingredients')->where('id',$ids[$i])
                 ->update(['stock'=>$stocks[$i],'position'=>$positions[$i]]);
         }
+        flasher::success('Ingredients updated correctly');
         return redirect('admin');
     }
 }

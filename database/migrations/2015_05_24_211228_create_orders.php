@@ -17,6 +17,7 @@ class CreateOrders extends Migration {
 			$table->increments('id');
             $table->integer('drink_id')->unsigned();
             $table->foreign('drink_id')->references('id')->on('drinks');
+            $table->char('name',30);
             $table->tinyInteger('status')->unsigned();//0=not seen, 1=approved,2=working 3=completed, 4=deleted
 			$table->timestamps();
 		});

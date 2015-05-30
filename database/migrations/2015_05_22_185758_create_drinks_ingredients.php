@@ -23,7 +23,6 @@ class CreateDrinksIngredients extends Migration {
             $table->foreign('ingredient_id')->references('id')->on('ingredients');
 
             $table->tinyInteger('needed')->unsigned();
-			$table->timestamps();
 		});
 	}
 

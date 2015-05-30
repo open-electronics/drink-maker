@@ -16,7 +16,6 @@ class CreateDrinks extends Migration {
 		{
 			$table->increments('id');
             $table->char('name',50);
-			$table->timestamps();
 		});
 	}
 

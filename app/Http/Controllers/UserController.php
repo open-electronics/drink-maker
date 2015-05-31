@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller {
     /**
-     * Return the admin index with a list of the orders and the ingredients with the relative info
+     * Return the admin index with a list of the drinks, orders and the ingredients with the relative info
      * @return $this
      */
     public function adminIndex(){
@@ -21,15 +21,16 @@ class UserController extends Controller {
             flasher::warning('Login to access the control panel');
             return redirect('login');
         }
-
-        $ingredients=DB::table("ingredients")->select("id","ingredient","stock","position")->get();
+        $drinks=DB::table('drinks')->select('id','name')->get();
+        $ingredients=DB::table("ingredients")->select("id","ingredient","stock","position")->where('position','<>','-2')->get();
         $orders=DB::table("orders")->join("drinks","drinks.id","=","orders.drink_id")
             ->select("drinks.name","orders.name AS customer","orders.status","orders.id")->whereIn("orders.status",[0,1,2])->get();
         $status=false;
         foreach($orders as $o){
             if($o['status']==2) $status=true;
         }
-        return view('admin')->with('ingredients',$ingredients)->with('orders',$orders)->with('status',$status);
+        return view('admin')->with('ingredients',$ingredients)
+            ->with('orders',$orders)->with('status',$status)->with('drinks',$drinks);
     }
 
     /**

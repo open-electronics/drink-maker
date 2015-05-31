@@ -31,4 +31,33 @@ class IngredientController extends Controller {
         flasher::success('Ingredients updated correctly');
         return redirect('admin');
     }
+
+
+    /**
+     * Adds an ingredient with a specified name and stock quantity
+     * @param Request $r
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
+    public function add(Request $r){
+        if(!($r->has('stock')&& $r->has('name'))){
+            flasher::error('Fill in both fields');
+            return redirect('admin');
+        }
+
+        DB::table('ingredients')
+            ->insert(['ingredient'=>$r->input('name'),'stock'=>$r->input('stock'),'position'=>'-1']);
+        flasher::success('Ingredient added correctly');
+        return redirect('admin');
+    }
+
+    /**
+     * Delete an ingredient
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
+    public function delete($id){
+        DB::table('ingredients')->where('id',$id)->update('position','-2');
+        flasher::success('Ingredient deleted correctly');
+        return redirect('admin');
+    }
 }

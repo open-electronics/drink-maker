@@ -17,10 +17,9 @@ class CreateDrinksIngredients extends Migration {
 			$table->increments('id');
 
             $table->integer('drink_id')->unsigned();
-            $table->foreign('drink_id')->references('id')->on('drinks');
-
+            $table->foreign('drink_id')->references('id')->on('drinks')->onDelete('cascade');
             $table->integer('ingredient_id')->unsigned();
-            $table->foreign('ingredient_id')->references('id')->on('ingredients');
+            $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
 
             $table->tinyInteger('needed')->unsigned();
 		});

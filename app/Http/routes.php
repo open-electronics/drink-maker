@@ -33,3 +33,8 @@ $app->patch('orders/{id}','App\Http\Controllers\OrderController@approve');
 $app->delete('orders/{id}','App\Http\Controllers\OrderController@delete');
 
 $app->patch('ingredients','App\Http\Controllers\IngredientController@update');
+$app->post('ingredients','App\Http\Controllers\IngredientController@add');
+$app->delete('ingredients/{id}','App\Http\Controllers\IngredientController@delete');
+
+$app->post('drinks','App\Http\Controllers\DrinkController@add');
+$app->delete('drinks/{id}','App\Http\Controllers\DrinkController@delete');

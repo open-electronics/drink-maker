@@ -15,7 +15,7 @@
 use Illuminate\Support\Facades\Session;
 
 $app->get('/', function()  {
-    if(Session::get('logged')!=true){
+    if(Session::get('logged')==true){
         return redirect('admin');
     }
     return redirect('user');

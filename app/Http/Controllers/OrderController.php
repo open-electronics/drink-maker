@@ -40,7 +40,7 @@ class OrderController extends Controller {
         }
         DB::table("orders")->insert(['drink_id'=>$id,'status'=>0,'name'=>$name]);//Insert order
         $number=DB::table('orders')->whereIn('status',[0,1,2])->count();
-        flasher::success('We\'re taking care of your order, which is the number '.$number);
+        flasher::success('We\'re taking care of your order!(number '.$number.')');
         return redirect("user");
     }
 

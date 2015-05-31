@@ -35,7 +35,7 @@
                     @endforelse
                 </tbody>
             </table>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <button class="btn waves-effect waves-light" type="submit" name="action">Save
                     <i class="mdi-content-send right"></i>
                 </button>
             </form>

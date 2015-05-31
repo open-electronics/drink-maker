@@ -20,11 +20,12 @@
                         <label for="na">Insert your name</label>
                     </div>
                 </div>
-                Select the cocktail by clicking on the bell:
+                Click the cocktail names to see their ingredients!<br>
+                Click the bell to order the cocktail!
                 <ul class="collapsible" data-collapsible="accordion">
                     @forelse($drinks as $n=>$d)
                         <li>
-                            <div class="collapsible-header">
+                            <div class="collapsible-header" >
                                 <i class="mdi-maps-local-bar medium"></i> <span>{{$n}}</span>
                                 @if($d["available"])
                                     <a href="#" class="order" id="{{$d["id"]}}" >

@@ -176,8 +176,32 @@
             </div>
             <div class="col offset-s1 s4" align="center">
                 <h4>Add drink:</h4>
-                <form method="post" action="{{url('drink')}}">
-
+                <form method="post" action="{{url('drinks')}}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" name="name" maxlength="50">
+                            <label for="name">Drink name</label>
+                        </div>
+                    </div>
+                    @for($i=0;$i<5;$i++)
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <select name="ingredients[]" class="browser-default">
+                                    <option value="0" selected>None</option>
+                                    @foreach($ingredients as $in)
+                                        <option value="{{$in["id"]}}">{{$in["ingredient"]}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="input-field col offset-s1 s4">
+                                <input type="number" value="1" name="parts[]" min="1" max="9">
+                                <label for="parts">Parts</label>
+                            </div>
+                        </div>
+                    @endfor
+                    <button type="submit" class="btn waves-effect waves-light" name="action">Add
+                        <i class="mdi-content-add right"></i>
+                    </button>
                 </form>
             </div>
         </div>

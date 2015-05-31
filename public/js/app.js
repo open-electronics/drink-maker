@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('select').material_select();
     $(".order").click(function(){
         if($('#na').val().length != 0){
             $('#id').val($(this).attr('id'));

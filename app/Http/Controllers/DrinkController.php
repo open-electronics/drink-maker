@@ -15,8 +15,36 @@ use Illuminate\Support\Facades\DB;
 
 class DrinkController extends Controller {
 
+    /**
+     * Adds a drink given ingredients and parameters
+     * @param Request $r
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
     public function add(Request $r){
-
+        if(!$r->has('name')){
+            flasher::error('Fill in the name');
+            return redirect('admin');
+        }
+        $score=0;
+        $ingredients=$r->input('ingredients');
+        $parts=$r->input('parts');
+        $drink_id=DB::table('drinks')->insertGetId(['name'=>$r->input('name')]);
+        $data=[];
+        for($i=0;$i<5;$i++){
+            if($ingredients[$i]!=0){
+                $score++;
+                array_push($data,
+                    ['ingredient_id'=>$ingredients[$i],'drink_id'=>$drink_id,'needed'=>$parts[$i]]);
+            }
+        }
+        if($score==0){
+            DB::table('drinks')->where('id',$drink_id)->delete();
+            flasher::error('Choose at least one ingredient');
+            return redirect('admin');
+        }
+        DB::table('drinks_ingredients')->insert($data);
+        flasher::success('Drink added successfully');
+        return redirect('admin');
     }
 
 

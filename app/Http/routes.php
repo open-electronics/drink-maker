@@ -12,13 +12,19 @@
 */
 
 
+use Illuminate\Support\Facades\Session;
 
 $app->get('/', function()  {
-
-    return view('landing');
+    if(Session::get('logged')!=true){
+        return redirect('admin');
+    }
+    return redirect('user');
 });
 $app->get('admin','App\Http\Controllers\UserController@adminIndex');
 $app->get('user','App\Http\Controllers\UserController@userIndex');
+
+$app->get('login','App\Http\Controllers\AuthController@index');
+$app->post('login','App\Http\Controllers\AuthController@login');
 
 $app->get('orders/waiting','App\Http\Controllers\OrderController@waiting');
 $app->get('orders/completed/{id}','App\Http\Controllers\OrderController@completed');

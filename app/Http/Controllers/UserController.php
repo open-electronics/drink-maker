@@ -17,6 +17,11 @@ class UserController extends Controller {
      * @return $this
      */
     public function adminIndex(){
+        if(Session::get('logged')!=true){
+            flasher::warning('Login to access the control panel');
+            return redirect('login');
+        }
+
         $ingredients=DB::table("ingredients")->select("id","ingredient","stock","position")->get();
         $orders=DB::table("orders")->join("drinks","drinks.id","=","orders.drink_id")
             ->select("drinks.name","orders.name AS customer","orders.status","orders.id")->whereIn("orders.status",[0,1,2])->get();

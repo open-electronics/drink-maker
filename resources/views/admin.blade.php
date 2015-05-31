@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{$i["ingredient"]}}<input value="{{$i["id"]}}" name="id[]" type="hidden"></td>
                             <td><input value="{{$i["stock"]}}" name="stock[]" type="number" class="validate"></td>
-                            <td><input value="{{$i["position"]}}" name="position[]" type="number" class="validate"></td>
+                            <td><input value="{{$i["position"]}}" name="position[]" min="-1" max="9" type="number" class="validate"></td>
                         </tr>
                     @empty
                         There are no ingredients yet!

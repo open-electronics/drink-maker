@@ -1,12 +1,12 @@
 @extends('master')
 @section('title')
-    User
+    Order your cocktail!
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col offset-s3 s6" align="center">
-            <h3>User</h3>
+            <h3>Order your cocktail!</h3>
         </div>
     </div>
     @include('messages')
@@ -17,9 +17,10 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <input name="name" type="text" maxlength="30" id="na">
-                        <label for="na">Name</label>
+                        <label for="na">Insert your name</label>
                     </div>
                 </div>
+                Select the cocktail by clicking on the bell:
                 <ul class="collapsible" data-collapsible="accordion">
                     @forelse($drinks as $n=>$d)
                         <li>

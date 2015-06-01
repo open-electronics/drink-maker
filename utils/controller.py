@@ -37,8 +37,8 @@ def write_data(data):
 	ser.write(bytes(data+'\n','UTF-8'))
 
 data="null"
-base_url="http://robot.app/orders/"
-ser=serial.Serial(port="dev/ttyS0",baudrate=9600)
+base_url="http://192.168.0.199/orders/"
+ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
 write_data("GoHome")
 while True:
 	main_loop()

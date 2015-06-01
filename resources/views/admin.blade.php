@@ -133,7 +133,10 @@
                                         Making
                                     </td>
                                     <td>
-
+                                        <form action="{{url("orders/".$o["id"])}}" method="post" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete">
+                                            <input name="_method" type="hidden" value="delete"/>
+                                            <i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-clear"></i>
+                                        </form>
                                     </td>
                                 @endif
                             </tr>

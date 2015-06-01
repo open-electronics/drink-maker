@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller {
     /**
      * Get the drink with the specified name and add it to the orders queue, decrease stock of items
-     * @param $name
+     * @param $req
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
     public function add(Request $req){

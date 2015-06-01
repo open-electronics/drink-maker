@@ -64,6 +64,6 @@ echo "Migrating and seeding"
 sudo -u www-data -H php artisan migrate --seed --force
 
 echo "Adding python to startup"
-echo "python3 /var/www/barobot/utils/controller.py" | sudo tee /etc/profile
+echo "python3 /var/www/barobot/utils/controller.py" | sudo tee /etc/profile -a
 
 echo "Enjoy!"

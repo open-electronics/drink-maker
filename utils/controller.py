@@ -30,8 +30,8 @@ def wait_answer():
 	global ser
 	v=None
 	while not v=="1":
-		v=ser.readline().strip()
-		time.sleep(0.5)
+		v=ser.readline().decode("UTF-8").strip()
+		time.sleep(0.2)
 def write_data(data):
 	global ser
 	ser.write(bytes(data+'\n','UTF-8'))
@@ -40,5 +40,6 @@ data="null"
 base_url="http://192.168.0.199/orders/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
 write_data("GoHome")
+wait_answer()
 while True:
 	main_loop()

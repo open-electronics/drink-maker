@@ -6,7 +6,8 @@
     "type": "project",
     "require": {
         "laravel/lumen-framework": "5.0.*",
-        "vlucas/phpdotenv": "~1.0"
+        "vlucas/phpdotenv": "~1.0",
+        "intervention/image": "^2.2"
     },
     "autoload": {
         "psr-4": {

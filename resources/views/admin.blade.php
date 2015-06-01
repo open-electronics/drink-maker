@@ -199,9 +199,11 @@
                             </div>
                         </div>
                     @endfor
-                    <button type="submit" class="btn waves-effect waves-light" name="action">Add
-                        <i class="mdi-content-add right"></i>
-                    </button>
+                    <div class="row">
+                        <button type="submit" class="btn waves-effect waves-light" name="action">Add
+                            <i class="mdi-content-add right"></i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -84,7 +84,7 @@ class OrderController extends Controller {
      * @return \Laravel\Lumen\Http\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function completed($id){
-        $r=DB::table('orders')->where('id',$id)->andWhere('status',2)->count();
+        $r=DB::table('orders')->where('id',$id)->where('status',2)->count();
         if($r==1){
             DB::table('orders')->where('id',$id)->update(['status'=>3]);
             return response('200');

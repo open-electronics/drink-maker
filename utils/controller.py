@@ -21,6 +21,7 @@ def main_loop():
 	#reset position
 	write_data("*-00")
 	wait_answer()
+	data=None
 def fetch_url(url):
 	global data
 	try:

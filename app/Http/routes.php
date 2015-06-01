@@ -27,7 +27,7 @@ $app->get('login','App\Http\Controllers\AuthController@index');
 $app->post('login','App\Http\Controllers\AuthController@login');
 
 $app->get('orders/waiting','App\Http\Controllers\OrderController@waiting');
-$app->get('orders/completed/{id}','App\Http\Controllers\OrderController@completed');
+$app->get('orders/completed','App\Http\Controllers\OrderController@completed');
 $app->post('orders','App\Http\Controllers\OrderController@add');
 $app->patch('orders/{id}','App\Http\Controllers\OrderController@approve');
 $app->delete('orders/{id}','App\Http\Controllers\OrderController@delete');

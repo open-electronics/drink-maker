@@ -80,17 +80,12 @@ class OrderController extends Controller {
 
     /**
      * Sets an order status to complete
-     * @param $id
+     *
      * @return \Laravel\Lumen\Http\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function completed($id){
-        $r=DB::table('orders')->where('id',$id)->where('status',2)->count();
-        if($r==1){
-            DB::table('orders')->where('id',$id)->update(['status'=>3]);
-            return response('200');
-        }else {
-            return response('400');
-        }
+    public function completed(){
+        DB::table('orders')->where('status','2')->update(['status'=>3]);
+        return response('200');
     }
     /**
      * Find order with given id, put back in stock the various ingredients and delete the order

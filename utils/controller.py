@@ -30,8 +30,8 @@ def wait_answer():
 	global ser
 	v=None
 	while not v=="1":
-		v=ser.readline().strip()
-		time.sleep(0.5)
+		v=ser.readline().decode("UTF-8").strip()
+		time.sleep(0.2)
 def write_data(data):
 	global ser
 	ser.write(bytes(data+'\n','UTF-8'))

@@ -14,7 +14,7 @@ def main_loop():
 		time.sleep(2)
 	#dictate ingredients
 	for i in data["ingredients"]:
-		ser.write(i+"|"+str(data["ingredients"][i]))
+		ser.write("*\"+i+str(data["ingredients"][i]))
 		wait_answer()
 	#update db
 	fetch_url(base_url+"completed/"+str(data["id"]))

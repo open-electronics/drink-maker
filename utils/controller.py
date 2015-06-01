@@ -7,19 +7,19 @@ global data,ser,base_url
 
 
 def main_loop():
-	global data,ser,base_url
+	global data,base_url
 	#data retrieving
 	while data=="null":
 		fetch_url(base_url+"waiting")
 		time.sleep(2)
 	#dictate ingredients
 	for i in data["ingredients"]:
-		ser.write("*-"+i+str(data["ingredients"][i])+"\n")
+		write_data("*-"+i+str(data["ingredients"][i]))
 		wait_answer()
 	#update db
 	fetch_url(base_url+"completed/"+str(data["id"]))
 	#reset position
-	ser.writeline("00\n")
+	write_data("00")
 	wait_answer()
 def fetch_url(url):
 	global data
@@ -32,10 +32,13 @@ def wait_answer():
 	while not v=="1":
 		v=ser.readline().strip()
 		time.sleep(0.5)
+def write_data(data):
+	global ser
+	ser.write(bytes(data+'\n','UTF-8'))
 
 data="null"
 base_url="http://robot.app/orders/"
 ser=serial.Serial(port="dev/ttyS0",baudrate=9600)
-ser.writeline("GoHome\n")
+write_data("GoHome")
 while True:
 	main_loop()

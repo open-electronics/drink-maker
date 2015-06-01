@@ -85,11 +85,13 @@ class OrderController extends Controller {
      */
     public function completed($id){
         $r=DB::table('orders')->where('id',$id)->where('status',2)->count();
+        dd($r);
         if($r==1){
             DB::table('orders')->where('id',$id)->update(['status'=>3]);
             return response('200');
+        }else {
+            return response('400');
         }
-        return response('400');
     }
     /**
      * Find order with given id, put back in stock the various ingredients and delete the order

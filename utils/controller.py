@@ -17,7 +17,7 @@ def main_loop():
 		write_data("*-"+i+str(data["ingredients"][i]))
 		wait_answer()
 	#update db
-	fetch_url(base_url+"completed/"+str(data["id"]))
+	fetch_url(base_url+"completed")
 	#reset position
 	write_data("*-00")
 	wait_answer()

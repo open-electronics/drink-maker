@@ -40,5 +40,6 @@ data="null"
 base_url="http://192.168.0.199/orders/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
 write_data("GoHome")
+wait_answer()
 while True:
 	main_loop()

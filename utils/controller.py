@@ -14,12 +14,12 @@ def main_loop():
 		time.sleep(2)
 	#dictate ingredients
 	for i in data["ingredients"]:
-		ser.write("*\"+i+str(data["ingredients"][i]))
+		ser.writeline("*\"+i+str(data["ingredients"][i]))
 		wait_answer()
 	#update db
 	fetch_url(base_url+"completed/"+str(data["id"]))
 	#reset position
-	ser.write("00")
+	ser.writeline("00")
 	wait_answer()
 def fetch_url(url):
 	global data
@@ -36,5 +36,6 @@ def wait_answer():
 data="null"
 base_url="http://robot.app/orders/"
 ser=serial.Serial(port="dev/tty0",baudrate=9600)
+ser.writeline("GoHome")
 while True:
 	main_loop()

@@ -19,7 +19,7 @@ def main_loop():
 	#update db
 	fetch_url(base_url+"completed/"+str(data["id"]))
 	#reset position
-	serial.write("x|x")
+	serial.write("GoHome")
 	wait_answer()
 def fetch_url(url):
 	global data

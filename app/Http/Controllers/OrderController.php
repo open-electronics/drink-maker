@@ -85,7 +85,6 @@ class OrderController extends Controller {
      */
     public function completed($id){
         $r=DB::table('orders')->where('id',$id)->where('status',2)->count();
-        dd($r);
         if($r==1){
             DB::table('orders')->where('id',$id)->update(['status'=>3]);
             return response('200');

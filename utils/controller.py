@@ -9,7 +9,7 @@ global data,ser,base_url
 def main_loop():
 	global data,base_url
 	#data retrieving
-	while data=="null":
+	while data==None:
 		fetch_url(base_url+"waiting")
 		time.sleep(2)
 	#dictate ingredients
@@ -23,9 +23,12 @@ def main_loop():
 	wait_answer()
 def fetch_url(url):
 	global data
-	page=urllib.request.urlopen(url)
-	j=page.read().decode("utf-8")
-	data=json.loads(j)
+	try:
+		page=urllib.request.urlopen(url)
+		j=page.read().decode("utf-8")
+		data=json.loads(j)
+	except:
+		data=None
 def wait_answer():
 	global ser
 	v=None
@@ -36,7 +39,7 @@ def write_data(data):
 	global ser
 	ser.write(bytes(data+'\n','UTF-8'))
 
-data="null"
+data=None
 base_url="http://192.168.0.199/orders/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
 write_data("GoHome")

@@ -62,13 +62,13 @@
                 <form method="post" action="{{url('ingredients')}}">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input name="name" type="text" class="validate" maxlength="50">
+                            <input id="name" name="name" type="text" class="validate" maxlength="50">
                             <label for="name">Name</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input name="stock" type="number" class="validate" value="0" min="0">
+                            <input id="stock" name="stock" type="number" class="validate" value="0" min="0">
                             <label for="stock">Stock quantity:</label>
                         </div>
                     </div>
@@ -182,8 +182,8 @@
                 <form method="post" action="{{url('drinks')}}">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input type="text" name="name" maxlength="50">
-                            <label for="name">Drink name</label>
+                            <input type="text" id="dname" name="name" maxlength="50">
+                            <label for="dname">Drink name</label>
                         </div>
                     </div>
                     @for($i=0;$i<5;$i++)

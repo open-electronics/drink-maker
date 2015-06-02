@@ -81,8 +81,8 @@ $app->middleware([
 */
 
 // $app->register('App\Providers\AppServiceProvider');
-$app->register('Laracasts\Flash\FlashServiceProvider');
-$app->alias('flash','Laracasts\Flash\Flash');
+//$app->register('Intervention\Image\ImageServiceProvider');
+//$app->alias('Image','Intervention\Image\Facades\Image');
 
 /*
 |--------------------------------------------------------------------------

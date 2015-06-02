@@ -8,5 +8,8 @@ $(document).ready(function(){
             Materialize.toast('Name is required!',1500,'rounded');
         }
     });
+    $(".tab").click(function(event){
+        location.href = event.target.href;
+    });
 });
 

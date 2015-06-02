@@ -56,7 +56,7 @@ class OrderController extends Controller {
         }else{
             flasher::error('An order has already been taken in charge');
         }
-        return redirect("admin");
+        return redirect("admin#orders");
     }
 
     /**
@@ -103,6 +103,6 @@ class OrderController extends Controller {
         }
         DB::table("orders")->where("id",$id)->update(['status'=>4]);
         flasher::success('Order deleted correctly');
-        return redirect("admin");
+        return redirect("admin#orders");
     }
 }

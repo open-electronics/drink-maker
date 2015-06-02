@@ -29,7 +29,7 @@ class IngredientController extends Controller {
                 ->update(['stock'=>$stocks[$i],'position'=>$positions[$i]]);
         }
         flasher::success('Ingredients updated correctly');
-        return redirect('admin');
+        return redirect('admin#ingredients');
     }
 
 
@@ -41,13 +41,13 @@ class IngredientController extends Controller {
     public function add(Request $r){
         if(!($r->has('stock')&& $r->has('name'))){
             flasher::error('Fill in both fields');
-            return redirect('admin');
+            return redirect('admin#ingredients');
         }
 
         DB::table('ingredients')
             ->insert(['ingredient'=>$r->input('name'),'stock'=>$r->input('stock'),'position'=>'-1']);
         flasher::success('Ingredient added correctly');
-        return redirect('admin');
+        return redirect('admin#ingredients');
     }
 
     /**
@@ -58,6 +58,6 @@ class IngredientController extends Controller {
     public function delete($id){
         DB::table('ingredients')->where('id',$id)->update('position','-2');
         flasher::success('Ingredient deleted correctly');
-        return redirect('admin');
+        return redirect('admin#ingredients');
     }
 }

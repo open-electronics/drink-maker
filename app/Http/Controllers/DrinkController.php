@@ -23,7 +23,7 @@ class DrinkController extends Controller {
     public function add(Request $r){
         if(!$r->has('name')){
             flasher::error('Fill in the name');
-            return redirect('admin');
+            return redirect('admin#drinks');
         }
         $score=0;
         $ingredients=$r->input('ingredients');
@@ -40,11 +40,11 @@ class DrinkController extends Controller {
         if($score==0){
             DB::table('drinks')->where('id',$drink_id)->delete();
             flasher::error('Choose at least one ingredient');
-            return redirect('admin');
+            return redirect('admin#drinks');
         }
         DB::table('drinks_ingredients')->insert($data);
         flasher::success('Drink added successfully');
-        return redirect('admin');
+        return redirect('admin#drinks');
     }
 
 
@@ -56,10 +56,10 @@ class DrinkController extends Controller {
     public function delete($id){
         if(DB::table('orders')->where('drink_id',$id)->count()!=0){
             flasher::error('There are some orders relative to this drink, delete them first');
-            return redirect('admin');
+            return redirect('admin#drinks');
         }
         DB::table('drinks')->where('id',$id)->delete();
         flasher::success('Drink deleted correctly');
-        return redirect('admin');
+        return redirect('admin#drinks');
     }
 }

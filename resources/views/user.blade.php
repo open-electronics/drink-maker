@@ -37,8 +37,13 @@
                             </div>
                             <div class="collapsible-body">
                                 <div class="row">
-                                    <div class="col s10 offset-s1">
+                                    <div class="col s6 offset-s1">
                                         Ingredients:<ul>@foreach($d["ingredients"] as $ingred=>$data)<li>{{$data["needed"]." parts of ".$ingred}}</li>@endforeach</ul>
+                                    </div>
+                                    <div class="col s4">
+                                        @if($d["photo"]!=null)
+                                        <img class="responsive-img circle" src="{{'uploads/'.$d["photo"]}}">
+                                        @endif
                                     </div>
                                 </div>
                             </div>

@@ -151,7 +151,7 @@
     </div>
     <div id="drinks">
         <div class="row">
-            <div class="col s5 offset-s1" align="center">
+            <div class="col s4 offset-s1" align="center">
                 <h4>Drinks:</h4>
                 <table>
                     <thead>
@@ -177,13 +177,19 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col offset-s1 s4" align="center">
+            <div class="col offset-s1 s5" align="center">
                 <h4>Add drink:</h4>
-                <form method="post" action="{{url('drinks')}}">
+                <form method="post" enctype="multipart/form-data" action="{{url('drinks')}}">
                     <div class="row">
-                        <div class="input-field col s12">
+                        <div class="input-field col s8">
                             <input type="text" id="dname" name="name" maxlength="50">
                             <label for="dname">Drink name</label>
+                        </div>
+                        <div class="col s3 file-field input-field">
+                            <div class="btn waves-effect waves-light">
+                                <i class="mdi-editor-insert-photo"></i>
+                                <input type="file" name="photo" />
+                            </div>
                         </div>
                     </div>
                     @for($i=0;$i<5;$i++)
@@ -203,9 +209,11 @@
                         </div>
                     @endfor
                     <div class="row">
-                        <button type="submit" class="btn waves-effect waves-light" name="action">Add
-                            <i class="mdi-content-add right"></i>
-                        </button>
+                        <div class="col s7 offset-s1">
+                            <button type="submit" class="btn waves-effect waves-light" name="action">Add
+                                <i class="mdi-content-add right"></i>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

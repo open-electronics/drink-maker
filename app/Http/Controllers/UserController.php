@@ -41,12 +41,13 @@ class UserController extends Controller {
         $result=DB::table("drinks")
             ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
             ->join("ingredients","ingredients.id","=","drinks_ingredients.ingredient_id")
-            ->select("drinks.id","drinks.name","ingredients.ingredient","ingredients.stock","drinks_ingredients.needed")
+            ->select("drinks.id","drinks.name","drinks.photo","ingredients.ingredient","ingredients.stock","drinks_ingredients.needed")
             ->where("ingredients.position",">","-1")
             ->get();
         $drinks=[];
         foreach($result as  $r){
             $drinks[$r["name"]]["id"]=$r["id"];
+            $drinks[$r["name"]]["photo"]=$r["photo"];
             $drinks[$r["name"]]["ingredients"][$r["ingredient"]]["needed"]=$r["needed"];
             $drinks[$r["name"]]["ingredients"][$r["ingredient"]]["stock"]=$r["stock"];
         }

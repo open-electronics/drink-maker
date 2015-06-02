@@ -80,9 +80,9 @@ $app->middleware([
 |
 */
 
-// $app->register('App\Providers\AppServiceProvider');
-//$app->register('Intervention\Image\ImageServiceProvider');
-//$app->alias('Image','Intervention\Image\Facades\Image');
+//$app->register('App\Providers\AppServiceProvider');
+
+
 
 /*
 |--------------------------------------------------------------------------

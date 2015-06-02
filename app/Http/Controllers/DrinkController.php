@@ -25,10 +25,15 @@ class DrinkController extends Controller {
             flasher::error('Fill in the name');
             return redirect('admin#drinks');
         }
+
+        $destinationPath = 'uploads';
+        $extension = $r->file('photo')->getClientOriginalExtension(); // getting image extension
+        $fileName = $r->input('name').'.'.$extension;
+
         $score=0;
         $ingredients=$r->input('ingredients');
         $parts=$r->input('parts');
-        $drink_id=DB::table('drinks')->insertGetId(['name'=>$r->input('name')]);
+        $drink_id=DB::table('drinks')->insertGetId(['name'=>$r->input('name'),'photo'=>$fileName]);
         $data=[];
         for($i=0;$i<5;$i++){
             if($ingredients[$i]!=0){
@@ -42,6 +47,9 @@ class DrinkController extends Controller {
             flasher::error('Choose at least one ingredient');
             return redirect('admin#drinks');
         }
+
+        $r->file('photo')->move($destinationPath, $fileName);
+
         DB::table('drinks_ingredients')->insert($data);
         flasher::success('Drink added successfully');
         return redirect('admin#drinks');

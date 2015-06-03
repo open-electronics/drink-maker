@@ -14,13 +14,13 @@
         <form class="col s10 offset-s1" method="post" action="{{'login'}}">
             <div class="row">
                 <div class="input-field col s10 offset-s1">
-                    <input name="name" type="text" class="validate">
+                    <input name="name" id="name" type="text" class="validate">
                     <label for="name">Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s10 offset-s1">
-                    <input name="password" type="password" class="validate">
+                    <input name="password" id="password" type="password" class="validate">
                     <label for="password">Password</label>
                 </div>
             </div>

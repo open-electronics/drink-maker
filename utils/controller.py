@@ -46,8 +46,8 @@ def write_data(data):
 def get_ip():
 	myip = "ip addr show eth0 | grep -m 1 inet | awk '{print $2}' | cut -d/ -f1"
 	p = Popen(cmd, shell = True, stdout = PIPE)
-    output = p.communicate()[0]
-    return output
+	output = p.communicate()[0]
+	return output
 
 	
 

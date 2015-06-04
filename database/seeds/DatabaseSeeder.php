@@ -31,14 +31,14 @@ class DatabaseSeeder extends Seeder {
         DB::table('ingredients')->insert(['ingredient'=>'Soda','position'=>7,'stock'=>35]);
         DB::table('ingredients')->insert(['ingredient'=>'Martini dry','position'=>5,'stock'=>35]);
         DB::table('ingredients')->insert(['ingredient'=>'Vodka','position'=>8,'stock'=>35]);
-        DB::table('ingredients')->insert(['ingredient'=>'Vodka','position'=>9,'stock'=>35]);
+
 
         //Seed drinks
         DB::table('drinks')->insert(['name'=>'Negroni','photo'=>'negroni.jpg']);
         DB::table('drinks')->insert(['name'=>'Spritz','photo'=>'spritz.jpg']);
         DB::table('drinks')->insert(['name'=>'Negroni sbagliato','photo'=>'negronisb.jpg']);
         DB::table('drinks')->insert(['name'=>'Americano','photo'=>'americano.jpg']);
-        DB::table('drinks')->insert(['name'=>'Martini dry','photo'=>'cuba.jpg']);
+        DB::table('drinks')->insert(['name'=>'Martini dry','photo'=>'dry.jpg']);
         DB::table('drinks')->insert(['name'=>'Vodka martini','photo'=>'vodma.jpg']);
 
         //Recipes

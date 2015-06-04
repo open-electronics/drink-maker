@@ -18,6 +18,8 @@
     {{--App related--}}
     <link rel="stylesheet" href="css/app.css">
     <script src="js/app.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <body>
     <div class="row">

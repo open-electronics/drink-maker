@@ -63,7 +63,7 @@ class DrinkController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
     public function delete($id){
-        if(DB::table('orders')->where('drink_id',$id)->count()!=0){
+        if(DB::table('orders')->where('drink_id',$id)->whereIn('status',[0,1,2])->count()!=0){
             flasher::error('There are some orders relative to this drink, delete them first');
             return redirect('admin#drinks');
         }

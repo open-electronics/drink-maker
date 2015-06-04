@@ -210,7 +210,7 @@
                     @endfor
                     <div class="row">
                         <div class="col s7 offset-s1">
-                            <button type="submit" class="btn waves-effect waves-light" name="action">Add
+                            <button type="submit" class="btn waves-effect waves-light" name="action">Save
                                 <i class="mdi-content-add right"></i>
                             </button>
                         </div>

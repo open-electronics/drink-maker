@@ -5,7 +5,7 @@ $(document).ready(function(){
             $('#id').val($(this).attr('id'));
             $(this).closest('form').trigger('submit');
         }else {
-            Materialize.toast('Name is required!',1500,'rounded');
+            Materialize.toast('Name is required!',3000,'rounded');
         }
     });
     $(".tab").click(function(event){

@@ -15,6 +15,7 @@ def main_loop():
 		time.sleep(2)
 	#wait 10 seconds
 	write_data("NewDrink")
+	wait_answer()
 	time.sleep(10)
 	#dictate ingredients
 	for i in data["ingredients"]:

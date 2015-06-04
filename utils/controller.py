@@ -40,9 +40,11 @@ def wait_answer(answer="1"):
 	v=None
 	while not v==answer:
 		v=ser.readline().decode("UTF-8").strip()
+		print("In:"+data)
 		time.sleep(0.2)
 def write_data(data):
 	global ser
+	print("Out:"+data)
 	ser.write(bytes(data+'\n','UTF-8'))
 def get_ip():
 	myip = "ip addr show wlan0 | grep -m 1 inet | awk '{print $2}' | cut -d/ -f1"

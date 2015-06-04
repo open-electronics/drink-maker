@@ -24,7 +24,7 @@
 <body>
     <div class="row">
         <div class="col offset-s3 s6" align="center">
-            <h3>Order your cocktail!</h3>
+            <h4>Order your cocktail!</h4>
         </div>
     </div>
     @include('messages')

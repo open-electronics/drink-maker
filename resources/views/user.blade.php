@@ -1,9 +1,25 @@
-@extends('master')
-@section('title')
-    Order your cocktail!
-@endsection
 
-@section('content')
+{{--@section('title')--}}
+    {{--Order your cocktail!--}}
+{{--@endsection--}}
+
+{{--@section('content')--}}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@yield('title')</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <!-- Jquery -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="js/materialize.min.js"></script>
+    {{--App related--}}
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/app.js"></script>
+</head>
+<body>
     <div class="row">
         <div class="col offset-s3 s6" align="center">
             <h3>Order your cocktail!</h3>
@@ -11,7 +27,7 @@
     </div>
     @include('messages')
     <div class="row">
-        <div class="col s8 offset-s2">
+        <div class="col s12">
             <form method="post" action="{{url("orders")}}">
                 <input type="hidden" id="id" name="id" value="">
                 <div class="row">
@@ -20,8 +36,8 @@
                         <label for="na">Insert your name</label>
                     </div>
                 </div>
-                Click the cocktail names to see their ingredients!<br>
-                Click the bell to order the cocktail!
+                <div align="center">Click the cocktail names to see their ingredients!<br>
+                Click the bell to order the cocktail!</div>
                 <ul class="collapsible" data-collapsible="accordion">
                     @forelse($drinks as $n=>$d)
                         <li>
@@ -54,5 +70,6 @@
             </form>
         </div>
     </div>
-
-@endsection
+</body>
+</html>
+{{--@endsection--}}

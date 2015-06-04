@@ -5,43 +5,67 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder {
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
         $unguard=[['SET foreign_key_checks=0','SET foreign_key_checks=1'],
             ['PRAGMA foreign_keys=OFF','PRAGMA foreign_keys=ON']];
         $driver=env('DB_CONNECTION')=='sqlite';
-		Model::unguard();
+        Model::unguard();
         DB::statement($unguard[$driver][0]);
         DB::table('drinks_ingredients')->truncate();
         DB::table('ingredients')->truncate();
         DB::table('drinks')->truncate();
         DB::statement($unguard[$driver][1]);
         //Seed ingredients
-        DB::insert('INSERT INTO ingredients (ingredient,stock,position ) values("Ice",5,1)');
-        DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Rum",5,3)');
-        DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Vodka",5,4)');
-        DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Gin",5,5)');
-        DB::insert('INSERT INTO ingredients (ingredient,stock,position) values("Jack",5,7)');
+        DB::table('ingredients')->insert(['ingredient'=>'Gin','position'=>1,'stock'=>35]);
+        DB::table('ingredients')->insert(['ingredient'=>'Campari','position'=>3,'stock'=>35]);
+        DB::table('ingredients')->insert(['ingredient'=>'Martini rosso','position'=>6,'stock'=>35]);
+
+        DB::table('ingredients')->insert(['ingredient'=>'Prosecco','position'=>2,'stock'=>35]);
+        DB::table('ingredients')->insert(['ingredient'=>'Aperol','position'=>4,'stock'=>35]);
+        DB::table('ingredients')->insert(['ingredient'=>'Soda','position'=>7,'stock'=>35]);
+        DB::table('ingredients')->insert(['ingredient'=>'Martini dry','position'=>5,'stock'=>35]);
+        DB::table('ingredients')->insert(['ingredient'=>'Vodka','position'=>8,'stock'=>35]);
+        DB::table('ingredients')->insert(['ingredient'=>'Vodka','position'=>9,'stock'=>35]);
+
         //Seed drinks
-        $r=rand(3,10);
-        for($i=0;$i<$r;$i++){
-            DB::insert('INSERT INTO drinks (name) values(?)',['asd'.$i]);
-        }
-        //Seed relationship
-        for($d=1;$d<=$r;$d++) {
-            for ($i = 1; $i < 6; $i++) {
-                if (rand(0, 1) == 0) {
-                    DB::insert('INSERT INTO drinks_ingredients (drink_id,ingredient_id,needed) values(?,?,?)', [$d, $i,rand(1,8)]);
-                }
-            }
-        }
+        DB::table('drinks')->insert(['name'=>'Negroni','photo'=>'negroni.jpg']);
+        DB::table('drinks')->insert(['name'=>'Spritz','photo'=>'spritz.jpg']);
+        DB::table('drinks')->insert(['name'=>'Negroni sbagliato','photo'=>'negronisb.jpg']);
+        DB::table('drinks')->insert(['name'=>'Americano','photo'=>'americano.jpg']);
+        DB::table('drinks')->insert(['name'=>'Martini dry','photo'=>'cuba.jpg']);
+        DB::table('drinks')->insert(['name'=>'Vodka martini','photo'=>'vodma.jpg']);
+
+        //Recipes
+        $recipes=[
+            ['drink_id'=>1,'ingredient_id'=>1,'needed'=>2],//Seed negroni Gin
+            ['drink_id'=>1,'ingredient_id'=>2,'needed'=>2],//Seed negroni Campari
+            ['drink_id'=>1,'ingredient_id'=>3,'needed'=>2],//Seed negroni Martini rosso
+            ['drink_id'=>2,'ingredient_id'=>4,'needed'=>3],//Seed aperol prosecco
+            ['drink_id'=>2,'ingredient_id'=>5,'needed'=>2],//Seed aperol aperol
+            ['drink_id'=>2,'ingredient_id'=>6,'needed'=>1],//Seed aperol soda
+            ['drink_id'=>3,'ingredient_id'=>4,'needed'=>1],//Seed negronisb prosecco
+            ['drink_id'=>3,'ingredient_id'=>2,'needed'=>1],//Seed negronisb Campari
+            ['drink_id'=>3,'ingredient_id'=>3,'needed'=>1],//Seed negronisb Martini rosso
+            ['drink_id'=>4,'ingredient_id'=>2,'needed'=>2],//Seed americano campari
+            ['drink_id'=>4,'ingredient_id'=>6,'needed'=>1],//Seed americano soda
+            ['drink_id'=>4,'ingredient_id'=>3,'needed'=>2],//Seed americano Martini rosso
+            ['drink_id'=>5,'ingredient_id'=>1,'needed'=>1],//Seed dry Gin
+            ['drink_id'=>5,'ingredient_id'=>7,'needed'=>1],//Seed dry dry
+            ['drink_id'=>6,'ingredient_id'=>7,'needed'=>1],//Seed vodma dry
+            ['drink_id'=>6,'ingredient_id'=>8,'needed'=>2],//Seed vodma vodka
+        ];
+        //Seed recipes
+        DB::table('drinks_ingredients')->insert($recipes);
+
+
         Model::reguard();
-		// $this->call('UserTableSeeder');
-	}
+        // $this->call('UserTableSeeder');
+    }
 
 }

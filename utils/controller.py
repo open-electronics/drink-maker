@@ -40,7 +40,7 @@ def wait_answer(answer="1"):
 	v=None
 	while not v==answer:
 		v=ser.readline().decode("UTF-8").strip()
-		print("In:"+data)
+		print("In:"+v)
 		time.sleep(0.2)
 def write_data(data):
 	global ser

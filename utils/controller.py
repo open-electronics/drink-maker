@@ -47,7 +47,7 @@ def write_data(data):
 	print("Out:"+data)
 	ser.write(bytes(data+'\n','UTF-8'))
 def get_ip():
-	myip = "ip addr show wlan0 | grep -m 1 inet | awk '{print $2}' | cut -d/ -f1"
+	myip = "ip addr show eth0 | grep -m 1 inet | awk '{print $2}' | cut -d/ -f1"
 	p = Popen(myip, shell = True, stdout = PIPE)
 	output = p.communicate()[0]
 	return output.decode("UTF-8").strip()

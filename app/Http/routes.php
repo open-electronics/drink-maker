@@ -20,6 +20,12 @@ $app->get('/', function()  {
     }
     return redirect('user');
 });
+$app->get('/maker' , function() {
+    if(Session::get('logged')==true){
+        return redirect('admin');
+    }
+    return redirect('user');
+});
 $app->get('admin','App\Http\Controllers\UserController@adminIndex');
 $app->get('user','App\Http\Controllers\UserController@userIndex');
 

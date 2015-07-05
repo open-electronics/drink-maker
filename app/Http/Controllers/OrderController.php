@@ -32,7 +32,7 @@ class OrderController extends Controller {
         }
         if($score!=count($result)){//If we have all
             flasher::error('An error occured, please retry later');
-            return redirect("user");
+            return redirect("order");
         }
 
         foreach($result as $r){//Decrement stock quantities
@@ -41,7 +41,7 @@ class OrderController extends Controller {
         DB::table("orders")->insert(['drink_id'=>$id,'status'=>env('default_status',1),'name'=>$name]);//Insert order
         $number=DB::table('orders')->whereIn('status',[0,1,2])->count();
         flasher::success('We\'re taking care of your order!(number '.$number.')');
-        return redirect("user");
+        return redirect("order");
     }
 
     /**

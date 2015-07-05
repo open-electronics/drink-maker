@@ -60,9 +60,15 @@ class DatabaseSeeder extends Seeder {
             ['drink_id'=>6,'ingredient_id'=>7,'needed'=>1],//Seed vodma dry
             ['drink_id'=>6,'ingredient_id'=>8,'needed'=>2],//Seed vodma vodka
         ];
+
         //Seed recipes
         DB::table('drinks_ingredients')->insert($recipes);
 
+        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>0]);
+        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>1]);
+        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>2]);
+        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>3]);
+        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>4]);
 
         Model::reguard();
         // $this->call('UserTableSeeder');

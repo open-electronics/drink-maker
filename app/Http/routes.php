@@ -18,10 +18,10 @@ $app->get('/', function()  {
     if(Session::get('logged')==true){
         return redirect('admin');
     }
-    return redirect('user');
+    return redirect('order');
 });
 $app->get('admin','App\Http\Controllers\UserController@adminIndex');
-$app->get('user','App\Http\Controllers\UserController@userIndex');
+$app->get('order','App\Http\Controllers\UserController@userIndex');
 
 $app->get('login','App\Http\Controllers\AuthController@index');
 $app->post('login','App\Http\Controllers\AuthController@login');

@@ -46,16 +46,10 @@ def write_data(data):
 	global ser
 	print("Out:"+data)
 	ser.write(bytes(data+'\n','UTF-8'))
-def get_ip():
-	myip = "ip addr show eth0 | grep -m 1 inet | awk '{print $2}' | cut -d/ -f1"
-	p = Popen(myip, shell = True, stdout = PIPE)
-	output = p.communicate()[0]
-	return output.decode("UTF-8").strip()
-
 	
 
 data=None
-base_url="http://"+get_ip()+"/orders/"
+base_url="http://drink/orders/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
 write_data("GoHome")
 wait_answer()

@@ -5,8 +5,10 @@
  * Date: 26/05/15
  * Time: 17:49
  */
+use App\Drink;
 use App\flasher;
 use App\Http\Controllers\Controller;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,24 +23,15 @@ class OrderController extends Controller {
     public function add(Request $req){
         $id=$req->input('id');
         $name=$req->input('name');
-        $result=DB::table("drinks")
-            ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
-            ->join("ingredients","ingredients.id","=","drinks_ingredients.ingredient_id")
-            ->select("drinks.id","drinks_ingredients.needed","ingredients.stock","drinks_ingredients.ingredient_id")
-            ->where("drinks.id","=",$id)->get();
-        $score=0;
-        foreach($result as $r){//Count in stock ingredients
-            if($r["needed"]<=$r["stock"])$score++;
-        }
-        if($score!=count($result)){//If we have all
+        $volume=$req->input('volume');
+        $drink = Drink::find($id);
+
+        if($drink->maxAvailable <$volume){//If we have all
             flasher::error('An error occured, please retry later');
             return redirect("order");
         }
+        $drink->orderDrink($name,$volume);
 
-        foreach($result as $r){//Decrement stock quantities
-            DB::table("ingredients")->where("id","=",$r["ingredient_id"])->decrement("stock",$r["needed"]);
-        }
-        DB::table("orders")->insert(['drink_id'=>$id,'status'=>env('default_status',1),'name'=>$name]);//Insert order
         $number=DB::table('orders')->whereIn('status',[0,1,2])->count();
         flasher::success('We\'re taking care of your order!(number '.$number.')');
         return redirect("order");
@@ -51,7 +44,7 @@ class OrderController extends Controller {
      */
     public function approve($id){
         if(DB::table('orders')->where('status',1)->count()==0){
-            DB::table('orders')->where('id',$id)->update(['status'=>1]);
+            $order=Order::find($id)->update(['status'=>1]);
             flasher::success('Order set waiting to checkout');
         }else{
             flasher::error('An order has already been taken in charge');
@@ -64,19 +57,15 @@ class OrderController extends Controller {
      * @return \Laravel\Lumen\Http\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function waiting(){
-        $id=DB::table('orders')->select('id')->where('status',1)->orderBy('id','asc')->take(1)->get();
-        $id=$id[0]["id"];
-        $result=DB::table('orders')->where('orders.id',$id)
-            ->join('drinks_ingredients','orders.drink_id','=','drinks_ingredients.drink_id')
-            ->join('ingredients','drinks_ingredients.ingredient_id','=','ingredients.id')
-            ->select('orders.drink_id','drinks_ingredients.needed','ingredients.position')
-            ->orderBy('ingredients.position','asc')->get();
-        if(count($result)==0) return response("none");
-        $resp["id"]=$result[0]["drink_id"];
-        foreach($result as $r){
-            $resp['ingredients'][$r['position']]=$r['needed'];
+        $order= Order::where('status',1)->orderBy('id','asc')->firstOrFail();
+        if(!$order) return response("none");
+        //Create json
+        $resp["id"]=$order->id;
+        foreach($order->Drink()->Ingredients() as $i){
+            $resp['ingredients'][$i->position]=$i->needed;
         }
-        DB::table('orders')->where('id',$id)->update(['status'=>2]);
+        $order->status=2;
+        $order->save();
         return response()->json($resp);
     }
 
@@ -95,13 +84,7 @@ class OrderController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
     public function delete($id){
-        $ingredients=DB::table("orders")->where("orders.id",$id)
-            ->join("drinks_ingredients","orders.drink_id","=","drinks_ingredients.drink_id")
-            ->select("ingredient_id","needed")->get();
-        foreach($ingredients as $i){
-            DB::table("ingredients")->where('id',$i["ingredient_id"])->increment("stock",$i["needed"]);
-        }
-        DB::table("orders")->where("id",$id)->update(['status'=>4]);
+        Order::find($id)->deleteOrder();
         flasher::success('Order deleted correctly');
         return redirect("admin#orders");
     }

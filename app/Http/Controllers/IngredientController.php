@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
+use App\Drink;
 use App\flasher;
+use App\Ingredient;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +28,7 @@ class IngredientController extends Controller {
         $stocks=$r->input('stock');
         $positions=$r->input('position');
         for($i=0;$i<count($ids);$i++){
-            DB::table('ingredients')->where('id',$ids[$i])
+            Ingredient::find($ids[$i])
                 ->update(['stock'=>$stocks[$i],'position'=>$positions[$i]]);
         }
         flasher::success('Ingredients updated correctly');
@@ -43,9 +46,7 @@ class IngredientController extends Controller {
             flasher::error('Fill in both fields');
             return redirect('admin#ingredients');
         }
-
-        DB::table('ingredients')
-            ->insert(['ingredient'=>$r->input('name'),'stock'=>$r->input('stock'),'position'=>'-1']);
+        Order::create(['name'=>$r->input('name'),'stock'=>$r->input('stock'),'position'=>'-1');
         flasher::success('Ingredient added correctly');
         return redirect('admin#ingredients');
     }
@@ -56,7 +57,7 @@ class IngredientController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
     public function delete($id){
-        DB::table('ingredients')->where('id',$id)->update('position','-2');
+        Ingredient::find($id)->update('position','-2');
         flasher::success('Ingredient deleted correctly');
         return redirect('admin#ingredients');
     }

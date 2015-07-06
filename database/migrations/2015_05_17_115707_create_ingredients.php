@@ -17,7 +17,7 @@ class CreateIngredients extends Migration {
         Schema::create('ingredients', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->char('ingredient',50);
+            $table->char('name',50);
             $table->smallInteger('stock')->unsigned();
             $table->tinyInteger('position')->nullable();
 		});

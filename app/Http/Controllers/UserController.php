@@ -5,8 +5,11 @@
  * Date: 26/05/15
  * Time: 17:49
  */
+use App\Drink;
 use App\Http\Controllers\Controller;
 use App\flasher;
+use App\Ingredient;
+use App\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -21,13 +24,13 @@ class UserController extends Controller {
             flasher::warning('Login to access the control panel');
             return redirect('login');
         }
-        $drinks=DB::table('drinks')->select('id','name')->get();
-        $ingredients=DB::table("ingredients")->select("id","ingredient","stock","position")->where('position','<>','-2')->get();
-        $orders=DB::table("orders")->join("drinks","drinks.id","=","orders.drink_id")
-            ->select("drinks.name","orders.name AS customer","orders.status","orders.id")->whereIn("orders.status",[0,1,2])->get();
+        $drinks=Drink::all();
+        $ingredients=Ingredient::all();
+        $orders=Order::all();
         $status=false;
         foreach($orders as $o){
             if($o['status']==2) $status=true;
+            break;
         }
         return view('admin')->with('ingredients',$ingredients)
             ->with('orders',$orders)->with('status',$status)->with('drinks',$drinks);
@@ -38,28 +41,6 @@ class UserController extends Controller {
      * @return $this
      */
     public function userIndex(){
-        $result=DB::table("drinks")
-            ->join("drinks_ingredients","drinks.id","=","drinks_ingredients.drink_id")
-            ->join("ingredients","ingredients.id","=","drinks_ingredients.ingredient_id")
-            ->select("drinks.id","drinks.name","drinks.photo","ingredients.ingredient","ingredients.stock","drinks_ingredients.needed")
-            ->where("ingredients.position",">","-1")
-            ->get();
-        $drinks=[];
-        foreach($result as  $r){
-            $drinks[$r["name"]]["id"]=$r["id"];
-            $drinks[$r["name"]]["photo"]=$r["photo"];
-            $drinks[$r["name"]]["ingredients"][$r["ingredient"]]["needed"]=$r["needed"];
-            $drinks[$r["name"]]["ingredients"][$r["ingredient"]]["stock"]=$r["stock"];
-        }
-        $avab=[];
-        foreach($drinks as $name=>$drink){
-            $score=0;
-            foreach($drink["ingredients"] as $ingredients){
-                if($ingredients["needed"]<=$ingredients["stock"]) $score++;
-            }
-            $avab[$name]=$drink;
-            $avab[$name]["available"]=($score==count($drink["ingredients"]));
-        }
-        return view('user')->with("drinks",$avab);
+        return view('user')->with("drinks",Drink::all());
     }
 }

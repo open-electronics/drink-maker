@@ -57,8 +57,8 @@ class IngredientController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
     public function delete($id){
-        Ingredient::find($id)->update('position','-2');
+        Ingredient::find($id)->update(['position'=>'-2']);
         flasher::success('Ingredient deleted correctly');
-        return redirect('admin#ingredients');
+
     }
 }

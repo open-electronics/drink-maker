@@ -28,5 +28,18 @@ $(document).ready(function(){
     $(".tab").click(function(event){
         location.href = event.target.href;
     });
+    $('.delete-ingredient').click(function(e){
+        var url = $(this).attr('href');
+        var response = $.ajax({
+           url: url.replace("#",""),
+            method: "DELETE"
+        });
+
+        response.done(function(data){
+           location.reload();
+        });
+        e.preventDefault();
+        return false;
+    });
 });
 

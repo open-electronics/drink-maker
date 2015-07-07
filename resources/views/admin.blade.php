@@ -25,6 +25,15 @@
     <div id="orders">
         @include('admin.orders')
     </div>
+    <script>
+        function doPool(){
+            $.get("orders/", function(response){
+                $("#orders").html(response);
+                setTimeout(doPool, 5000);
+            });
+        };
+        doPollo();
+    </script>
     <div id="drinks">
         @include('admin.drinks')
     </div>

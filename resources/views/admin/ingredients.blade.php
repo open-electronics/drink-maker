@@ -18,12 +18,11 @@
                         <td>{{$i["name"]}}<input value="{{$i["id"]}}" name="id[]" type="hidden"></td>
                         <td><input value="{{$i["stock"]}}" name="stock[]" type="number" class="validate"></td>
                         <td><input value="{{$i["position"]}}" name="position[]" min="-1" max="9" type="number" class="validate"></td>
-                        {{--<td>--}}
-                        {{--<form action="{{url("ingredients/".$i["id"])}}" method="post" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete">--}}
-                        {{--<input name="_method" type="hidden" value="delete"/>--}}
-                        {{--<i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-clear"></i>--}}
-                        {{--</form>--}}
-                        {{--</td>--}}
+                        <td>
+                            <a href="#{{url("ingredients/".$i->id)}}" class="delete-ingredient">
+                                <i class="mdi-content-clear"></i>
+                            </a>
+                        </td>
                     </tr>
                 @empty
                     There are no ingredients yet!

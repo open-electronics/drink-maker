@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\DB;
 
 
 class OrderController extends Controller {
+    public function pending(){
+        $orders=Order::whereIn('status',[0,1,2])->get();
+        return response(view('admin.orders')->with('orders',$orders)->render());
+    }
     /**
      * Get the drink with the specified name and add it to the orders queue, decrease stock of items
      * @param $req

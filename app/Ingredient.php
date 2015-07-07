@@ -27,7 +27,7 @@ class Ingredient extends Model{
      * @var array
      */
     protected $hidden = [];
-
+    public $timestamps=false;
     /**
      * All dirnks using that ingredient
      * @return $this

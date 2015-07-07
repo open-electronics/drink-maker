@@ -26,7 +26,7 @@ class OrderController extends Controller {
         $volume=$req->input('volume');
         $drink = Drink::find($id);
 
-        if($drink->maxAvailable <$volume){//If we have all
+        if($drink->getAvailable() <$volume){//If we have all
             flasher::error('An error occured, please retry later');
             return redirect("order");
         }

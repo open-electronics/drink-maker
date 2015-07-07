@@ -46,7 +46,7 @@ class IngredientController extends Controller {
             flasher::error('Fill in both fields');
             return redirect('admin#ingredients');
         }
-        Order::create(['name'=>$r->input('name'),'stock'=>$r->input('stock'),'position'=>'-1');
+        Ingredient::create(['name'=>$r->input('name'),'stock'=>$r->input('stock'),'position'=>'-1']);
         flasher::success('Ingredient added correctly');
         return redirect('admin#ingredients');
     }

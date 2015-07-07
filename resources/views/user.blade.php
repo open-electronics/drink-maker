@@ -38,37 +38,41 @@
                         <label for="na">Insert your name</label>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="2" max="200" min="2" name="volume" type="number" id="vol">
+                        <label for="vol">Insert the drink volume</label>
+                    </div>
+                </div>
                 <div align="center">Click the cocktail names to see their ingredients!<br>
                 Click the bell to order the cocktail!</div>
-                <ul class="collapsible" data-collapsible="accordion">
-                    @forelse($drinks as $n=>$d)
-                        <li>
-                            <div class="collapsible-header" >
-                                <i class="mdi-maps-local-bar medium"></i> <span>{{$n}}</span>
-                                @if($d["available"])
-                                    <a href="#" class="order" id="{{$d["id"]}}" >
-                                        <i class="mdi-social-notifications medium right"></i>
+                <?php $i=0 ?>
+                    @forelse($drinks as $drink)
+                        <?php $i++ ?>
+                        <div data-id="{{$drink->id}}" data-max="{{$drink->maxAvailable}}" class="drink card-panel col s12 m5 {{($i%2==0)?"offset-m2":""}} z-depth-1-half">
+                            <div class="row" >
+                                <i class="mdi-maps-local-bar small"></i> <span>{{$drink->name}}</span>
+                                @if($drink->maxAvailable>2)
+                                    <a href="#" class="order" id="{{$drink->id}}" >
+                                        <i data-disable="mdi-av-not-interested" data-enable="mdi-social-notifications" class="mdi-social-notifications small right"></i>
                                     </a>
                                 @else
-                                    <i class="mdi-av-not-interested medium right"></i>
+                                    <i class="mdi-av-not-interested small right"></i>
                                 @endif
                             </div>
-                            <div class="collapsible-body">
-                                <div class="row">
-                                    <div class="col s6 offset-s1">
-                                        Ingredients:<ul>@foreach($d["ingredients"] as $ingred=>$data)<li>{{$data["needed"]." parts of ".$ingred}}</li>@endforeach</ul>
-                                    </div>
-                                    <div class="col s4">
-                                        @if($d["photo"]!=null)
-                                        <img class="responsive-img circle" src="{{'uploads/'.$d["photo"]}}">
-                                        @endif
-                                    </div>
+                            <div class="row">
+                                <div class="col s6 offset-s1">
+                                    Ingredients:<ul>@foreach($drink->Ingredients as $ingred)<li>{{$ingred->pivot->needed." parts of ".$ingred->name}}</li>@endforeach</ul>
+                                </div>
+                                <div class="col s4">
+                                    @if($drink->photo!=null)
+                                        <img class="responsive-img circle" src="{{'uploads/'.$drink->photo}}">
+                                    @endif
                                 </div>
                             </div>
-                        </li>
+                        </div>
                     @empty
                     @endforelse
-                </ul>
             </form>
         </div>
     </div>

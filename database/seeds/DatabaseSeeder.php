@@ -22,15 +22,15 @@ class DatabaseSeeder extends Seeder {
         DB::table('drinks')->truncate();
         DB::statement($unguard[$driver][1]);
         //Seed ingredients
-        DB::table('ingredients')->insert(['ingredient'=>'Gin','position'=>1,'stock'=>35]);
-        DB::table('ingredients')->insert(['ingredient'=>'Campari','position'=>3,'stock'=>35]);
-        DB::table('ingredients')->insert(['ingredient'=>'Martini rosso','position'=>6,'stock'=>35]);
+        DB::table('ingredients')->insert(['name'=>'Gin','position'=>1,'stock'=>35]);
+        DB::table('ingredients')->insert(['name'=>'Campari','position'=>3,'stock'=>35]);
+        DB::table('ingredients')->insert(['name'=>'Martini rosso','position'=>6,'stock'=>35]);
 
-        DB::table('ingredients')->insert(['ingredient'=>'Prosecco','position'=>2,'stock'=>35]);
-        DB::table('ingredients')->insert(['ingredient'=>'Aperol','position'=>4,'stock'=>35]);
-        DB::table('ingredients')->insert(['ingredient'=>'Soda','position'=>7,'stock'=>35]);
-        DB::table('ingredients')->insert(['ingredient'=>'Martini dry','position'=>5,'stock'=>35]);
-        DB::table('ingredients')->insert(['ingredient'=>'Vodka','position'=>8,'stock'=>35]);
+        DB::table('ingredients')->insert(['name'=>'Prosecco','position'=>2,'stock'=>35]);
+        DB::table('ingredients')->insert(['name'=>'Aperol','position'=>4,'stock'=>35]);
+        DB::table('ingredients')->insert(['name'=>'Soda','position'=>7,'stock'=>35]);
+        DB::table('ingredients')->insert(['name'=>'Martini dry','position'=>5,'stock'=>35]);
+        DB::table('ingredients')->insert(['name'=>'Vodka','position'=>8,'stock'=>35]);
 
 
         //Seed drinks

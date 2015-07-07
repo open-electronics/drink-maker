@@ -28,10 +28,12 @@ class Order extends Model{
      */
     protected $hidden = [];
 
+    public $timestamps=false;
+
     public function deleteOrder(){
         $this->status=4;
         $this->save();
-        $this->Drink()->restoreDrinkIngredients($this->volume);
+        $this->Drink->restoreDrinkIngredients($this->volume);
     }
     /**
      * The drink ordered

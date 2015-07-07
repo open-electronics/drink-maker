@@ -33,23 +33,29 @@ class DrinkController extends Controller {
             $extension = $r->file('photo')->getClientOriginalExtension(); // getting image extension
             $fileName = $r->input('name').'.'.$extension;
         }
-        $score=0;
-        $drink=Drink::create(['name'=>$r->input('name'),'photo'=>$fileName]);
         $ingredients=$r->input('ingredients');
         $parts=$r->input('parts');
-        $data=[];
+        $recognizedIngredients=[];
+        $recognizedParts=[];
         for($i=0;$i<5;$i++){
             if($ingredients[$i]!=0){
-                $score++;
-                $drink->Ingredients()->attach($ingredients[$i],['needed'=>$parts[$i]]);
+                if($i<4&&$ingredients[$i]==$ingredients[$i+1]){
+                    $parts[$i+1]+=$parts[$i];
+                    continue;
+                }else{
+                    array_push($recognizedIngredients,$ingredients[$i]);
+                    array_push($recognizedParts,$parts[$i]);
+                }
             }
         }
-        if($score==0){
-            $drink->delete();
+        if(count($recognizedIngredients)==0){
             flasher::error('Choose at least one ingredient');
             return redirect('admin#drinks');
         }
-
+        $drink=Drink::create(['name'=>$r->input('name'),'photo'=>$fileName]);
+        for($i=0;$i<count($recognizedIngredients);$i++){
+                $drink->Ingredients()->attach($recognizedIngredients[$i],['needed'=>$recognizedParts[$i]]);
+        }
         if($fileName!=null)$r->file('photo')->move($destinationPath, $fileName);
 
         flasher::success('Drink added successfully');

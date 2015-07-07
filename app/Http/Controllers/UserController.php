@@ -25,8 +25,8 @@ class UserController extends Controller {
             return redirect('login');
         }
         $drinks=Drink::all();
-        $ingredients=Ingredient::where('position','<>','-2');
-        $orders=Order::whereIn('status',[0,1,2]);
+        $ingredients=Ingredient::where('position','<>','-2')->get();
+        $orders=Order::whereIn('status',[0,1,2])->get();
         $status=false;
         foreach($orders as $o){
             if($o['status']==2) $status=true;

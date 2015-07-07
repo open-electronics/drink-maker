@@ -41,17 +41,22 @@ class Drink extends Model{
     /**
      * Calculates total parts and max available
      */
-    function __construct()
+    function getAvailable()
     {
-        $ingredients=$this->Ingredients();
+        $ingredients=$this->Ingredients;
         foreach($ingredients as $i){
-            $this->totalParts+=$i->needed;
+            $this->totalParts+=$i->pivot->needed;
         }
         for($i=0;$i<count($ingredients);$i++){
-            $max=$this->roundToMultiple($ingredients[$i]->stock/$ingredients[$i]->needed)*$this->totalParts;
-            if($max<$this->maxAvailable)$this->maxAvailable=$max;
+            if($ingredients[$i]->position>=0){
+                $max=$this->roundToMultiple($ingredients[$i]->stock/$ingredients[$i]->pivot->needed)*$this->totalParts;
+            }else{
+                $max=0;
+            }
+            if($max<$this->maxAvailable||$i==0)$this->maxAvailable=$max;
+            if($max<2)return 0;
         }
-
+        return $this->maxAvailable;
     }
 
     /**
@@ -61,8 +66,7 @@ class Drink extends Model{
      * @return float
      */
     private function roundToMultiple($number,$multiple=2){
-        return (floor(($number)%$multiple==0)? floor($number) :
-            floor(($number+$multiple)/$multiple)*$multiple;
+        return (floor(($number)%$multiple)==0)? floor($number) : floor(($number+$multiple)/$multiple)*$multiple;
     }
 
     /**
@@ -71,8 +75,8 @@ class Drink extends Model{
      * @param $volume
      */
     public function orderDrink($name,$volume){
-        foreach($this->Ingredients() as $i){
-            $i->stock-=$this->roundToMultiple($volume*($i->needed/$this->totalParts));
+        foreach($this->Ingredients as $i){
+            $i->stock-=$this->roundToMultiple($volume*($i->pivot->needed/$this->totalParts));
             $i->save();
         }
         $order = new Order();
@@ -87,8 +91,8 @@ class Drink extends Model{
      * @param $volume
      */
     public function restoreDrinkIngredients($volume){
-        foreach($this->Ingredients() as $i){
-            $i->stock+=$this->roundToMultiple($volume*($i->needed/$this->totalParts));
+        foreach($this->Ingredients as $i){
+            $i->stock+=$this->roundToMultiple($volume*($i->pivot->needed/$this->totalParts));
             $i->save();
         }
     }
@@ -104,7 +108,7 @@ class Drink extends Model{
      * @return $this
      */
     public function Ingredients(){
-        return $this->belongsToMany(Ingredient::class,'drink_id','ingredient_id')->withPivot('needed');
+        return $this->belongsToMany(Ingredient::class,'drinks_ingredients','drink_id','ingredient_id')->withPivot('needed');
     }
 
 }

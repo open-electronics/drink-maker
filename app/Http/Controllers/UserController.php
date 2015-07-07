@@ -25,8 +25,8 @@ class UserController extends Controller {
             return redirect('login');
         }
         $drinks=Drink::all();
-        $ingredients=Ingredient::all();
-        $orders=Order::all();
+        $ingredients=Ingredient::where('position','<>','-2');
+        $orders=Order::whereIn('status',[0,1,2]);
         $status=false;
         foreach($orders as $o){
             if($o['status']==2) $status=true;
@@ -41,6 +41,10 @@ class UserController extends Controller {
      * @return $this
      */
     public function userIndex(){
-        return view('user')->with("drinks",Drink::all());
+        $drinks=[];
+        foreach(Drink::all() as $drink){
+            if($drink->getAvailable()!=0)array_push($drinks,$drink);
+        }
+        return view('user')->with("drinks",$drinks);
     }
 }

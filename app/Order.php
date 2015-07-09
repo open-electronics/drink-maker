@@ -27,8 +27,7 @@ class Order extends Model{
      * @var array
      */
     protected $hidden = [];
-
-    public $timestamps=false;
+    protected $dates = ['created_at'];
 
     public function deleteOrder(){
         $this->status=4;

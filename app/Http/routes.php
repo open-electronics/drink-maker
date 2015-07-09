@@ -32,10 +32,13 @@ $app->get('order','App\Http\Controllers\UserController@userIndex');
 $app->get('login','App\Http\Controllers\AuthController@index');
 $app->post('login','App\Http\Controllers\AuthController@login');
 
-$app->get('orders','App\Http\Controllers\OrderController@pending');
-$app->get('orders/waiting','App\Http\Controllers\OrderController@waiting');
-$app->get('orders/completed','App\Http\Controllers\OrderController@completed');
+$app->get('orders/pending','App\Http\Controllers\OrderController@pending');
+$app->get('orders/waiting','App\Http\Controllers\OrderController@waiting');//python
+$app->get('orders/completed','App\Http\Controllers\OrderController@completed');//python
 $app->post('orders','App\Http\Controllers\OrderController@add');
+$app->get('orders/{id}','App\Http\Controllers\OrderController@show');
+$app->get('orders/{id}/async','App\Http\Controllers\OrderController@async');
+$app->post('orders/{id}/requeue','App\Http\Controllers\OrderController@requeue');
 $app->patch('orders/{id}','App\Http\Controllers\OrderController@approve');
 $app->delete('orders/{id}','App\Http\Controllers\OrderController@delete');
 

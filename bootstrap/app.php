@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 require_once __DIR__.'/../vendor/autoload.php';
@@ -94,7 +95,6 @@ $app->middleware([
 | can respond to, as well as the controllers that may handle them.
 |
 */
-
 require __DIR__.'/../app/Http/routes.php';
 DB::setFetchMode(PDO::FETCH_ASSOC);
 return $app;

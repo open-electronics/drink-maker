@@ -27,12 +27,12 @@
     </div>
     <script>
         function doPool(){
-            $.get("orders/", function(response){
+            $.get("orders/pending", function(response){
                 $("#orders").html(response);
                 setTimeout(doPool, 5000);
             });
         };
-        doPollo();
+        doPool();
     </script>
     <div id="drinks">
         @include('admin.drinks')

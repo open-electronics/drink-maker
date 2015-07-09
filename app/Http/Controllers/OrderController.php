@@ -15,9 +15,38 @@ use Illuminate\Support\Facades\DB;
 
 
 class OrderController extends Controller {
-    public function pending(){
-        $orders=Order::whereIn('status',[0,1,2])->get();
+    public function requeue($id){
+        $order= Order::find($id);
+        if(!$order || $order->status!=5){
+            flasher::error('Error!This order cannot be reordered');
+            return redirect()->back();
+        }
+        $order->status=1;
+        $order->save();
+        flasher::success('Your drink has been reordered!');
+        return redirect('orders/'.$id);
+    }
+    public function pending(Request $r){
+        if(!$r->ajax())return redirect()->back();
+        $orders=Order::whereIn('status',[0,1,2,5])->get();
         return response(view('admin.orders')->with('orders',$orders)->render());
+    }
+    public function show($id){
+        $order=Order::find($id);
+        if(!$order){
+            flasher::error('We\'re sorry, we can\t find this order');
+            return redirect()->back();
+        }
+        return view('order')->with('order',$order);
+    }
+    public function async($id,Request $r){
+        if(!$r->ajax())return redirect()->back();
+        $order=Order::find($id);
+        if(!$order){
+            flasher::error('We\'re sorry, we can\t find this order');
+            return redirect()->back();
+        }
+        return response(view('order.status')->with('order',$order)->render());
     }
     /**
      * Get the drink with the specified name and add it to the orders queue, decrease stock of items
@@ -34,11 +63,9 @@ class OrderController extends Controller {
             flasher::error('An error occured, please retry later');
             return redirect("order");
         }
-        $drink->orderDrink($name,$volume);
-
-        $number=DB::table('orders')->whereIn('status',[0,1,2])->count();
-        flasher::success('We\'re taking care of your order!(number '.$number.')');
-        return redirect("order");
+        $id=$drink->orderDrink($name,$volume);
+        flasher::success('We\'re taking care of your order!');
+        return redirect('orders/'.$id);
     }
 
     /**

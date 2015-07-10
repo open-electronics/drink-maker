@@ -43,20 +43,20 @@ sudo mv composer.phar /usr/local/bin/composer
 cd ..
 
 echo "Changing environment"
-sudo rm ../.env
-sudo cp ../.env.deploy ../.env
+sudo rm /home/pi/drink-maker/.env
+sudo cp /home/pi/drink-maker/.env.deploy /home/pi/drink-maker/.env
 
 echo "Moving all in /var/www"
-sudo mkdir /var/www/barobot
-sudo cp -R ../. /var/www/barobot
-sudo chown www-data:www-data /var/www/barobot -R
-sudo chmod 0775 /var/www/barobot/storage -R
+sudo mkdir /var/www/drink-maker
+sudo cp -R /home/pi/drink-maker /var/www/drink-maker
+sudo chown www-data:www-data /var/www/drink-maker -R
+sudo chmod 0775 /var/www/drink-maker/storage -R
 
 echo "Deleting everything from install path"
-sudo rm -rf ../../barobot
+sudo rm -rf /home/pi/drink-maker
 
 echo "Installing composer dependencies"
-cd /var/www/barobot
+cd /var/www/drink-maker
 sudo -u www-data -H touch storage/database.sqlite
 sudo -u www-data -H composer install
 
@@ -64,6 +64,6 @@ echo "Migrating and seeding"
 sudo -u www-data -H php artisan migrate --seed --force
 
 echo "Adding python to startup"
-echo "python3 /var/www/barobot/utils/controller.py" | sudo tee /etc/profile -a
+echo "python3 /var/www/drink-maker/utils/controller.py" | sudo tee /etc/profile -a
 
 echo "Enjoy!"

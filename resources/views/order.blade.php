@@ -57,5 +57,23 @@
             @include('order.status')
         </div>
     </div>
+    <div class="row">
+        <div class="col offset-s1 s10 offset-m1 m4">
+            <a class="btn waves-effect waves-light" href="{{url('order')}}">
+                <i class="mdi-content-undo"></i>Go back
+            </a>
+            <br>
+        </div>
+        @if(in_array([0,1,5,6],$order->status))
+        <div class="col offset-s1 s10 offset-m2 m4">
+            <form>
+                <button type="submit" class="btn waves-effect waves-light red" href="{{url('order')}}">
+                    <input type="hidden" name="_method" value="delete">
+                    <i class="mdi-content-clear right"></i>Delete order
+                </button>
+            </form>
+        </div>
+        @endif
+    </div>
 </div>
 </body>

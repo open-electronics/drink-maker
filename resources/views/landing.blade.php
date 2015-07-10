@@ -1,20 +1,35 @@
 @extends('master')
 @section('title')
-Homepage
+Drink Maker
 @endsection
 
 @section('content')
 <div class="row">
     <div class="col offset-s3 s6" align="center">
-        <h3>Benvenuto</h3>
+        <h3>Welcome!!</h3>
+    </div>
+</div>
+<div class="row" align="center">
+    <div class="col offset-s3 s6" align="center">
+        <a class="btn waves-effect waves-light" href="{{url('order')}}">
+            <i class=" left mdi-maps-local-bar"></i>
+            Order something!
+            <i class=" right mdi-maps-local-bar"></i>
+        </a>
     </div>
 </div>
 <div class="row">
-    <div class="col offset-s2 s3" align="center">
-        <a class="btn waves-effect waves-light" href="{{url('/admin')}}">Admin</a>
+    <div class="col offset-s3 s6" align="center">
+        <a class="btn waves-effect waves-light" href="{{url('orders')}}">
+            <i class=" left mdi-action-history"></i>
+            View your orders!
+            <i class=" right mdi-action-history"></i>
+        </a>
     </div>
-    <div class="col offset-s2 s3" align="center">
-        <a class="btn waves-effect waves-light" href="{{url('/user')}}">User</a>
+</div>
+<div class="row">
+    <div class="col offset-s3 s6" align="center">
+        <a class="btn waves-effect waves-light" href="{{url('admin')}}">Login as an administrator</a>
     </div>
 </div>
 @endsection

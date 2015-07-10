@@ -24,6 +24,7 @@ Status:<?php
                     break;
             }
             ?>
+    There are {{$before}} orders before yours
 @if($order->status==6)
     <form method="post" action="{{url('orders/'+$order->id+'/requeue')}}">
         <button type="submit" class="btn waves-light waves-effect">Re-order!</button>

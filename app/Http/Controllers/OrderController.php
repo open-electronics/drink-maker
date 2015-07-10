@@ -11,10 +11,15 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 
 
 class OrderController extends Controller {
+    public function personal(Request $r){
+        $drinks= $r->session()->get('order_ids');
+        $orders= Order::whereIn('id',$drinks);
+        return view('personal')->with('orders',$orders);
+    }
     public function requeue($id){
         $order= Order::find($id);
         if(!$order || $order->status!=5){
@@ -31,13 +36,21 @@ class OrderController extends Controller {
         $orders=Order::whereIn('status',[0,1,2,5])->get();
         return response(view('admin.orders')->with('orders',$orders)->render());
     }
-    public function show($id){
+    public function show($id,Request $r){
+        $var=$r->session()->get('order_ids');
+        if(!in_array($id,$var))
+            //is_array($r->session()->get('order_ids'))&&in_array($id,$r->session()->get('order_ids')))))
+        {
+            flasher::error('You don\'t own this order!');
+            return redirect()->back();
+        }
         $order=Order::find($id);
         if(!$order){
             flasher::error('We\'re sorry, we can\t find this order');
             return redirect()->back();
         }
-        return view('order')->with('order',$order);
+        $before= Order::whereIn('status',[0,1,2,5])->where('id','<',$id)->count();
+        return view('order')->with('order',$order)->with('before',$before);
     }
     public function async($id,Request $r){
         if(!$r->ajax())return redirect()->back();
@@ -46,7 +59,8 @@ class OrderController extends Controller {
             flasher::error('We\'re sorry, we can\t find this order');
             return redirect()->back();
         }
-        return response(view('order.status')->with('order',$order)->render());
+        $before= Order::whereIn('status',[0,1,2,5])->where('id','<',$id)->count();
+        return response(view('order.status')->with('order',$order)->with('before',$before)->render());
     }
     /**
      * Get the drink with the specified name and add it to the orders queue, decrease stock of items
@@ -65,6 +79,10 @@ class OrderController extends Controller {
         }
         $id=$drink->orderDrink($name,$volume);
         flasher::success('We\'re taking care of your order!');
+        $drinks=$req->session()->get('order_ids');
+        if(!$drinks)$drinks=[];
+        array_push($drinks,$id);
+        $req->session()->put(['order_ids'=>$drinks]);
         return redirect('orders/'.$id);
     }
 
@@ -117,6 +135,6 @@ class OrderController extends Controller {
     public function delete($id){
         Order::find($id)->deleteOrder();
         flasher::success('Order deleted correctly');
-        return redirect("admin#orders");
+        return redirect()->back();
     }
 }

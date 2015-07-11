@@ -30,8 +30,10 @@ class UserController extends Controller {
         $orders=Order::whereIn('status',[0,1,2])->get();
         $status=false;
         foreach($orders as $o){
-            if($o['status']==2) $status=true;
-            break;
+            if($o['status']==1){
+                $status=true;
+                break;
+            }
         }
         return view('admin')->with('ingredients',$ingredients)->with('settings',Settings::all())
             ->with('orders',$orders)->with('status',$status)->with('drinks',$drinks);

@@ -59,8 +59,8 @@ $app->singleton(
 */
 
 $app->middleware([
-//     // 'Illuminate\Cookie\Middleware\EncryptCookies',
-//     // 'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
+//      'Illuminate\Cookie\Middleware\EncryptCookies',
+//      'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
       'Illuminate\Session\Middleware\StartSession',
       'Illuminate\View\Middleware\ShareErrorsFromSession',
 //     // 'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
@@ -95,6 +95,7 @@ $app->middleware([
 | can respond to, as well as the controllers that may handle them.
 |
 */
+Carbon::setLocale('it');
 require __DIR__.'/../app/Http/routes.php';
 DB::setFetchMode(PDO::FETCH_ASSOC);
 return $app;

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Session;
 class OrderController extends Controller {
     public function personal(Request $r){
         $drinks= $r->session()->get('order_ids');
-        $orders= Order::whereIn('id',$drinks);
+        $orders= Order::whereIn('id',$drinks)->get();
         return view('personal')->with('orders',$orders);
     }
     public function requeue($id){

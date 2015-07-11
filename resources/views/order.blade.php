@@ -46,6 +46,9 @@
         function doPool(){
             var id= $("#title").attr("data-id");
             $.get(id+"/async", function(response){
+                if(response.indexOf("deleted")>-1){
+                    alert("ei");
+                    }
                 $(".target").html(response);
                 setTimeout(doPool, 5000);
             });
@@ -59,15 +62,16 @@
     </div>
     <div class="row">
         <div class="col offset-s1 s10 offset-m1 m4">
-            <a class="btn waves-effect waves-light" href="{{url('order')}}">
+            <a class="btn waves-effect waves-light" href="{{url('maker')}}">
                 <i class="mdi-content-undo"></i>Go back
             </a>
             <br>
         </div>
-        @if(in_array([0,1,5,6],$order->status))
+        @if(in_array($order->status,[0,1,5,6]))
         <div class="col offset-s1 s10 offset-m2 m4">
-            <form>
-                <button type="submit" class="btn waves-effect waves-light red" href="{{url('order')}}">
+            <form method="post" action="{{url('orders/'.$order->id)}}">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn waves-effect waves-light red">
                     <input type="hidden" name="_method" value="delete">
                     <i class="mdi-content-clear right"></i>Delete order
                 </button>

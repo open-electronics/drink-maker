@@ -4,8 +4,24 @@
 @endsection
 
 @section('content')
-    @forelse($orders as $o)
+    <div class="row">
+        <div class="col offset-s1 s10">
 
+    @forelse($orders as $o)
+        <a href="{{url('orders/'.$o->id)}}">
+                <div class="card-panel">
+                    <div class="row">
+                        <div class="col offset-s1 s10">
+                            Ordered by: {{$o->name}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col offset-s1 s10">
+                            Ordered at: {{$o->created_at}}
+                        </div>
+                    </div>
+                </div>
+        </a>
     @empty
         <div class="row">
             <div class="col offset-s2 s8" align="center">
@@ -20,4 +36,7 @@
             </div>
         </div>
     @endforelse
+
+        </div>
+    </div>
 @endsection

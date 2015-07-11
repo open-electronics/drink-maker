@@ -1,4 +1,6 @@
 <?php namespace App\Http\Controllers;
+use App\Settings;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\flasher;
@@ -32,7 +34,7 @@ class AuthController extends Controller {
             flasher::error('Compile both fields!');
             return redirect('login');
         }
-        if($r->input('name')=='barobot' && $r->input('password')=='futura_barobot'){
+        if($r->input('name')==Settings::username() && Hash::check($r->input('password'),Settings::password())){
             Session::put('logged',true);
             return redirect('admin');
         }

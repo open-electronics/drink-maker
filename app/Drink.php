@@ -84,7 +84,7 @@ class Drink extends Model{
         $order = new Order();
         $order->name=$name;
         $order->volume=$volume;
-        $order->status=env('default_status',1);
+        $order->status=Settings::initial_status();
         $order->Drink()->associate($this);
         $order->save();
         return $order->id;

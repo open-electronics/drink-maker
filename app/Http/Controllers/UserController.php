@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\flasher;
 use App\Ingredient;
 use App\Order;
+use App\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -32,7 +33,7 @@ class UserController extends Controller {
             if($o['status']==2) $status=true;
             break;
         }
-        return view('admin')->with('ingredients',$ingredients)
+        return view('admin')->with('ingredients',$ingredients)->with('settings',Settings::all())
             ->with('orders',$orders)->with('status',$status)->with('drinks',$drinks);
     }
 
@@ -45,6 +46,7 @@ class UserController extends Controller {
         foreach(Drink::all() as $drink){
             if($drink->getAvailable()!=0)array_push($drinks,$drink);
         }
-        return view('user')->with("drinks",$drinks);
+        $max = Settings::volume();
+        return view('user')->with("drinks",$drinks)->with('max',$max);
     }
 }

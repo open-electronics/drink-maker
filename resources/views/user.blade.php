@@ -23,7 +23,7 @@ Order your cocktail!
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input value="2" max="200" min="2" name="volume" type="number" id="vol">
+                        <input value="10" max="{{$max}}" min="10" name="volume" type="number" id="vol">
                         <label for="vol">Insert the drink volume</label>
                     </div>
                 </div>

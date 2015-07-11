@@ -9,6 +9,7 @@ use App\Drink;
 use App\flasher;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -110,8 +111,11 @@ class OrderController extends Controller {
         if(!$order) return response("none");
         //Create json
         $resp["id"]=$order->id;
-        foreach($order->Drink()->Ingredients() as $i){
-            $resp['ingredients'][$i->position]=$i->needed;
+        $resp["timeout"]=Settings::timeoutTime();
+        $resp["start"]=Settings::startMethod();
+        $ing= $order->Drink->Ingredients;
+        for($i=0;$i<count($ing);$i++){
+            $resp['ingredients'][$i]=$ing[$i]->position.'|'.$ing[$i]->needed;
         }
         $order->status=2;
         $order->save();

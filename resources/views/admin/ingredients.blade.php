@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col s5 offset-s1" align="center">
         <h4>Ingredients:</h4>
+        Use numbers from 0 to 9 for positions, and -1 if the bottle is not on the machine
         <form method="post" id="quantities" action="{{url('ingredients')}}">
             <input name="_method" type="hidden" value="patch"/>
             <table>
@@ -9,7 +10,7 @@
                     <th data-field="name">Name</th>
                     <th data-field="quantity">Stock</th>
                     <th data-field="position">Position</th>
-                    {{--<th data-field="delete">Delete</th>--}}
+                    <th data-field="delete">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,7 +19,7 @@
                         <td>{{$i["name"]}}<input value="{{$i["id"]}}" name="id[]" type="hidden"></td>
                         <td><input value="{{$i["stock"]}}" name="stock[]" type="number" class="validate"></td>
                         <td><input value="{{$i["position"]}}" name="position[]" min="-1" max="9" type="number" class="validate"></td>
-                        <td>
+                        <td align="center">
                             <a href="#{{url("ingredients/".$i->id)}}" class="delete-ingredient">
                                 <i class="mdi-content-clear"></i>
                             </a>

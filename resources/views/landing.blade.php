@@ -9,6 +9,7 @@ Drink Maker
         <h3>Welcome!!</h3>
     </div>
 </div>
+@include('messages')
 <div class="row" align="center">
     <div class="col offset-s3 s6" align="center">
         <a class="btn waves-effect waves-light" href="{{url('order')}}">

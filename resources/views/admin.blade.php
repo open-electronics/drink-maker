@@ -13,8 +13,9 @@
         <div class="col s10 offset-s1">
             <ul class="tabs">
                 <li class="tab col s3"><a href="#orders">Orders</a></li>
-                <li class="tab col s4"><a href="#ingredients">Ingredients</a></li>
+                <li class="tab col s3"><a href="#ingredients">Ingredients</a></li>
                 <li class="tab col s3"><a href="#drinks">Drinks</a></li>
+                <li class="tab col s3"><a href="#settings">Settings</a></li>
             </ul>
         </div>
     </div>
@@ -36,5 +37,8 @@
     </script>
     <div id="drinks">
         @include('admin.drinks')
+    </div>
+    <div id="settings">
+        @include('admin.settings')
     </div>
 @endsection

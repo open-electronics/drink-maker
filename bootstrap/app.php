@@ -66,9 +66,9 @@ $app->middleware([
 //     // 'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
  ]);
 
-// $app->routeMiddleware([
-
-// ]);
+ $app->routeMiddleware([
+     'settings'=>'App\Http\Middleware\SettingsExistMiddleware',
+ ]);
 
 /*
 |--------------------------------------------------------------------------

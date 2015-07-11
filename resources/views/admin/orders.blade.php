@@ -6,6 +6,7 @@
                 <thead>
                 <tr>
                     <th data-field="name">Name</th>
+                    <th data-field="volume">Volume</th>
                     <th data-field="customer">Customer</th>
                     <th data-field="status">Status</th>
                     <th data-field="action">Action</th>
@@ -15,6 +16,7 @@
                 @foreach($orders as $o)
                     <tr>
                         <td>{{$o->Drink->name}}</td>
+                        <td>{{$o["volume"]}}</td>
                         <td>{{$o["name"]}}</td>
                         @if($o["status"]==0)
                             <td>
@@ -42,9 +44,31 @@
                                     <i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-clear"></i>
                                 </form>
                             </td>
-                        @else
+                        @elseif($o["stauts"]==2)
                             <td>
                                 Making
+                            </td>
+                            <td>
+                                <form action="{{url("orders/".$o["id"])}}" method="post" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete">
+                                    <input name="_method" type="hidden" value="delete"/>
+                                    <i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-clear"></i>
+                                </form>
+                            </td>
+                        @elseif($o["status"]==5)
+                            <td>
+                                Waiting start
+                            </td>
+                            <td>
+                            <td>
+                                <form action="{{url("orders/".$o["id"])}}" method="post" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete">
+                                    <input name="_method" type="hidden" value="delete"/>
+                                    <i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-clear"></i>
+                                </form>
+                            </td>
+                            </td>
+                        @else
+                            <td>
+                                Timed out
                             </td>
                             <td>
                                 <form action="{{url("orders/".$o["id"])}}" method="post" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete">

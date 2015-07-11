@@ -70,6 +70,8 @@ class DatabaseSeeder extends Seeder {
         DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>3]);
         DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>4]);
 
+
+        DB::table('settings')->where('id', '1')->insert(['username' => 'diocane','password'=>\Illuminate\Support\Facades\Hash::make('password')]);
         Model::reguard();
         // $this->call('UserTableSeeder');
     }

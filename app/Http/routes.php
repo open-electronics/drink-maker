@@ -24,6 +24,9 @@ $app->group(['middleware'=>'settings'],function() use($app){
         return view('landing');
     });
     $app->get('/maker' , function() {
+        $var = "sudo iwlist wlan0 scan 2>&1 | grep 'ESSID' | grep -oP '\"";
+        $var=$var."\\K[^\"\047]+(?=[\"\047])'";
+        dd(shell_exec($var));
         return view('landing');
     });
 

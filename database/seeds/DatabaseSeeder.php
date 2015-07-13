@@ -64,14 +64,7 @@ class DatabaseSeeder extends Seeder {
         //Seed recipes
         DB::table('drinks_ingredients')->insert($recipes);
 
-        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>0]);
-        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>1]);
-        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>2]);
-        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>3]);
-        DB::table('orders')->insert(['drink_id'=>1,'name'=>'ei','status'=>4]);
-
-
-        DB::table('settings')->where('id', '1')->insert(['username' => 'User','Password'=>\Illuminate\Support\Facades\Hash::make('password')]);
+        DB::table('settings')->where('id', '1')->insert(['username' => 'User','Password'=>\Illuminate\Support\Facades\Hash::make('password'),'volume'=>10,'timeout_time'=>15,'initial_status'=>0,'start_method'=>0,'wifi_ssid'=>"x"]);
         Model::reguard();
         // $this->call('UserTableSeeder');
     }

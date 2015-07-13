@@ -73,8 +73,8 @@ echo "Migrating and seeding"
 sudo -u www-data -H php artisan migrate --seed --force
 
 echo "Adding python to startup"
-sudo cp /var/www/drink-maker/utils/drink-makerController /etc/init.d/drink-maker
-sudo chmod +x /etc/init.d/drink-maker
+sudo cp /var/www/drink-maker/utils/drink-makerController.sh /etc/init.d/drink-maker.sh
+sudo chmod +x /etc/init.d/drink-maker.sh
 
 echo "Enjoy!"
 

@@ -107,7 +107,7 @@ class OrderController extends Controller {
      * @return \Laravel\Lumen\Http\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function waiting(){
-        $order= Order::where('status',1)->orderBy('id','asc')->firstOrFail();
+        $order= Order::where('status',1)->orderBy('id','asc')->first();
         if(!$order) return response("none");
         //Create json
         $resp["id"]=$order->id;

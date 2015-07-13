@@ -12,9 +12,9 @@ sudo apt-get install php5-fpm php5-cgi php5-cli php5-common php5-mcrypt -y >/dev
 echo "sqlite"
 sudo apt-get install sqlite sqlite3 libsqlite3-dev php5-sqlite -y >/dev/null
 echo "Wireless tools"
-sudo apt-get install wireless-tools
+sudo apt-get install wireless-tools -y
 echo "avahi-daemon"
-sudo apt-get install avahi-daemon
+sudo apt-get install avahi-daemon -y
 
 echo "Changing host"
 sudo sed -i '$ d' /etc/hosts

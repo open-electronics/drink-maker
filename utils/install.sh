@@ -78,6 +78,12 @@ echo "Adding python to startup"
 sudo cp /var/www/drink-maker/utils/drink-makerController.sh /etc/init.d/drink-maker.sh
 sudo chmod +x /etc/init.d/drink-maker.sh
 
-echo "Enjoy!"
+echo "Installing RandA"
+cp /var/www/drink-maker/utils/install/RandAinstall.sh /home/pi/RandAinstall.sh
+cp /var/www/drink-maker/utils/install/RandAinstall.tar.gz /home/pi/RandAinstall.tar.gz
+chmod 777 /home/pi/RandAinstall.sh
+bash RandAinstall.sh
+
+echo "Rebooting!"
 
 sudo reboot

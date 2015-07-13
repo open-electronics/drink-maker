@@ -58,13 +58,9 @@ sudo rm /home/pi/drink-maker/.env
 sudo cp /home/pi/drink-maker/.env.deploy /home/pi/drink-maker/.env
 
 echo "Moving all in /var/www"
-sudo mkdir /var/www/drink-maker
-sudo cp -R /home/pi/drink-maker /var/www/drink-maker
+sudo mv -R /home/pi/drink-maker /var/www
 sudo chown www-data:www-data /var/www/drink-maker -R
 sudo chmod 0775 /var/www/drink-maker/storage -R
-
-echo "Deleting everything from install path"
-sudo rm -rf /home/pi/drink-maker
 
 echo "Installing composer dependencies"
 cd /var/www/drink-maker

@@ -27,7 +27,7 @@ class OrderController extends Controller {
             flasher::error('Error!This order cannot be reordered');
             return redirect()->back();
         }
-        $order->status=1;
+        $order->status=Settings::initial_status();
         $order->save();
         flasher::success('Your drink has been reordered!');
         return redirect('orders/'.$id);

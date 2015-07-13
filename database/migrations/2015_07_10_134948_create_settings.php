@@ -22,7 +22,7 @@ class CreateSettings extends Migration {
             $table->tinyInteger('initial_status')->unsigned()->nullable();
             $table->smallInteger('timeout_time')->unsigned()->nullable();
             $table->string('wifi_ssid')->nullable();
-			$table->timestamps();
+
 		});
 	}
 

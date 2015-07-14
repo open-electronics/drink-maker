@@ -28,7 +28,7 @@ class Settings {
                 return DB::table('settings')->where('id', '1')->select($arguments)->first();
                 break;
             case 'exists':
-                    return DB::table('settings')->where('id', '1')->select('wifi_ssid')->first()["wifi_ssid"]=="default_drink_maker_placeholder";
+                    return !DB::table('settings')->where('id', '1')->select('wifi_ssid')->first()["wifi_ssid"]=="default_drink_maker_placeholder";
                 break;
             default:
                 if($arguments==[]) {

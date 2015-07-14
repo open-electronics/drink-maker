@@ -7,6 +7,8 @@ set -v
 #redirect stdout and stderr to output and log file
 exec &> >(tee RandAinstall.log)
 
+cd /home/pi
+
 #extract directory RandAinstall (where installation files are contained) 
 #from archive
 sudo tar -xzf /home/pi/RandAinstall.tar.gz -C /

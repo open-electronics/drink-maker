@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder {
         //Seed recipes
         DB::table('drinks_ingredients')->insert($recipes);
 
-        DB::table('settings')->where('id', '1')->insert(['username' => 'User','Password'=>\Illuminate\Support\Facades\Hash::make('password'),'volume'=>10,'timeout_time'=>15,'initial_status'=>0,'start_method'=>0,'wifi_ssid'=>"x"]);
+        DB::table('settings')->where('id', '1')->insert(['username' => 'User','Password'=>\Illuminate\Support\Facades\Hash::make('password'),'volume'=>10,'timeout_time'=>15,'initial_status'=>0,'start_method'=>0,'wifi_ssid'=>"default_drink_maker_placeholder"]);
         Model::reguard();
         // $this->call('UserTableSeeder');
     }

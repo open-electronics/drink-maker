@@ -18,10 +18,11 @@ sudo apt-get install avahi-daemon -y > /dev/null
 
 echo "Changing host"
 sudo sed -i '$ d' /etc/hosts
-sudo echo "127.0.1.1	drink" >> /etc/hosts
+echo "127.0.1.1	drink" | sudo tee --append /etc/hosts
 
 echo "Changing hostname"
-sudo echo "drink" > /etc/hostname
+sudo sed -i '$ d' /etc/hostname
+echo "drink" | sudo tee --append /etc/hostname
 
 echo "Creating usergroup www-data"
 sudo useradd www-data 

@@ -77,6 +77,7 @@ sudo chmod +x /etc/init.d/drink-maker.sh
 echo "Installing RandA"
 cp /var/www/drink-maker/utils/install/RandAinstall.sh /home/pi/RandAinstall.sh
 cp /var/www/drink-maker/utils/install/RandAinstall.tar.gz /home/pi/RandAinstall.tar.gz
+cd /home/pi
 chmod 777 /home/pi/RandAinstall.sh
 sudo bash /home/pi/RandAinstall.sh
 

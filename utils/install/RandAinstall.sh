@@ -9,7 +9,7 @@ exec &> >(tee RandAinstall.log)
 
 #extract directory RandAinstall (where installation files are contained) 
 #from archive
-sudo tar -xzf RandAinstall.tar.gz
+sudo tar -xzf RandAinstall.tar.gz -C /
 #end extract from archive
 
 #modify files

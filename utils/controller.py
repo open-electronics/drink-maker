@@ -2,6 +2,7 @@ import json
 import urllib.request
 import time
 import serial
+import math
 from subprocess import *
 
 global data,ser,base_url
@@ -29,7 +30,7 @@ def prepare_drink():
 		total_parts=total_parts+ ingredient["needed"]
 	
 	for ingredient in data["ingredients"]:
-		ingredient_volume= (ingredient["needed"]*total_parts)*data["volume"]
+		ingredient_volume= (ingredient["needed"]/total_parts)*data["volume"]
 		ingredient_volume= round_to_multiple(ingredient_volume)
 		parts= ingredient_volume/2
 		write_data(str(ingredient["position"])+ "|"+str(parts))
@@ -41,10 +42,10 @@ def prepare_drink():
 	wait_answer()
 
 def round_to_multiple(number,multiple=2):
-	if floor(number)%multiple==0:
-		return int(floor(number))
+	if math.floor(number)%multiple==0:
+		return int(math-floor(number))
 	else :
-		return int((floor(number/multiple))*multiple)
+		return int((math.floor(number/multiple))*multiple)
 		
 def fetch_url(url):
 	global data

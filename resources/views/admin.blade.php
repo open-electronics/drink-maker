@@ -27,13 +27,13 @@
         @include('admin.orders')
     </div>
     <script>
-        function doPool(){
+        function doOrderPool(){
             $.get("orders/pending", function(response){
                 $("#orders").html(response);
-                setTimeout(doPool, 5000);
+                setTimeout(doOrderPool, 5000);
             });
         };
-        doPool();
+        doOrderPool();
     </script>
     <div id="drinks">
         @include('admin.drinks')

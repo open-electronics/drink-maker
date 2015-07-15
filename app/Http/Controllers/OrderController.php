@@ -34,8 +34,15 @@ class OrderController extends Controller {
     }
     public function pending(Request $r){
         if(!$r->ajax())return redirect()->back();
-        $orders=Order::whereIn('status',[0,1,2,5])->get();
-        return response(view('admin.orders')->with('orders',$orders)->render());
+        $orders=Order::whereIn('status',[0,1,2,5,6])->get();
+        $status=false;
+        foreach($orders as $o){
+            if($o['status']==1){
+                $status=true;
+                break;
+            }
+        }
+        return response(view('admin.orders')->with('orders',$orders)->with('status',$status)->render());
     }
     public function show($id,Request $r){
         $var=$r->session()->get('order_ids');
@@ -111,11 +118,13 @@ class OrderController extends Controller {
         if(!$order) return response("none");
         //Create json
         $resp["id"]=$order->id;
-        $resp["timeout"]=Settings::timeoutTime();
-        $resp["start"]=Settings::startMethod();
+        $resp["timeout"]=Settings::timeout_time();
+        $resp["start"]=Settings::start_method();
+        $resp["volume"]=$order->volume;
         $ing= $order->Drink->Ingredients;
-        for($i=0;$i<count($ing);$i++){
-            $resp['ingredients'][$i]=$ing[$i]->position.'|'.$ing[$i]->needed;
+        for($i=0;$i<count($order->Drink->Ingredients);$i++){
+            $resp['ingredients'][$i]['position']=$ing[$i]->position;
+            $resp['ingredients'][$i]['needed']=$ing[$i]->pivot->needed;
         }
         if(Settings::start_method()==0){
             $order->status=2;    //Making

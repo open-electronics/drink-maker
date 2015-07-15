@@ -27,7 +27,7 @@ class UserController extends Controller {
         }
         $drinks=Drink::all();
         $ingredients=Ingredient::where('position','<>','-2')->get();
-        $orders=Order::whereIn('status',[0,1,2])->get();
+        $orders=Order::whereIn('status',[0,1,2,5,6])->get();
         $status=false;
         foreach($orders as $o){
             if($o['status']==1){
@@ -36,7 +36,7 @@ class UserController extends Controller {
             }
         }
         return view('admin')->with('ingredients',$ingredients)->with('settings',Settings::all())
-            ->with('orders',$orders)->with('status',$status)->with('drinks',$drinks);
+            ->with('orders',$orders)->with('status',$status)->with('drinks',$drinks)->with('wifi',Settings::wifi());
     }
 
     /**

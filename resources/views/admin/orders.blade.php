@@ -44,7 +44,7 @@
                                     <i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-clear"></i>
                                 </form>
                             </td>
-                        @elseif($o["stauts"]==2)
+                        @elseif($o["stauts"]==2 || $o["status"]=="2")
                             <td>
                                 Making
                             </td>

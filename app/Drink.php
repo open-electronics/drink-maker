@@ -60,7 +60,7 @@ class Drink extends Model{
      * @return float
      */
     private function roundToMultiple($number,$multiple=2){
-        return (floor(($number)%$multiple)==0)? floor($number) : floor(($number+$multiple)/$multiple)*$multiple;
+        return (floor(($number)%$multiple)==0)? floor($number) : floor($number/$multiple)*$multiple;
     }
     private  function  totalParts(){
         $ingredients=$this->Ingredients;

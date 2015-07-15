@@ -25,7 +25,7 @@ def main_loop():
 def prepare_drink():
 	#dictate ingredients
 	for i in data["ingredients"]:
-		write_data("*-"+str(data["ingredients"][i]))
+		write_data(str(data["ingredients"][i]))
 		wait_answer()
 	#update db
 	fetch_url("completed")
@@ -53,7 +53,7 @@ def wait_answer(answer="1"):
 def write_data(data):
 	global ser
 	print("Out:"+data)
-	ser.write(bytes(data+'\n','UTF-8'))
+	ser.write(bytes("!"+data+'\n','UTF-8'))
 	
 
 data=None

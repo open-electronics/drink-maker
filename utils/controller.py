@@ -30,7 +30,7 @@ def prepare_drink():
 	#update db
 	fetch_url("completed")
 	#reset position
-	write_data("*-00")
+	write_data("0|0")
 	wait_answer()
 	
 def fetch_url(url):

@@ -65,7 +65,6 @@
             <a class="btn waves-effect waves-light" href="{{url('maker')}}">
                 <i class="mdi-content-undo"></i>Go back
             </a>
-            <br>
         </div>
         @if(in_array($order->status,[0,1,5,6]))
         <div class="col offset-s2 s4">

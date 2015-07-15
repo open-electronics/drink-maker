@@ -20,6 +20,8 @@ $app->get('configure','App\Http\Controllers\SettingsController@showPage');
 $app->post('configure','App\Http\Controllers\SettingsController@configure');
 $app->get('orders/waiting', 'App\Http\Controllers\OrderController@waiting');//python
 $app->get('orders/completed', 'App\Http\Controllers\OrderController@completed');//python
+$app->get('orders/timedout', 'App\Http\Controllers\OrderController@timedOut');//python
+$app->get('orders/activated', 'App\Http\Controllers\OrderController@activated');//python
 $app->get('wifi','App\Http\Controllers\SettingsController@getWifi');
 
 $app->group(['middleware'=>'settings'],function() use($app){

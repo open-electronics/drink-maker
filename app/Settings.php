@@ -22,7 +22,7 @@ class Settings {
                 $settings['start_method'] = Settings::start_method();
                 $settings['initial_status'] = Settings::initial_status();
                 $settings['timeout_time'] = Settings::timeout_time();
-                $settings["wifi"]=Settings::wifi();
+                $settings["wifi"]=Settings::wifi_ssid();
                 return $settings;
                 break;
             case 'wifi':
@@ -36,7 +36,7 @@ class Settings {
                 return DB::table('settings')->where('id', '1')->select($arguments)->first();
                 break;
             case 'exists':
-                    return !DB::table('settings')->where('id', '1')->select('wifi_ssid')->first()["wifi_ssid"]=="default_drink_maker_placeholder";
+                    return !(DB::table('settings')->where('id', '1')->select('wifi_ssid')->first()["wifi_ssid"]=="default_drink_maker_placeholder");
                 break;
             default:
                 if($arguments==[]) {

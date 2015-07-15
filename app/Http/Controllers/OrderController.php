@@ -117,7 +117,11 @@ class OrderController extends Controller {
         for($i=0;$i<count($ing);$i++){
             $resp['ingredients'][$i]=$ing[$i]->position.'|'.$ing[$i]->needed;
         }
-        $order->status=2;
+        if(Settings::start_method()==0){
+            $order->status=2;    //Making
+        }else{
+            $order->status=5;   //Waiting activation
+        }
         $order->save();
         return response()->json($resp);
     }
@@ -129,6 +133,14 @@ class OrderController extends Controller {
      */
     public function completed(){
         DB::table('orders')->where('status','2')->update(['status'=>3]);
+        return response('200');
+    }
+    public function timedOut(){
+        DB::table('orders')->where('status','5')->update(['status'=>6]);
+        return response('200');
+    }
+    public function activated(){
+        DB::table('orders')->where('status','5')->update(['status'=>2]);
         return response('200');
     }
     /**

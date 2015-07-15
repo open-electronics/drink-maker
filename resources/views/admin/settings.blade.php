@@ -71,7 +71,7 @@
         <script>
             function doPool(){
                 $.get("wifi", function(response){
-                    $(".list").html(response);
+                    $("#list").html(response);
                     setTimeout(doPool, 12000);
                 });
             };
@@ -84,12 +84,12 @@
             <div class=" col offset-s8 s3">
                 <script>
                     $( document ).ready(function() {
-                        $(".submit").click(function(){
+                        $("#submit").click(function(){
                             event.preventDefault();
-                            if( $(".ssid").val()==""){
+                            if( $("#ssid").val()==""){
                                 Materialize.toast('Choose a wifi network!',3000,'rounded');
                             }else{
-                                $(".form").submit();
+                                $("#form").submit();
                             }
                         });
                     });

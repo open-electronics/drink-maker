@@ -42,6 +42,7 @@ class SettingsController extends Controller {
         Settings::start_method($r->input('start_method'));
         Settings::initial_status($r->input('initial_status'));
         Settings::timeout_time($r->input('timeout_time'));
+        Settings::wifi_ssid($r->input('ssid'));
 
         flasher::success('Your settings have been saved correctly');
         if(Session::has('logged')){

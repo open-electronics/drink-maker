@@ -22,6 +22,7 @@ class Settings {
                 $settings['start_method'] = Settings::start_method();
                 $settings['initial_status'] = Settings::initial_status();
                 $settings['timeout_time'] = Settings::timeout_time();
+                $settings["wifi"]=Settings::wifi();
                 return $settings;
                 break;
             case 'wifi':

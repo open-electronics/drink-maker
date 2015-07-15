@@ -18,8 +18,10 @@ class SettingsController extends Controller {
             flasher::warning('The machine has already been configured');
             return redirect('maker');
         }
-        //TODO WIFI
-        return view('configure')->with('settings',Settings::all());
+        return view('configure')->with('settings',Settings::all())->with('wifi',Settings::wifi());
+    }
+    public function getWifi(){
+        return response(view('wifi')->with('wifi',Settings::wifi())->render());
     }
     public function configure(Request $r){
         if($r->has('new_psw')){

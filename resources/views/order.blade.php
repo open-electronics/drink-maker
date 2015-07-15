@@ -61,14 +61,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col offset-s1 s10 offset-m1 m4">
+        <div class="col offset-s1 s4">
             <a class="btn waves-effect waves-light" href="{{url('maker')}}">
                 <i class="mdi-content-undo"></i>Go back
             </a>
             <br>
         </div>
         @if(in_array($order->status,[0,1,5,6]))
-        <div class="col offset-s1 s10 offset-m2 m4">
+        <div class="col offset-s2 s4">
             <form method="post" action="{{url('orders/'.$order->id)}}">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn waves-effect waves-light red">

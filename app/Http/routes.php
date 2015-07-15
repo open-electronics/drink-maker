@@ -18,17 +18,18 @@ use Illuminate\Support\Facades\Session;
 
 $app->get('configure','App\Http\Controllers\SettingsController@showPage');
 $app->post('configure','App\Http\Controllers\SettingsController@configure');
+$app->get('orders/waiting', 'App\Http\Controllers\OrderController@waiting');//python
+$app->get('orders/completed', 'App\Http\Controllers\OrderController@completed');//python
+$app->get('wifi','App\Http\Controllers\SettingsController@getWifi');
 
 $app->group(['middleware'=>'settings'],function() use($app){
     $app->get('/', function()  {
         return view('landing');
     });
     $app->get('/maker' , function() {
-        $var = "sudo iwlist wlan0 scan 2>&1 | grep 'ESSID' | grep -oP '\"";
-        $var=$var."\\K[^\"\047]+(?=[\"\047])'";
-        dd(shell_exec($var));
         return view('landing');
     });
+
 
 $app->get('admin', 'App\Http\Controllers\UserController@adminIndex');
 $app->get('order', 'App\Http\Controllers\UserController@userIndex');
@@ -38,8 +39,6 @@ $app->post('login', 'App\Http\Controllers\AuthController@login');
 
 $app->get('orders', 'App\Http\Controllers\OrderController@personal');
 $app->get('orders/pending', 'App\Http\Controllers\OrderController@pending');//Admin panel
-$app->get('orders/waiting', 'App\Http\Controllers\OrderController@waiting');//python
-$app->get('orders/completed', 'App\Http\Controllers\OrderController@completed');//python
 $app->post('orders', 'App\Http\Controllers\OrderController@add');
 $app->get('orders/{id}', 'App\Http\Controllers\OrderController@show');
 $app->get('orders/{id}/async', 'App\Http\Controllers\OrderController@async');

@@ -24,6 +24,13 @@ class Settings {
                 $settings['timeout_time'] = Settings::timeout_time();
                 return $settings;
                 break;
+            case 'wifi':
+                $var = "sudo iwlist wlan0 scan 2>&1 | grep 'ESSID' | grep -oP '\"";
+                $var=$var."\\K[^\"\\047]+(?=[\"\\047])'";
+                $access= explode("\n",shell_exec($var));
+                $access=array_unique(array_filter($access));
+                return $access;
+                break;
             case 'multiple':
                 return DB::table('settings')->where('id', '1')->select($arguments)->first();
                 break;

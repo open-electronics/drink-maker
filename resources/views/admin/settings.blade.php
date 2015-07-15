@@ -67,6 +67,18 @@
                 </div>
             </div>
         </div>
+        <script>
+            function doPool(){
+                $.get("wifi", function(response){
+                    $(".list").html(response);
+                    setTimeout(doPool, 12000);
+                });
+            };
+            doPool();
+        </script>
+        <div class="row" id = "list">
+        @include('wifi')
+        </div>
         <div class="row">
             <div class=" col offset-s8 s3">
                 <button type="submit" class="btn waves-effect waves-light">

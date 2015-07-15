@@ -11,24 +11,31 @@ def main_loop():
 	global data,base_url
 	#data retrieving
 	while data==None:
-		fetch_url(base_url+"waiting")
+		fetch_url("waiting")
 		time.sleep(2)
-	#wait 10 seconds
-	write_data("NewDrink")
-	wait_answer()
-	time.sleep(10)
+	#tell the machine that we have a new drink with stuff
+	write_data("NewDrink|"+data["start"]+"|"+data["timeout"])
+	if wait_answer("2") == "2": #activate, expect 2 as a "timed out" signal
+		fetch_url("timedout")
+	else:
+		fetch_url("activated")
+		prepare_drink()
+	data=None
+	
+def prepare_drink():
 	#dictate ingredients
 	for i in data["ingredients"]:
-		write_data("*-"+i+str(data["ingredients"][i]))
+		write_data("*-"+str(data["ingredients"][i]))
 		wait_answer()
 	#update db
-	fetch_url(base_url+"completed")
+	fetch_url("completed")
 	#reset position
 	write_data("*-00")
 	wait_answer()
-	data=None
+	
 def fetch_url(url):
 	global data
+	url= base_url+url
 	try:
 		page=urllib.request.urlopen(url)
 		j=page.read().decode("utf-8")
@@ -38,10 +45,11 @@ def fetch_url(url):
 def wait_answer(answer="1"):
 	global ser
 	v=None
-	while not v==answer:
+	while not (v=="1" or v==answer):
 		v=ser.readline().decode("UTF-8").strip()
 		print("In:"+v)
 		time.sleep(0.2)
+	return v
 def write_data(data):
 	global ser
 	print("Out:"+data)

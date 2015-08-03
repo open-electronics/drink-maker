@@ -14,8 +14,11 @@ def main_loop():
 	while data==None:
 		fetch_url("waiting")
 		time.sleep(2)
+		if data=="shutdown":
+			
+	
 	#tell the machine that we have a new drink with stuff
-	write_data("NewDrink|"+data["start"]+"|"+data["timeout"])
+	write_data("NewDrink|"+data["start"]+"|"+data["timeout"]+"|"+data["lights"])
 	if wait_answer("2") == "2": #activate, expect 2 as a "timed out" signal
 		fetch_url("timedout")
 	else:
@@ -46,13 +49,20 @@ def round_to_multiple(number,multiple=2):
 		return int(math-floor(number))
 	else :
 		return int((math.floor(number/multiple))*multiple)
-		
+
+def restart():
+    command = "/usr/bin/sudo /sbin/shutdown -h now"
+    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+	
 def fetch_url(url):
 	global data
 	url= base_url+url
 	try:
 		page=urllib.request.urlopen(url)
 		j=page.read().decode("utf-8")
+		if j=="shutdown":
+			data="shutdown"
+			return
 		data=json.loads(j)
 	except:
 		data=None

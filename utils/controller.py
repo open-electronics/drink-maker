@@ -60,12 +60,12 @@ def fetch_url(url):
 	try:
 		page=urllib.request.urlopen(url)
 		j=page.read().decode("utf-8")
-		data=json.loads(j)
-	except:
 		if j=="shutdown":
 			data="shutdown"
-		else:
-			data=None
+			return
+		data=json.loads(j)
+	except:
+		data=None
 def wait_answer(answer="1"):
 	global ser
 	v=None

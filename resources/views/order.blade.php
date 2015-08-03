@@ -46,7 +46,7 @@
         function doPool(){
             var id= $("#title").attr("data-id");
             $.get(id+"/async", function(response){
-                if(response.indexOf("deleted")>-1){
+                if(response.indexOf("This order is ready!")>-1){
                     alert("ei");
                     }
                 $(".target").html(response);

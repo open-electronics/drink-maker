@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 
 $app->get('configure','App\Http\Controllers\SettingsController@showPage');
 $app->post('configure','App\Http\Controllers\SettingsController@configure');
+$app->post('shutdown','App\Http\Controllers\SettingsController@shutDown');
 $app->get('orders/waiting', 'App\Http\Controllers\OrderController@waiting');//python
 $app->get('orders/completed', 'App\Http\Controllers\OrderController@completed');//python
 $app->get('orders/timedout', 'App\Http\Controllers\OrderController@timedOut');//python

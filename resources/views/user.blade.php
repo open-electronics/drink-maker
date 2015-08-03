@@ -29,10 +29,8 @@ Order your cocktail!
                 </div>
                 <div align="center">Click the cocktail names to see their ingredients!<br>
                 Click the bell to order the cocktail!</div>
-                <?php $i=0 ?>
                     @forelse($drinks as $drink)
-                        <?php $i++ ?>
-                        <div data-id="{{$drink->id}}" data-max="{{$drink->maxAvailable}}" class="drink card-panel col s12  {{($i%2==0)?"offset-m2":""}} z-depth-1-half">
+                        <div data-id="{{$drink->id}}" data-max="{{$drink->maxAvailable}}" class="drink card-panel col s12 m6 z-depth-1-half">
                             <div class="row" >
                                 <i class="mdi-maps-local-bar small"></i> <span>{{$drink->name}}</span>
                                 @if($drink->maxAvailable>2)

@@ -20,6 +20,19 @@ class SettingsController extends Controller {
         }
         return view('configure')->with('settings',Settings::all())->with('wifi',Settings::wifi());
     }
+    public function shutDown(Request $r){
+        if($r->has(('password'))){
+            if(Hash::check($r->input('password'),Settings::password())){
+                Settings::should_shutdown(true);
+                flasher::success('Shutting down! Unplug from the wall when the next drink is finished!');
+            }else{
+                flasher::error('Wrong password');
+            }
+        }else{
+            flasher::error('Unable to shutdown, please retry!');
+        }
+        return redirect()->back();
+    }
     public function getWifi(){
         return response(view('wifi')->with('wifi',Settings::wifi())->render());
     }
@@ -43,7 +56,7 @@ class SettingsController extends Controller {
         Settings::initial_status($r->input('initial_status'));
         Settings::timeout_time($r->input('timeout_time'));
         Settings::wifi_ssid($r->input('ssid'));
-
+        Settings::exists(true);
         flasher::success('Your settings have been saved correctly');
         if(Session::has('logged')){
             return redirect('admin#settings');

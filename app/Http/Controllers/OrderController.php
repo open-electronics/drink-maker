@@ -114,6 +114,10 @@ class OrderController extends Controller {
      * @return \Laravel\Lumen\Http\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function waiting(){
+        if(Settings::should_shutdown()==true){
+            Settings::should_shutdown(false);
+            return response("shutdown");
+        }
         $order= Order::where('status',1)->orderBy('id','asc')->first();
         if(!$order) return response("none");
         //Create json
@@ -121,6 +125,7 @@ class OrderController extends Controller {
         $resp["timeout"]=Settings::timeout_time();
         $resp["start"]=Settings::start_method();
         $resp["volume"]=$order->volume;
+        $resp["lights"]=Settings::has_lights();
         $ing= $order->Drink->Ingredients;
         for($i=0;$i<count($order->Drink->Ingredients);$i++){
             $resp['ingredients'][$i]['position']=$ing[$i]->position;

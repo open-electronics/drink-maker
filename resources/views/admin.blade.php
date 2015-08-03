@@ -40,5 +40,20 @@
     </div>
     <div id="settings">
         @include('admin.settings')
+        <div class="card-panel">
+            <form action="{{url('shutdown')}}" method="post">
+                <div class="row">
+                    <div class="input-field col s6 offset-s1">
+                        <input type="password" name="password" id="password" >
+                        <label for="password">Password for shutdown</label>
+                    </div>
+                    <div class="input-field offset-s1 col s3">
+                        <button type="submit" class="btn waves-light red waves-effect">
+                            <i class="mdi-content-send right"></i>Shutdown!
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection

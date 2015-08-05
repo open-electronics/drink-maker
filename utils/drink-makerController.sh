@@ -5,12 +5,12 @@ case "$1" in
   start)
     echo "Starting the controller"
     # run application you want to start
-    python3 /var/www/drink-maker/utils/controller.py &
+    sudo python3 /var/www/drink-maker/utils/controller.py &
     ;;
   stop)
     echo "Stopping the controller"
     # kill application you want to stop
-    killall python
+    sudo killall python
     ;;
   *)
     echo "Usage: /etc/init.d/example{start|stop}"

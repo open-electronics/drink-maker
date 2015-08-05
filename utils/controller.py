@@ -3,6 +3,7 @@ import urllib.request
 import time
 import serial
 import math
+import os
 from subprocess import *
 
 global data,ser,base_url
@@ -13,9 +14,9 @@ def main_loop():
 	#data retrieving
 	while data==None:
 		fetch_url("waiting")
-		time.sleep(2)
 		if data=="shutdown":
-			
+			shutdown()
+		time.sleep(2)
 	
 	#tell the machine that we have a new drink with stuff
 	write_data("NewDrink|"+data["start"]+"|"+data["timeout"]+"|"+data["lights"])
@@ -50,9 +51,9 @@ def round_to_multiple(number,multiple=2):
 	else :
 		return int((math.floor(number/multiple))*multiple)
 
-def restart():
-    command = "/usr/bin/sudo /sbin/shutdown -h now"
-    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+def shutdown():
+    os.system("sudo shutdown -h now")
+	time.sleep(5)
 	
 def fetch_url(url):
 	global data

@@ -81,7 +81,7 @@ def write_data(data):
 	
 
 data=None
-subprocess.call(["ArduLoad", "/var/www/drink-maker/utils/drink-maker.hex"])
+subprocess.call(["ArduLoad", "/var/www/drink-maker/utils/drink-maker.cpp.hex"])
 time.sleep(3)
 base_url="http://drink/orders/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)

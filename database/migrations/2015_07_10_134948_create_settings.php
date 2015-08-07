@@ -23,6 +23,7 @@ class CreateSettings extends Migration {
             $table->smallInteger('timeout_time')->unsigned()->nullable();
             $table->string('wifi_ssid')->nullable();
             $table->boolean('has_lights')->default(0);
+            $table->boolean('play_sounds')->default(0);
             $table->boolean('exists')->default(0);
             $table->boolean('should_shutdown')->default(0);
 		});

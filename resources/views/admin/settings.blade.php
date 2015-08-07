@@ -45,6 +45,19 @@
                         <label for="timeout_time">Timeout time(seconds)</label>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col s10 offset-s1">
+                        <div class="switch" >
+                            <label>Enable lights: </label>
+                            <label>
+                                Off
+                                <input type="checkbox" {{$settings['has_lights']?'checked':'unchecked'}} name="has_lights" id="has_lights" >
+                                <span class="lever"></span>
+                                On
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col s6">
                 <div class="row">
@@ -66,6 +79,19 @@
                         </select>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col s10 offset-s1">
+                        <div class="switch" >
+                            <label>Play notification sounds: </label>
+                            <label>
+                                Off
+                                <input type="checkbox" {{$settings['play_sounds']?'checked':'unchecked'}} name="play_sounds" id="play_sounds" >
+                                <span class="lever"></span>
+                                On
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <script>
@@ -74,7 +100,7 @@
                     $("#list").html(response);
                     setTimeout(doPool, 12000);
                 });
-            };
+            }
             doPool();
         </script>
         <div class="row" id = "list">

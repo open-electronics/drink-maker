@@ -22,6 +22,8 @@ class Settings {
                 $settings['start_method'] = Settings::start_method();
                 $settings['initial_status'] = Settings::initial_status();
                 $settings['timeout_time'] = Settings::timeout_time();
+                $settings['play_sounds'] = Settings::play_sounds();
+                $settings['has_lights'] = Settings::has_lights();
                 $settings["wifi"]=Settings::wifi_ssid();
                 return $settings;
                 break;

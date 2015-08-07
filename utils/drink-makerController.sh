@@ -3,6 +3,18 @@
  
 case "$1" in
   start)
+    echo "Checking for updates"
+    cd /var/www/drink-maker
+    OUTPUT="$(sudo -u www-data -H git pull origin master)"
+    if [[ "$OUTPUT" == *"files changed"* ]]
+    then
+      echo "Updates found"
+    elif [[ "$OUTPUT" == *"Already up-to-date."* ]]
+    then
+      echo "Already up-to-date."
+    else
+      echo "Updates disabled"
+    fi
     echo "Starting the controller"
     # run application you want to start
     sudo python3 /var/www/drink-maker/utils/controller.py &

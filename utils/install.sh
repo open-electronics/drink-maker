@@ -74,6 +74,7 @@ sudo -u www-data -H php artisan migrate --seed --force
 echo "Adding python to startup"
 sudo cp /var/www/drink-maker/utils/drink-makerController.sh /etc/init.d/drink-maker.sh
 sudo chmod +x /etc/init.d/drink-maker.sh
+sudo update-rc.d drink-maker.sh defaults
 
 echo "Installing RandA"
 cp /var/www/drink-maker/utils/install/RandAinstall.sh /home/pi/RandAinstall.sh

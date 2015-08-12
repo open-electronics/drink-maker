@@ -69,8 +69,8 @@ class SettingsController extends Controller {
         Settings::initial_status($r->input('initial_status'));
         Settings::timeout_time($r->input('timeout_time'));
 
-        if($r->has('wifi_password')) {
-            Settings::wifi_success((Settings::wifi_success() && Settings::wifi_ssid() == $r->input('ssid')));
+        if($r->has('wifi_password') && Settings::wifi_ssid() == $r->input('ssid') ) {
+            Settings::wifi_success(0);
             Settings::wifi_ssid($r->input('ssid'));
             Settings::wifi_password($r->input('wifi_password'));
         }

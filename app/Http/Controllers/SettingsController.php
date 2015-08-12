@@ -33,6 +33,19 @@ class SettingsController extends Controller {
         }
         return redirect()->back();
     }
+
+    public function getWifiData(){
+        if(Settings::wifi_success()){
+            return response("none");
+        }
+        $resp= [
+            "ssid"=>Settings::wifi_ssid(),
+            "password"=>Settings::wifi_password()
+        ];
+        Settings::wifi_success(true);
+        return response($resp);
+    }
+
     public function getWifi(){
         return response(view('wifi')->with('wifi',Settings::wifi())->render());
     }
@@ -55,7 +68,13 @@ class SettingsController extends Controller {
         Settings::start_method($r->input('start_method'));
         Settings::initial_status($r->input('initial_status'));
         Settings::timeout_time($r->input('timeout_time'));
-        Settings::wifi_ssid($r->input('ssid'));
+
+        if($r->has('wifi_password')) {
+            Settings::wifi_success((Settings::wifi_success() && Settings::wifi_ssid() == $r->input('ssid')));
+            Settings::wifi_ssid($r->input('ssid'));
+            Settings::wifi_password($r->input('wifi_password'));
+        }
+
         Settings::has_lights($r->has('has_lights')&&$r->input('has_lights')=='on');
         Settings::play_sounds($r->has('play_sounds')&&$r->input('play_sounds')=='on');
         Settings::exists(true);

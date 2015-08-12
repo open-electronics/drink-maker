@@ -7,7 +7,7 @@
         @forelse($wifi as $w)
             <li class="collection-item">
                 {{$w}}
-                    <a href="#"><i class="mdi-device-signal-wifi-4-bar right"></i></a>
+                    <a href="passwordModal" class="modal-trigger"><i class="mdi-device-signal-wifi-4-bar right"></i></a>
             </li>
         @empty
             We're sorry! We can't find any wifi network!

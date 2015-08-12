@@ -71,6 +71,8 @@ class DatabaseSeeder extends Seeder {
             'initial_status'=>0,
             'start_method'=>0,
             'wifi_ssid'=>"",
+            'wifi_password'=>"",
+            'wifi_success'=>true,
             'exists'=>false,
             'has_lights'=>false,
             'should_shutdown'=>false]);

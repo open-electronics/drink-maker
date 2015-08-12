@@ -23,6 +23,7 @@ $app->get('orders/waiting', 'App\Http\Controllers\OrderController@waiting');//py
 $app->get('orders/completed', 'App\Http\Controllers\OrderController@completed');//python
 $app->get('orders/timedout', 'App\Http\Controllers\OrderController@timedOut');//python
 $app->get('orders/activated', 'App\Http\Controllers\OrderController@activated');//python
+$app->get('wifiData','App\Http\Controllers\SettingsController@getWifiData');
 $app->get('wifi','App\Http\Controllers\SettingsController@getWifi');
 
 $app->group(['middleware'=>'settings'],function() use($app){

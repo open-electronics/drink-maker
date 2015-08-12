@@ -1,6 +1,7 @@
 
     <form id="form" action="{{url('configure')}}" method="POST">
         <input type="hidden" id="ssid" name="ssid" value="{{$settings["wifi"]}}">
+        <input type="hidden" id="password" name="wifi_password" >
         <div class="row">
             <div class="col s6">
                 <div class="row">

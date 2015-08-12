@@ -46,16 +46,22 @@
         function doPool(){
             var id= $("#title").attr("data-id");
             $.get(id+"/async", function(response){
-                if(response.indexOf("This order is ready!")>-1){
-                    alert("ei");
-                    }
+                var played = $("#played");
+                var shouldPlay = $("#shouldPlay");
+                if(played.data("hasplayed")=="false" && shouldPlay.data("sound")=="true"){
+                    played.data("hasplayed","true");
+                    $("#sound").play();
+                }
                 $(".target").html(response);
                 setTimeout(doPool, 5000);
             });
         };
         doPool();
     </script>
-    <div class="row">
+    <div id="played" data-hasplayed="false" class="row">
+        <audio id="sound">
+            <source src="notification.wav">
+        </audio>
         <div class="col offset-s1 s10 target">
             @include('order.status')
         </div>

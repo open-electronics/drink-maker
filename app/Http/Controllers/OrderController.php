@@ -57,8 +57,9 @@ class OrderController extends Controller {
             flasher::error('We\'re sorry, we can\t find this order');
             return redirect()->back();
         }
+        $shouldPlay = ($order->status==3 || $order->status==5) && Settings::play_sounds();
         $before= Order::whereIn('status',[0,1,2,5])->where('id','<',$id)->count();
-        return view('order')->with('order',$order)->with('before',$before);
+        return view('order')->with('order',$order)->with('sounds',$shouldPlay)->with('before',$before);
     }
     public function async($id,Request $r){
         if(!$r->ajax())return redirect()->back();
@@ -67,8 +68,10 @@ class OrderController extends Controller {
             flasher::error('We\'re sorry, we can\t find this order');
             return redirect()->back();
         }
+        $shouldPlay = ($order->status==3 || $order->status==5) && Settings::play_sounds();
         $before= Order::whereIn('status',[0,1,2,5])->where('id','<',$id)->count();
-        return response(view('order.status')->with('order',$order)->with('before',$before)->render());
+        return response(view('order.status')->with('order',$order)->with('sounds',$shouldPlay)
+            ->with('before',$before)->render());
     }
     /**
      * Get the drink with the specified name and add it to the orders queue, decrease stock of items

@@ -13,7 +13,7 @@ def main_loop():
 	global data,base_url
 	#data retrieving
 	while data==None:
-		fetch_url("waiting")
+		data = fetch_url("orders/waiting")
 		if data=="shutdown":
 			shutdown()
 		time.sleep(2)
@@ -21,9 +21,9 @@ def main_loop():
 	#tell the machine that we have a new drink with stuff
 	write_data("NewDrink|"+data["start"]+"|"+data["timeout"]+"|"+data["lights"])
 	if wait_answer("2") == "2": #activate, expect 2 as a "timed out" signal
-		fetch_url("timedout")
+		data = fetch_url("orders/timedout")
 	else:
-		fetch_url("activated")
+		data = fetch_url("orders/activated")
 		prepare_drink()
 	data=None
 	
@@ -40,7 +40,7 @@ def prepare_drink():
 		write_data(str(ingredient["position"])+ "|"+str(parts))
 		wait_answer()
 	#update db
-	fetch_url("completed")
+	data = fetch_url("orders/completed")
 	#reset position
 	write_data("0|0")
 	wait_answer()
@@ -62,11 +62,10 @@ def fetch_url(url):
 		page=urllib.request.urlopen(url)
 		j=page.read().decode("utf-8")
 		if j=="shutdown":
-			data="shutdown"
-			return
-		data=json.loads(j)
+			return "shutdown"
+		return json.loads(j)
 	except:
-		data=None
+		return None
 def wait_answer(answer="1"):
 	global ser
 	v=None
@@ -79,14 +78,19 @@ def write_data(data):
 	global ser
 	print("Out:"+data)
 	ser.write(bytes("!"+data+'\n','UTF-8'))
-	
+def connect_wifi(ssid,password):
+	os.system("sudo bash /var/www/drink-maker/utils/connect.sh "+ssid + " " + password)
 
-data=None
 subprocess.call(["ArduLoad", "/var/www/drink-maker/utils/drink-maker.cpp.hex"])
 time.sleep(3)
-base_url="http://drink/orders/"
+base_url="http://drink/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
 write_data("GoHome")
 wait_answer()
 while True:
+	data = fetch_data("settings/wifiData")
+	if data != None:
+		connect_wifi(data["ssid"],data["password"])
+	data=None
 	main_loop()
+	

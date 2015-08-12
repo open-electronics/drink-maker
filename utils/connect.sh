@@ -14,11 +14,11 @@ echo "  psk=\""$2"\"" >> "${target}"
 echo "}" >> "${target}"
 
 #Connect interfaces
-sudo ifdown wlan0
-sudo ifup wlan0
+sudo ifdown wlan0 >> /dev/null
+sudo ifup wlan0 >> /dev/null
 
 #Wait for it to connect
-sleep 1
+sleep 12
 
 #Check if it has connected
 OUTPUT="$(iwgetid | grep 'wlan0' | grep -oP '"\K[^"\047]+(?=["\047])')"
@@ -28,11 +28,10 @@ then #it has connected
 else #it hasn't
 	sudo cp "${backup}" "${target}" #put in the old wpa_supplicant
 	#Connect interfaces
-	sudo ifdown wlan0
-	sudo ifup wlan0
+	sudo ifdown wlan0 >> /dev/null
+	sudo ifup wlan0 >> /dev/null
 	echo "0" #it didn't work
 fi
 
 #Delete the runtime file
 sudo rm "${backup}"
-echo "1"

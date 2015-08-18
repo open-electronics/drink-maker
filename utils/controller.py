@@ -81,7 +81,8 @@ def write_data(data):
 def connect_wifi(ssid,password):
 	os.system("sudo bash /var/www/drink-maker/utils/connect.sh "+ssid + " " + password)
 
-subprocess.call(["ArduLoad", "/var/www/drink-maker/utils/drink-maker.cpp.hex"])
+os.system("ArduLoad /var/www/drink-maker/utils/drink-maker.cpp.hex")
+
 time.sleep(3)
 base_url="http://drink/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)

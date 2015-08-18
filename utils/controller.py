@@ -52,7 +52,7 @@ def round_to_multiple(number,multiple=2):
 		return int((math.floor(number/multiple))*multiple)
 
 def shutdown():
-    os.system("sudo shutdown -h now")
+	os.system("sudo shutdown -h now")
 	time.sleep(5)
 	
 def fetch_url(url):

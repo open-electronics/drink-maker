@@ -71,6 +71,8 @@ sudo mv /home/pi/RandAinstall/etc/ups-monitor /etc/init.d/ups-monitor
 sudo mv /home/pi/RandAinstall/ArduinoUpload/ /home/ArduinoUpload/
 #repository for compiled Arduino sketches (remotelly compiled)
 sudo mv /home/pi/RandAinstall/RArduinoUpload/ /home/RArduinoUpload/
+#directory containing programs and scripts for RMI remote Arduino IDE server
+sudo mv /home/pi/RandAinstall/raspduino/ /home/raspduino/
 #repository for local sketches sources
 sudo mv /home/pi/RandAinstall/sketchbook/ /home/pi/sketchbook/
 #repository for c-workspace and java-workspace (containing command and examples)

@@ -53,7 +53,7 @@ def round_to_multiple(number,multiple=2):
 
 def shutdown():
     os.system("sudo shutdown -h now")
-	time.sleep(5)
+time.sleep(5)
 	
 def fetch_url(url):
 	global data

@@ -38,11 +38,3 @@ if [ -f /etc/modprobe.d/raspi-blacklist.conf ]; then
 else
   echo 'File raspi-blacklist.conf does not exist, skip this step.'
 fi
-
-# install i2c-tools
-echo '>>> Install i2c-tools'
-if hash i2cget 2>/dev/null; then
-  echo 'Seems i2c-tools is installed already, skip this step.'
-else
-  apt-get install -y i2c-tools
-fi

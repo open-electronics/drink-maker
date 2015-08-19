@@ -82,7 +82,7 @@ sudo mv /home/pi/RandAinstall/workspace/ /home/pi/workspace/
 mv /home/pi/RandAinstall/RandAutil/ /home/pi/RandAutil/
 
 #enable I2C
-sudo /home/pi/RandAutil/enable-i2c.sh
+sudo bash /var/www/drink-maker/utils/install/enablei2C.sh
 
 #install programs
 

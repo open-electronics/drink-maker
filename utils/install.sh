@@ -15,8 +15,7 @@ echo "Wireless tools"
 sudo apt-get install wireless-tools -y > /dev/null
 echo "avahi-daemon"
 sudo apt-get install avahi-daemon -y > /dev/null
-echo "i2c tools"
-sudo apt-get install i2c-tools libi2c-dev
+
 
 echo "Changing host"
 sudo sed -i '$ d' /etc/hosts

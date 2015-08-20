@@ -41,7 +41,7 @@ sudo chmod 755 .profile
 #Start: remote Arduino IDE server, WEB server and Arduino command detecting
 #But attention! This script uses command and script downloaded below
 sudo chmod 777 /etc/rc.local
-sudo sed -e 's/^exit 0/#RandA local/' /etc/rc.local | cat - /home/pi/RandAinstall/etc/addtorclocal.txt > /home/pi/RandAinstall/etc/rc.local
+sudo sed -e 's/^exit 0/#RandA local/' /etc/rc.local | cat - /var/www/drink-maker/utils/install/addtorclocal.txt > /home/pi/RandAinstall/etc/rc.local
 sudo cp /home/pi/RandAinstall/etc/rc.local /etc/rc.local
 sudo chmod 755 /etc/rc.local
 #Comment ttyAMA0 (that is dev/ttyS0 and dev/Arduino) for serial port communication

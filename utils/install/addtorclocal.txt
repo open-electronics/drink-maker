@@ -1,0 +1,37 @@
+#RandA local
+#RandA local
+
+#load driver for i2c device (for communication with RTC)
+/usr/local/bin/gpio load i2c
+chmod 777 /dev/i2c-1
+#if you like some led signaling start
+#/usr/local/bin/gpio -g mode 27 out
+#soft reset pin init
+/usr/local/bin/gpio -g mode 23 out
+
+#reset any alarm and load demon for switching off at shudown
+/home/pi/bin/ResetAlarm
+
+#if you like start signaling
+#/usr/local/bin/gpio -g write 27 1
+ 
+#start web server
+#/home/apache-tomcat-7.0.47/startWebS.sh
+#start remote arduino port server
+#/home/raspduino/StartRemoteServer.sh
+
+chmod 777 /dev/ttyAMA0
+ln -s /dev/ttyAMA0 /dev/ttyS0
+ln -s /dev/ttyAMA0 /dev/Arduino
+
+#enable manual soft shutdown (by button on pin GPIO24)
+/etc/ButtonOff.sh &
+
+sleep 2
+
+#start listen process for arduino command protocol with log file
+#su -l -c "nohup /home/pi/bin/StartListenCmd > /home/pi/ArduCommands.log &" pi
+#start listen process for arduino command protocol without log file
+su -l -c "nohup /home/pi/bin/StartListenCmd > /dev/null &" pi
+
+exit 0

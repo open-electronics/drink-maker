@@ -38,9 +38,10 @@ case "$1" in
       elif [[ "$OUTPUT" == *"Already up-to-date."* ]]
       then
         echo "Already up-to-date."
-      else
+      else #Strange output
         echo "Updates disabled"
-      fi
+    else #Updates disabled
+      echo "Updates disabled"
     fi
     echo "Starting the controller"
     # run application you want to start

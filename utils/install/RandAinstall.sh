@@ -103,3 +103,9 @@ source /home/pi/RandAutil/packages/arduino/ArduInst.sh
 sudo cp  /home/pi/RandAinstall/pde.jar /usr/share/arduino/lib/pde.jar 
 sudo mv  /home/pi/RandAinstall/RAComm/  /usr/share/arduino/libraries/RAComm/ 
 sudo ln -s -f /usr/lib/jni/librxtxSerial.so /usr/lib/librxtxSerial.so
+
+#install external software (from debian repository)
+source /home/pi/RandAutil/extProgInst.sh
+#
+# End installation
+# To activate the RandA installation please reboot (command: sudo reboot)

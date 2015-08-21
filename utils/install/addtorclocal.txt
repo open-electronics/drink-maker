@@ -18,7 +18,7 @@ chmod 777 /dev/i2c-1
 #start web server
 #/home/apache-tomcat-7.0.47/startWebS.sh
 #start remote arduino port server
-#/home/raspduino/StartRemoteServer.sh
+/home/raspduino/StartRemoteServer.sh
 
 chmod 777 /dev/ttyAMA0
 ln -s /dev/ttyAMA0 /dev/ttyS0

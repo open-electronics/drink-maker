@@ -40,6 +40,7 @@ case "$1" in
         echo "Already up-to-date."
       else #Strange output
         echo "Updates disabled"
+      fi
     else #Updates disabled
       echo "Updates disabled"
     fi

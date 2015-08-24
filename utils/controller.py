@@ -91,7 +91,7 @@ ser.flushOutput()
 write_data("GoHome")
 wait_answer()
 while True:
-	data = fetch_data("settings/wifiData")
+	data = fetch_url("settings/wifiData")
 	if data != None:
 		connect_wifi(data["ssid"],data["password"])
 	data=None

@@ -28,7 +28,7 @@ class Settings {
                 return $settings;
                 break;
             case 'wifi':
-                $var = "sudo iwlist wlan0 scan 2>&1 | grep 'ESSID' | grep -oP '\"";
+                $var = "iwlist wlan0 scan 2>&1 | grep 'ESSID' | grep -oP '\"";
                 $var=$var."\\K[^\"\\047]+(?=[\"\\047])'";
                 $access= explode("\n",shell_exec($var));
                 $access=array_unique(array_filter($access));

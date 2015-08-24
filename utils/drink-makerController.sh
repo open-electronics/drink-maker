@@ -46,6 +46,7 @@ case "$1" in
     echo "Starting the controller"
     # run application you want to start
     sudo python3 /var/www/drink-maker/utils/controller.py &
+    sudo bash /var/www/drink-maker/utils/check-wifi.sh &
     ;;
   stop)
     echo "Stopping the controller"

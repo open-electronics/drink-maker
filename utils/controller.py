@@ -86,6 +86,8 @@ os.system("ArduLoad /var/www/drink-maker/utils/drink-maker.cpp.hex")
 time.sleep(3)
 base_url="http://drink/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
+ser.flushInput()
+ser.flushOutput()
 write_data("GoHome")
 wait_answer()
 while True:

@@ -35,6 +35,13 @@ case "$1" in
         echo "Restarting services"
         sudo service php5-fpm restart
         sudo service nginx restart
+        if [[ "$OUTPUT" == *"utils/drink-makerController.sh"* ]]
+        then
+          echo "Updating startup"
+          sudo cp /var/www/drink-maker/utils/drink-makerController.sh /etc/init.d/drink-maker.sh
+          sudo chmod +x /etc/init.d/drink-maker.sh
+          sudo update-rc.d drink-maker.sh defaults 
+        fi
       elif [[ "$OUTPUT" == *"Already up-to-date."* ]]
       then
         echo "Already up-to-date."

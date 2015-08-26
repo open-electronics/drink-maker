@@ -98,7 +98,7 @@
             function doPool(){
                 $.get("wifi", function(response){
                     $("#list").html(response);
-                    setTimeout(doPool, 12000);
+                    setTimeout(doPool, 8000);
                 });
             }
             doPool();

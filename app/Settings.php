@@ -32,6 +32,8 @@ class Settings {
                 $var=$var."\\K[^\"\\047]+(?=[\"\\047])'";
                 $access= explode("\n",shell_exec($var));
                 $access=array_unique(array_filter($access));
+                array_push($access,'test');
+                array_push($access,'test2');
                 return $access;
                 break;
             case 'multiple':

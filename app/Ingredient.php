@@ -33,7 +33,7 @@ class Ingredient extends Model{
      * @return $this
      */
     public function drinksWhoUseIt(){
-        return $this->belongsToMany(Drink::class,'ingredient_id','drink_id')->withPivot('needed');
+        return $this->belongsToMany('App\Drink','ingredient_id','drink_id')->withPivot('needed');
     }
 
 }

@@ -39,7 +39,7 @@ class Order extends Model{
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function Drink(){
-        return $this->belongsTo(Drink::class,'drink_id');
+        return $this->belongsTo('App\Drink','drink_id');
     }
 
 }

@@ -106,14 +106,14 @@ class Drink extends Model{
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function Orders(){
-        return $this->hasMany(Order::class,'drink_id');
+        return $this->hasMany('App\Order','drink_id');
     }
     /**
      * All ingredients of the drink
      * @return $this
      */
     public function Ingredients(){
-        return $this->belongsToMany(Ingredient::class,'drinks_ingredients','drink_id','ingredient_id')->withPivot('needed');
+        return $this->belongsToMany('App\Ingredient','drinks_ingredients','drink_id','ingredient_id')->withPivot('needed');
     }
 
 }

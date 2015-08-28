@@ -119,7 +119,7 @@ void setup()
 
   neostrip.begin();
   neostrip.show(); // Initialize all pixels to 'off'
-
+  ledSet(BLACK);
 
   Serial.begin(9600); 
   Serial.println("Starting stepper dev tester.");
@@ -137,27 +137,38 @@ void loop(){
   if (Serial.available() > 0) {
     String message="";
     while(Serial.available()){ 
-      message+= Serial.read();
+      char partial = Serial.read();
+      message += partial;
+      delay(2);
     }
     parseString(message);
   }
   if(hasLights)idleLights();
+  delay(50);//togliere
 }
 /*
   COMMUNICATION METHODS
 */
 void parseString(String message){
+  tell("Got a message");
+  tell(message);
   if(message.startsWith("!") && message.endsWith("\n")){
      if(message == "!GoHome\n"){
+       tell("GoingHome");
        goHome();
        success();
      }else if(message.startsWith("!NewDrink")){
+         tell("NewDrink");
          int firstIndex = message.indexOf('|');
          int secondIndex = message.indexOf('|', firstIndex+1);
          int thirdIndex = message.indexOf('|',secondIndex+1);
          int start =(message.substring(firstIndex+1,secondIndex)).toInt();
          int time=(message.substring(secondIndex+1,thirdIndex)).toInt();
-         hasLights= (message.substring(thirdIndex+1)).toInt() == 1;
+         bool newLights= (message.substring(thirdIndex+1)).toInt() == 1;
+         if(newLights==false && hasLights == true){
+           ledSet(BLACK);
+           shutDownNeo();
+         }
          goHome();
          if(waitForActivation(start,time)){
             success(); 
@@ -165,6 +176,7 @@ void parseString(String message){
            timeout();
          }
      } else {
+         tell("Directives");
          int index = message.indexOf('|');
          int pos = (message.substring(1,index)).toInt();
          int times = (message.substring(index+1)).toInt();
@@ -175,7 +187,9 @@ void parseString(String message){
      }
   }  
 }
-
+void tell(String text){
+  Serial.println(text);
+}
 void success(){
   Serial.println("1");
 }
@@ -193,6 +207,7 @@ bool waitForActivation(int mode, int time){
   unsigned long elapsed =0;
   ledSet(color2);
   strip.writeStrip();
+  tell("WaitingForActivation");
   while(elapsed<totalMs){
      switch(mode){ 
         case 0:
@@ -211,6 +226,7 @@ bool waitForActivation(int mode, int time){
      elapsed=(millis()-start);
      if(hasLights)ledCountdown(elapsed,totalMs);
   }
+  tell("ExitingActivation");
   return (mode==0); //If we're here it means the loop timed out, if mode is 0 (auto) this is a good thing, so we return true, otherwise it's an user timeout, so we return false
 }
 
@@ -262,17 +278,20 @@ void reachBottle(int bottle)
 
 void goHome(){
   gobw();
-  while(checkForHome()){
+  enableStepper(true);
+  tell("GoingHomeFunction");
+  while(!checkForHome()){
     takeSingleStep();  
     delayMicroseconds(movementDelay);
   }
 }
 
 bool checkForHome(){
-        if ((digitalRead(minPin)==1)){
+      if ((digitalRead(minPin)==HIGH)){
         Serial.println("Home"); 
         enableStepper(false);
         actualpos=0;    // reset position
+        tell("GotHome");
         return true;
       }
       return false;
@@ -284,8 +303,17 @@ bool checkForHome(){
 /*
   LIGHT METHODS
 */
+void shutDownNeo(){
+    uint32_t c = neostrip.Color(0, 0, 0);
+    for(uint16_t i=0; i<neostrip.numPixels(); i++) {
+      neostrip.setPixelColor(i, c);
+  }
+  neostrip.show();
+}
+
 
 void idleLights(){
+  tell("IdleLights");
   neoj++;
     if (neoj>255) neoj=0;   
       for(int i=0; i<neostrip.numPixels(); i++) {

@@ -24,17 +24,18 @@ def main_loop():
 		fetch_url("orders/timedout")
 	else:
 		fetch_url("orders/activated")
-		prepare_drink()
+		prepare_drink(data)
 	data=None
 	
-def prepare_drink():
+def prepare_drink(info):
+	print(info)
 	#dictate ingredients
 	total_parts=0;
-	for ingredient in data["ingredients"]:
+	for ingredient in info["ingredients"]:
 		total_parts=total_parts+ ingredient["needed"]
 	
-	for ingredient in data["ingredients"]:
-		ingredient_volume= (ingredient["needed"]/total_parts)*data["volume"]
+	for ingredient in info["ingredients"]:
+		ingredient_volume= (ingredient["needed"]/total_parts)*info["volume"]
 		ingredient_volume= round_to_multiple(ingredient_volume)
 		parts= ingredient_volume/2
 		write_data(str(ingredient["position"])+ "|"+str(parts))

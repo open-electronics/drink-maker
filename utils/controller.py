@@ -21,9 +21,9 @@ def main_loop():
 	#tell the machine that we have a new drink with stuff
 	write_data("NewDrink|"+data["start"]+"|"+data["timeout"]+"|"+data["lights"])
 	if wait_answer("2") == "2": #activate, expect 2 as a "timed out" signal
-		data = fetch_url("orders/timedout")
+		fetch_url("orders/timedout")
 	else:
-		data = fetch_url("orders/activated")
+		fetch_url("orders/activated")
 		prepare_drink()
 	data=None
 	

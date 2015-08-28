@@ -35,7 +35,7 @@ def prepare_drink(info):
 		total_parts=total_parts+ int(ingredient["needed"])
 	
 	for ingredient in info["ingredients"]:
-		ingredient_volume= (ingredient["needed"]/total_parts)*info["volume"]
+		ingredient_volume= (int(ingredient["needed"])/total_parts)*int(info["volume"])
 		ingredient_volume= round_to_multiple(ingredient_volume)
 		parts= ingredient_volume/2
 		write_data(str(ingredient["position"])+ "|"+str(parts))

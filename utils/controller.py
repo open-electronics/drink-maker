@@ -84,7 +84,7 @@ def connect_wifi(ssid,password):
 os.system("bash /home/pi/bin/ArduLoad /var/www/drink-maker/utils/drink-maker.cpp.hex")
 
 time.sleep(3)
-base_url="http://drink/"
+base_url="http://127.0.0.1/"
 ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
 ser.flushInput()
 ser.flushOutput()

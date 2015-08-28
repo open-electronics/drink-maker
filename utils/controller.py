@@ -32,7 +32,7 @@ def prepare_drink(info):
 	#dictate ingredients
 	total_parts=0;
 	for ingredient in info["ingredients"]:
-		total_parts=total_parts+ ingredient["needed"]
+		total_parts=total_parts+ int(ingredient["needed"])
 	
 	for ingredient in info["ingredients"]:
 		ingredient_volume= (ingredient["needed"]/total_parts)*info["volume"]

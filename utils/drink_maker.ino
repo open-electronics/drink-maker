@@ -68,13 +68,14 @@ unsigned int pos[] = {0000, 6300, 12600, 18900, 25200, 31500, 37800, 44100, 5040
 unsigned int actualpos=0;
 
 int movementDelay=150;  //low=fast
-const int accelerationTreshold=1500;  //acceleration
+const int accelerationTreshold=1700;  //acceleration
 
 int servopos = 0;    // variable to store the servo position 
 int servomin = 30;    // variable to store the servo position 
 int servomax = 90;    // variable to store the servo position 
 
-bool hasLights=false;
+boolean hasLights=true;
+boolean machineBusy = false;
 
 int timeToSpill = 3500;    
 int timeToRefill = 2000;    
@@ -84,6 +85,7 @@ int timeToRefill = 2000;
 */
 
 boolean currentDirection = false;
+
 
 void setup() 
 {
@@ -134,6 +136,7 @@ void setup()
 }
 
 void loop(){
+
   if (Serial.available() > 0) {
     String message="";
     while(Serial.available()){ 
@@ -143,47 +146,54 @@ void loop(){
     }
     parseString(message);
   }
-  if(hasLights)idleLights();
-  delay(50);//togliere
+  if(hasLights && !machineBusy)idleLights();
+  //delay(50);//togliere
+
 }
 /*
   COMMUNICATION METHODS
 */
 void parseString(String message){
-  tell("Got a message");
+//  tell("Got a message");
   tell(message);
   if(message.startsWith("!") && message.endsWith("\n")){
      if(message == "!GoHome\n"){
-       tell("GoingHome");
+       //tell("GoingHome");
        goHome();
        success();
      }else if(message.startsWith("!NewDrink")){
-         tell("NewDrink");
+         //tell("NewDrink");
+         machineBusy = true;
          int firstIndex = message.indexOf('|');
          int secondIndex = message.indexOf('|', firstIndex+1);
          int thirdIndex = message.indexOf('|',secondIndex+1);
-         int start =(message.substring(firstIndex+1,secondIndex)).toInt();
+         int starts =(message.substring(firstIndex+1,secondIndex)).toInt();
          int time=(message.substring(secondIndex+1,thirdIndex)).toInt();
-         bool newLights= (message.substring(thirdIndex+1)).toInt() == 1;
+         bool newLights= (message.substring(thirdIndex+1)).toInt() == 1;         
          if(newLights==false && hasLights == true){
            ledSet(BLACK);
            shutDownNeo();
          }
+         hasLights=newLights;
+      
          goHome();
-         if(waitForActivation(start,time)){
+         if(waitForActivation(starts,time)){
             success(); 
          }else{
            timeout();
          }
      } else {
-         tell("Directives");
+         //tell("Directives");
          int index = message.indexOf('|');
          int pos = (message.substring(1,index)).toInt();
          int times = (message.substring(index+1)).toInt();
          reachBottle(pos);
          spill(times);
-         if(pos==0 && times==0 && hasLights)rainbowParty(30);
          success();
+         if(pos==0 && times==0 && hasLights){
+           machineBusy = false;
+           rainbowParty(15);      
+         }
      }
   }  
 }
@@ -202,11 +212,12 @@ void timeout(){
 */
 
 bool waitForActivation(int mode, int time){
-  unsigned long start= millis();
+  unsigned long starts= millis();
   unsigned long totalMs = time*1000;
   unsigned long elapsed =0;
-  ledSet(color2);
-  strip.writeStrip();
+    
+  if(hasLights)ledSet(color2);
+//  strip.writeStrip();
   tell("WaitingForActivation");
   while(elapsed<totalMs){
      switch(mode){ 
@@ -223,8 +234,12 @@ bool waitForActivation(int mode, int time){
           }
           break;
      }
-     elapsed=(millis()-start);
+     elapsed=(millis()-starts);
+     //times++;
+     //if (times%1000==0) tell(String(elapsed));
+     
      if(hasLights)ledCountdown(elapsed,totalMs);
+     delay(1);
   }
   tell("ExitingActivation");
   return (mode==0); //If we're here it means the loop timed out, if mode is 0 (auto) this is a good thing, so we return true, otherwise it's an user timeout, so we return false
@@ -238,8 +253,7 @@ void reachBottle(int bottle)
 {
   unsigned int startPos=actualpos;
   int deltaPos=0;
-
-  if(pos[bottle]==actualpos){
+  if(pos[bottle]==actualpos){   
     return;
   }
   else if (pos[bottle]>actualpos){
@@ -258,17 +272,22 @@ void reachBottle(int bottle)
     { 
       int accelerationDelay=0;
       long timetoexecute=micros();
-      int elerationDelay=0;
-      int moved = abs(actualpos-startPos);
-      int missing = abs(actualpos-pos[bottle]);
+      //int elerationDelay=0;
+      
+      int moved = actualpos-startPos;
+      moved = abs(moved);
+      int missing = actualpos-pos[bottle];
+      missing = abs(missing);
       if(moved<accelerationTreshold){ //if we've moved less than accelerationTreshold
+        //if(actualpos%150==0) tell("A");
         accelerationDelay=accelerationTreshold-moved; //add a delay
       }else if(missing < accelerationTreshold){//if we've almost arrived(the distance between the two is less than accelerationTreshold)
+        //if(actualpos%150==0) tell("B");
         accelerationDelay=accelerationTreshold-missing;
       }
-      takeSingleStep();//Move      
+      takeSingleStep();//Move    
       delayMicroseconds(movementDelay+accelerationDelay);//Sleep 
-      if(checkForHome()){//If we've got home
+      if(deltaPos==-1 && checkForHome()){//If we've got home
         break;  
       }
     }
@@ -313,7 +332,6 @@ void shutDownNeo(){
 
 
 void idleLights(){
-  tell("IdleLights");
   neoj++;
     if (neoj>255) neoj=0;   
       for(int i=0; i<neostrip.numPixels(); i++) {
@@ -371,7 +389,7 @@ void rainbowParty(uint8_t wait) {
               // cycle the first LED back to the last one
               strip.setLEDcolor(strip.numLEDs()-1, savedcolor);
               strip.writeStrip();
-              delay(25);
+              delay(wait);
             }
         for (int i=0; i < neostrip.numPixels(); i=i+3) {
           neostrip.setPixelColor(i+q, 0);        //turn every third pixel off
@@ -395,15 +413,17 @@ uint32_t Wheel(byte WheelPos) {
   }
 }
 
-void ledCountdown(int elapsed, int total){
-  int left=total-elapsed;
-  int led = ceil((left/total)*strip.numLEDs())-1;
-  if(led>0){
+void ledCountdown(long elapsed, long total){
+  
+  long left=total-elapsed;    
+  int led = ((((float)left) / ((float)total))*strip.numLEDs());
+  
+  if(led>=0){
     strip.setLEDcolor(led, color1);
     strip.writeStrip();
     neostrip.setPixelColor(led, neostrip.Color(0,0,200)); // Moderately bright green color.
     neostrip.show();    
-    delay(floor(total/strip.numLEDs()));
+    //delay(floor(total/strip.numLEDs()));
   }
 }
 
@@ -411,15 +431,16 @@ void ledSet(int color){
   for(int i=0;i<strip.numLEDs();i++){
     strip.setLEDcolor(i, color);
   }
+  strip.writeStrip();
 }
 
 void ledsBlink(){
   for (int i=0;i<3;i++){
         ledSet(color2);
-        strip.writeStrip();
+        //strip.writeStrip();
         delay(200);
         ledSet(color1);
-        strip.writeStrip();
+        //strip.writeStrip();
         delay(200);
       }
 }
@@ -446,17 +467,22 @@ void servodown()
     delay(4);                       
   } 
 }
+
 void servores()
 {  
   myservo.write(servomin);
 }
+
 void spill(int times){
+  myservo.attach(servo); 
   for ( int i = 0; i<times ; i++){
     servoup();
     delay(timeToSpill);
     servodown();
     if(i!=times-1) delay (timeToRefill);
   }  
+  delay(200);
+  myservo.detach(); 
 }
 /*
   END OF SERVO METHODS

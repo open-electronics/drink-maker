@@ -71,22 +71,41 @@ def wait_answer(answer="1"):
 	global ser
 	v=None
 	while not (v=="1" or v==answer):
-		v=ser.readline().decode("UTF-8").strip()
-		print("In:"+v)
-		time.sleep(0.2)
+                try:
+                        v=ser.readline().decode("UTF-8").strip()
+                        print("In:"+v)
+                except:
+                        print("Error")
+		time.sleep(0.1)
 	return v
 def write_data(data):
 	global ser
 	print("Out:"+data)
-	ser.write(bytes("!"+data+'\n','UTF-8'))
+	success = False
+	while not success:
+                try:
+                        ser.write(bytes("!"+data+'\n','UTF-8'))
+                        success= True
+                except:
+                        print("Error")
+                        success = False
+                        
 def connect_wifi(ssid,password):
 	os.system("sudo bash /var/www/drink-maker/utils/connect.sh "+ssid + " " + password)
 
-os.system("bash /home/pi/bin/ArduLoad /var/www/drink-maker/utils/drink-maker.cpp.hex")
+
+os.system("bash /home/pi/bin/ArduLoad /var/www/drink-maker/utils/drink_maker.cpp.hex")
 
 time.sleep(3)
 base_url="http://127.0.0.1/"
-ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
+connected = False
+while not connected:
+        try:
+                ser=serial.Serial(port="/dev/ttyS0",baudrate=9600)
+                connected= True
+        except:
+                connected= False
+                
 ser.flushInput()
 ser.flushOutput()
 write_data("GoHome")

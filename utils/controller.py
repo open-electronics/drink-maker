@@ -105,6 +105,7 @@ while not connected:
                 connected= True
         except:
                 connected= False
+                time.sleep(0.5)
                 
 ser.flushInput()
 ser.flushOutput()

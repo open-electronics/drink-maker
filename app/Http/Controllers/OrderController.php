@@ -73,6 +73,7 @@ class OrderController extends Controller {
         }
         $shouldPlay = ($order->status==3 || $order->status==5) && Settings::play_sounds();
         $before= Order::whereIn('status',[0,1,2,5])->where('id','<',$id)->count();
+        if($before == 0) $before = "no";
         return response(view('order.status')->with('order',$order)->with('sounds',$shouldPlay)
             ->with('before',$before)->render());
     }

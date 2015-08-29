@@ -5,7 +5,7 @@ Status:<?php
                     echo "This order hasn't been approved yet!";
                     break;
                 case 1:
-                    echo "This is approved, six and relax waiting for you turn!";
+                    echo "This is approved, sit and relax waiting for you turn!";
                     break;
                 case 2:
                     echo "This order is being prepared!";

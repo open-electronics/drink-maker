@@ -1,4 +1,4 @@
-<i id="shouldplay" data-sound="{{$sounds}}" class=" small mdi-social-person-outline"></i>
+<i id="shouldplay" data-status="{{$order->status}}" data-sound="{{$sounds}}" class=" small mdi-social-person-outline"></i>
 Status:<?php
             switch($order->status){
                 case 0:

@@ -170,8 +170,13 @@ class OrderController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
      */
     public function delete($id){
-        Order::find($id)->deleteOrder();
-        flasher::success('Order deleted correctly');
+        $order = Order::find($id);
+        if(in_array($order->status,[0,1,5,6])) {
+            $order->deleteOrder();
+            flasher::success('Order deleted correctly');
+        }else{
+            flasher::error('This order can\'t be deleted');
+        }
         return redirect()->back();
     }
 }

@@ -52,7 +52,10 @@
                     played.data("hasplayed","true");
                     $("#sound").play();
                 }
-                $(".target").html(response);
+                $("#target").html(response);
+                if(!$.inArray(shouldPlay.data("status"),[0,1,5,6])){
+                    $("#delete").hide();
+                }
                 setTimeout(doPool, 5000);
             });
         };
@@ -62,7 +65,7 @@
         <audio id="sound">
             <source src="notification.wav">
         </audio>
-        <div class="col offset-s1 s10 target">
+        <div class="col offset-s1 s10 " id="target">
             @include('order.status')
         </div>
     </div>
@@ -76,7 +79,7 @@
         <div class="col offset-s2 s4">
             <form method="post" action="{{url('orders/'.$order->id)}}">
                 <input type="hidden" name="_method" value="delete">
-                <button type="submit" class="btn waves-effect waves-light red">
+                <button id="delete" type="submit" class="btn waves-effect waves-light red">
                     <input type="hidden" name="_method" value="delete">
                     <i class="mdi-content-clear right"></i>Delete order
                 </button>

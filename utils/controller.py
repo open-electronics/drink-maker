@@ -76,7 +76,7 @@ def wait_answer(answer="1"):
                         print("In:"+v)
                 except:
                         print("Error")
-		time.sleep(0.1)
+                        time.sleep(0.1)
 	return v
 def write_data(data):
 	global ser

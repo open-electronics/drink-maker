@@ -339,25 +339,22 @@ void idleLights(){
       }
     neostrip.show();
     delay(20);
-    if (supercarDirection==true){
-    supercarIndex++;
-    if (supercarIndex>strip.numLEDs()-1) 
+    strip.setLEDcolor(supercarIndex, strip1);
+    strip.writeStrip();
+    if (supercarDirection)
     {
-      supercarDirection=false;
-      strip1++;
-      if (strip1>6) strip1=1;
+    supercarIndex++;
     }
-  }
-  else {
-    supercarIndex--;    
-    if (supercarIndex<1) {
-      supercarDirection=true;  
-      strip1++;
-      if (strip1>6) strip1=1;
+    else
+    {
+    supercarIndex--;
     }
-  }
-  strip.setLEDcolor(supercarIndex, strip1);
-  strip.writeStrip();
+    if (supercarIndex == 0 || supercarIndex == 33)
+    {
+    supercarDirection = !supercarDirection;
+    strip1++;
+    }
+    if (strip1 > 6) strip1 = 1;  
 }
 
 // scroll a rainbow!

@@ -60,7 +60,7 @@ const int color2= YELLOW;
 
 int neoj=0;
 int supercarIndex=0;
-boolean supercarDirection=0;//Direction of movement
+boolean supercarDirection=true;//Direction of movement
 int strip1=0;
 
 //  position array =   0      1     2      3      4      5      6      7      8     9   
@@ -349,7 +349,7 @@ void idleLights(){
     {
     supercarIndex--;
     }
-    if (supercarIndex == 0 || supercarIndex == 33)
+    if (supercarIndex <= 0 || supercarIndex >= strip.numLEDs()-1)
     {
     supercarDirection = !supercarDirection;
     strip1++;

@@ -1,4 +1,24 @@
 #!/bin/bash
+
+echo "Cleaning environment"
+
+echo "Removing GUI"
+sudo apt-get purge xserver.* x11.* xarchiver xauth xkb-data console-setup xinit lightdm lxde.* python-tk python3-tk scratch gtk.* libgtk.* openbox libxt.* lxpanel gnome.* libqt.* libxcb.* libxfont.* lxmenu.* gvfs.* xdg-.* desktop.* tcl.* shared-mime-info penguinspuzzle omxplayer gsfonts 
+sudo apt-get --yes autoremove 
+echo "Removing games and others"
+sudo rm -rf /usr/share/doc/* /opt/vc/src/hello_pi/hello_video/test.h264 /home/pi/python_games 
+find /usr/share/locale/* -maxdepth 0 -type d |grep -v en |xargs sudo rm -rf 
+find /usr/share/man/* -maxdepth 0 -type d |grep -Pv 'man\d' |xargs sudo rm -rf 
+echo "Removing MySQL"
+sudo apt-get remove mysql-server mysql-client mysql-common 
+sudo apt-get purge mysql-server mysql-client mysql-common 
+sudo apt-get autoremove
+echo "Removing Apache"
+sudo service apache2 stop
+sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common
+sudo apt-get autoremove
+
+
 echo "Updating"
 sudo apt-get update -qq >/dev/null
 echo "Upgrading"

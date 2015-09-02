@@ -3,8 +3,8 @@
 echo "Cleaning environment"
 
 echo "Removing GUI"
-sudo apt-get purge xserver.* x11.* xarchiver xauth xkb-data console-setup xinit lightdm lxde.* python-tk python3-tk scratch gtk.* libgtk.* openbox libxt.* lxpanel gnome.* libqt.* libxcb.* libxfont.* lxmenu.* gvfs.* xdg-.* desktop.* tcl.* shared-mime-info penguinspuzzle omxplayer gsfonts 
-sudo apt-get --yes autoremove 
+#sudo apt-get purge xserver.* x11.* xarchiver xauth xkb-data console-setup xinit lightdm lxde.* python-tk python3-tk scratch gtk.* libgtk.* openbox libxt.* lxpanel gnome.* libqt.* libxcb.* libxfont.* lxmenu.* gvfs.* xdg-.* desktop.* tcl.* shared-mime-info penguinspuzzle omxplayer gsfonts 
+#sudo apt-get --yes autoremove 
 echo "Removing games and others"
 sudo rm -rf /usr/share/doc/* /opt/vc/src/hello_pi/hello_video/test.h264 /home/pi/python_games 
 find /usr/share/locale/* -maxdepth 0 -type d |grep -v en |xargs sudo rm -rf 

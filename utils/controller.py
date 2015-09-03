@@ -48,7 +48,7 @@ def prepare_drink(info):
 
 def round_to_multiple(number,multiple=2):
 	if math.floor(number)%multiple==0:
-		return int(math-floor(number))
+		return int(math.floor(number))
 	else :
 		return int((math.floor(number/multiple))*multiple)
 

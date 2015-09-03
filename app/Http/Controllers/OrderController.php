@@ -130,7 +130,7 @@ class OrderController extends Controller {
         $resp["id"]=$order->id;
         $resp["timeout"]=Settings::timeout_time();
         $resp["start"]=Settings::start_method();
-        $resp["volume"]=$order->Drink()->volume;
+        $resp["volume"]=$order->Drink->volume;
         $resp["lights"]=Settings::has_lights();
         $ing= $order->Drink->Ingredients;
         for($i=0;$i<count($order->Drink->Ingredients);$i++){

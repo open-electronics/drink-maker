@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col offset-s1 s10">
             <i class=" small mdi-maps-local-bar"></i>
-            Order: {{$order->Drink->name}} {{$order->volume}} mL
+            Order: {{$order->Drink->name}} {{$order->Drink->volume}} mL
         </div>
     </div>
     <div class="row">

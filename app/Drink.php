@@ -27,7 +27,7 @@ class Drink extends Model{
      * @var array
      */
     protected $hidden = [];
-
+    public $available=false;
 
     public $timestamps=false;
     /**
@@ -40,9 +40,11 @@ class Drink extends Model{
         for($i=0;$i<count($ingredients);$i++){
             if($ingredients[$i]->position<0 ||
                 (($ingredients[$i]->pivot->needed/$parts)*$this->volume)>$ingredients[$i]->stock){
+                $this->available=false;
                 return false;
             }
         }
+        $this->available=true;
         return true;
     }
 

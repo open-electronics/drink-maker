@@ -16,7 +16,7 @@
                 @foreach($orders as $o)
                     <tr>
                         <td>{{$o->Drink->name}}</td>
-                        <td>{{$o["volume"]}}</td>
+                        <td>{{$o->Drink->volume}}</td>
                         <td>{{$o["name"]}}</td>
                         @if($o["status"]==0)
                             <td>

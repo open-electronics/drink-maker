@@ -85,14 +85,13 @@ class OrderController extends Controller {
     public function add(Request $req){
         $id=$req->input('id');
         $name=$req->input('name');
-        $volume=$req->input('volume');
         $drink = Drink::find($id);
 
-        if($drink->getAvailable() <$volume){//If we have all
+        if(!$drink->getAvailable()){
             flasher::error('An error occured, please retry later');
             return redirect("order");
         }
-        $id=$drink->orderDrink($name,$volume);
+        $id=$drink->orderDrink($name);
         flasher::success('We\'re taking care of your order!');
         $drinks=$req->session()->get('order_ids');
         if(!$drinks)$drinks=[];
@@ -131,7 +130,7 @@ class OrderController extends Controller {
         $resp["id"]=$order->id;
         $resp["timeout"]=Settings::timeout_time();
         $resp["start"]=Settings::start_method();
-        $resp["volume"]=$order->volume;
+        $resp["volume"]=$order->Drink()->volume;
         $resp["lights"]=Settings::has_lights();
         $ing= $order->Drink->Ingredients;
         for($i=0;$i<count($order->Drink->Ingredients);$i++){

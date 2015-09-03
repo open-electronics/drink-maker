@@ -18,7 +18,6 @@ class Settings {
             case 'all':
                 $settings=[];
                 $settings['username']=Settings::username();
-                $settings['volume']=Settings::volume();
                 $settings['start_method'] = Settings::start_method();
                 $settings['initial_status'] = Settings::initial_status();
                 $settings['timeout_time'] = Settings::timeout_time();

@@ -52,7 +52,7 @@ class DrinkController extends Controller {
             flasher::error('Choose at least one ingredient');
             return redirect('admin#drinks');
         }
-        $drink=Drink::create(['name'=>$r->input('name'),'photo'=>$fileName]);
+        $drink=Drink::create(['name'=>$r->input('name'),'volume'=>$r->input('volume'),'photo'=>$fileName]);
         for($i=0;$i<count($recognizedIngredients);$i++){
                 $drink->Ingredients()->attach($recognizedIngredients[$i],['needed'=>$recognizedParts[$i]]);
         }

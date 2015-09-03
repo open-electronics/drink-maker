@@ -66,7 +66,6 @@ class SettingsController extends Controller {
             }
         }
         Settings::username($r->input('username'));
-        Settings::volume($r->input('volume'));
         Settings::start_method($r->input('start_method'));
         Settings::initial_status($r->input('initial_status'));
         Settings::timeout_time($r->input('timeout_time'));

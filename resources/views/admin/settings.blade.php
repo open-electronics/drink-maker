@@ -23,10 +23,6 @@
         </div>
         <div class="row">
             <div class="col offset-s1 s5 input-field">
-                <input type="number" min="10" value="{{$settings['volume']}}" max="32000" name="volume" id="volume" >
-                <label for="volume">Drink max volume(cL)</label>
-            </div>
-            <div class="col offset-s1 s5 input-field">
                 <input type="number" min="15" value="{{$settings['timeout_time']}}" max="3600" name="timeout_time" id="timeout_time" >
                 <label for="timeout_time">Timeout time(seconds)</label>
             </div>

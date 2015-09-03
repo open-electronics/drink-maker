@@ -46,7 +46,7 @@ class UserController extends Controller {
     public function userIndex(){
         $drinks=[];
         foreach(Drink::all() as $drink){
-            if($drink->getAvailable()!=0)array_push($drinks,$drink);
+            if($drink->getAvailable())array_push($drinks,$drink);
         }
         $max = Settings::volume();
         return view('user')->with("drinks",$drinks)->with('max',$max);

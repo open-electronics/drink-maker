@@ -20,18 +20,14 @@ class Drink extends Model{
      * The attributes that are mass assignable.
      * @var array
      */
-    protected $fillable = ['name','photo'];
+    protected $fillable = ['name','photo','volume'];
 
     /**
      * The attributes excluded from the model's JSON form.
      * @var array
      */
     protected $hidden = [];
-    /**
-     * Max drink volume available
-     * @var float
-     */
-    public $maxAvailable;
+
 
     public $timestamps=false;
     /**
@@ -42,15 +38,12 @@ class Drink extends Model{
         $ingredients=$this->Ingredients;
         $parts=$this->totalParts();
         for($i=0;$i<count($ingredients);$i++){
-            if($ingredients[$i]->position>=0){
-                $max=$this->roundToMultiple($ingredients[$i]->stock/$ingredients[$i]->pivot->needed)*$parts;
-            }else{
-                $max=0;
+            if($ingredients[$i]->position<0 ||
+                (($ingredients[$i]->pivot->needed/$parts)*$this->volume)>$ingredients[$i]->stock){
+                return false;
             }
-            if($max<$this->maxAvailable||$i==0)$this->maxAvailable=$max;
-            if($max<2)return 0;
         }
-        return $this->maxAvailable;
+        return true;
     }
 
     /**
@@ -75,15 +68,14 @@ class Drink extends Model{
      * @param $name
      * @param $volume
      */
-    public function orderDrink($name,$volume){
+    public function orderDrink($name){
         $parts=$this->totalParts();
         foreach($this->Ingredients as $i){
-            $i->stock-=$this->roundToMultiple($volume*($i->pivot->needed/$parts));
+            $i->stock-=$this->volume*($i->pivot->needed/$parts);
             $i->save();
         }
         $order = new Order();
         $order->name=$name;
-        $order->volume=$volume;
         $order->status=Settings::initial_status();
         $order->Drink()->associate($this);
         $order->save();
@@ -94,10 +86,10 @@ class Drink extends Model{
      * Restores ingredients after a deletion
      * @param $volume
      */
-    public function restoreDrinkIngredients($volume){
+    public function restoreDrinkIngredients(){
         $parts=$this->totalParts();
         foreach($this->Ingredients as $i){
-            $i->stock+=$this->roundToMultiple($volume*($i->pivot->needed/$parts));
+            $i->stock+=$this->roundToMultiple($this->volume*($i->pivot->needed/$parts));
             $i->save();
         }
     }

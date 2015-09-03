@@ -20,7 +20,7 @@ class Order extends Model{
      * The attributes that are mass assignable.
      * @var array
      */
-    protected $fillable = ['name','volume','status'];
+    protected $fillable = ['name','status'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -32,7 +32,7 @@ class Order extends Model{
     public function deleteOrder(){
         $this->status=4;
         $this->save();
-        $this->Drink->restoreDrinkIngredients($this->volume);
+        $this->Drink->restoreDrinkIngredients();
     }
     /**
      * The drink ordered

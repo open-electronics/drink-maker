@@ -57,6 +57,12 @@
                 </div>
             @endfor
             <div class="row">
+                <div class="col s10 offset-s1">
+                    <input type="number" value="2" name="volume" min="2" max="500">
+                    <label for="volume">Drink volume(cL)</label>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col s7 offset-s1">
                     <button type="submit" class="btn waves-effect waves-light" name="action">Save
                         <i class="mdi-content-add right"></i>

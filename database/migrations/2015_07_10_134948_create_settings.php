@@ -17,7 +17,6 @@ class CreateSettings extends Migration {
 			$table->increments('id');
             $table->string('username');
             $table->string('password');
-            $table->smallInteger('volume')->unsigned()->nullable();
             $table->tinyInteger('start_method')->unsigned()->nullable();
             $table->tinyInteger('initial_status')->unsigned()->nullable();
             $table->smallInteger('timeout_time')->unsigned()->nullable();

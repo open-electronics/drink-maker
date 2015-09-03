@@ -66,7 +66,6 @@ class DatabaseSeeder extends Seeder {
 
         DB::table('settings')->where('id', '1')->insert(['username' => 'User',
             'Password'=>\Illuminate\Support\Facades\Hash::make('password'),
-            'volume'=>10,
             'timeout_time'=>15,
             'initial_status'=>0,
             'start_method'=>0,

@@ -27,7 +27,7 @@
     </div>
     <div class="col offset-s1 s5" align="center">
         <h4>Add drink:</h4>
-        <form method="post" enctype="multipart/form-data" action="{{url('drinks')}}">
+        <form id="newDrink" method="post" enctype="multipart/form-data" action="{{url('drinks')}}">
             <div class="row">
                 <div class="input-field col s8">
                     <input type="text" id="dname" name="name" maxlength="50">
@@ -64,11 +64,29 @@
             </div>
             <div class="row">
                 <div class="col s7 offset-s1">
-                    <button type="submit" class="btn waves-effect waves-light" name="action">Save
+                    <button id="drinkSubmit" type="submit" onclick="event.preventDefault(); save()" class="btn waves-effect waves-light" name="action">Save
                         <i class="mdi-content-add right"></i>
                     </button>
                 </div>
             </div>
+            <script>
+                function save(){
+                    //if($('input[name="quantity"]'))
+                    var l = $("input[name='parts[]']");
+                    var c = $("select[name='ingredients[]']");
+                    var tot= 0;
+                    for(var i = 0; i< l.length;i++){
+                        if(c[i]["value"]!=0) {
+                            tot += parseInt(l[i]["value"]);
+                        }
+                    }
+                    if($("input[name='volume']").val()%(2*tot)==0) {
+                        $('#newDrink').trigger('submit');
+                    }else{
+                        Materialize.toast('Volume must be an even multiple of the total parts',5000);
+                    }
+                }
+            </script>
         </form>
     </div>
 </div>

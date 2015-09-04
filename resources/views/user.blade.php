@@ -48,8 +48,8 @@ Order your cocktail!
                                 </div>
                             </div>
                             <div class = "row">
-                                <div class="col s10 offset-s1">
-                                    Volume : {{$drink->volume}}
+                                <div class="col s10 offset-s1 ">
+                                    Volume : {{$drink->volume}} cL
                                 </div>
                             </div>
                         </div>

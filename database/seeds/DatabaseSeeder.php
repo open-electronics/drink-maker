@@ -34,12 +34,12 @@ class DatabaseSeeder extends Seeder {
 
 
         //Seed drinks
-        DB::table('drinks')->insert(['name'=>'Negroni','photo'=>'negroni.jpg']);
-        DB::table('drinks')->insert(['name'=>'Spritz','photo'=>'spritz.jpg']);
-        DB::table('drinks')->insert(['name'=>'Negroni sbagliato','photo'=>'negronisb.jpg']);
-        DB::table('drinks')->insert(['name'=>'Americano','photo'=>'americano.jpg']);
-        DB::table('drinks')->insert(['name'=>'Martini dry','photo'=>'dry.jpg']);
-        DB::table('drinks')->insert(['name'=>'Vodka martini','photo'=>'vodma.jpg']);
+        DB::table('drinks')->insert(['name'=>'Negroni','photo'=>'negroni.jpg','volume'=>12]);
+        DB::table('drinks')->insert(['name'=>'Spritz','photo'=>'spritz.jpg','volume'=>12]);
+        DB::table('drinks')->insert(['name'=>'Negroni sbagliato','photo'=>'negronisb.jpg','volume'=>12]);
+        DB::table('drinks')->insert(['name'=>'Americano','photo'=>'americano.jpg','volume'=>10]);
+        DB::table('drinks')->insert(['name'=>'Martini dry','photo'=>'dry.jpg','volume'=>8]);
+        DB::table('drinks')->insert(['name'=>'Vodka martini','photo'=>'vodma.jpg','volume'=>8]);
 
         //Recipes
         $recipes=[
@@ -55,10 +55,10 @@ class DatabaseSeeder extends Seeder {
             ['drink_id'=>4,'ingredient_id'=>2,'needed'=>2],//Seed americano campari
             ['drink_id'=>4,'ingredient_id'=>6,'needed'=>1],//Seed americano soda
             ['drink_id'=>4,'ingredient_id'=>3,'needed'=>2],//Seed americano Martini rosso
-            ['drink_id'=>5,'ingredient_id'=>1,'needed'=>1],//Seed dry Gin
+            ['drink_id'=>5,'ingredient_id'=>1,'needed'=>3],//Seed dry Gin
             ['drink_id'=>5,'ingredient_id'=>7,'needed'=>1],//Seed dry dry
             ['drink_id'=>6,'ingredient_id'=>7,'needed'=>1],//Seed vodma dry
-            ['drink_id'=>6,'ingredient_id'=>8,'needed'=>2],//Seed vodma vodka
+            ['drink_id'=>6,'ingredient_id'=>8,'needed'=>3],//Seed vodma vodka
         ];
 
         //Seed recipes

@@ -2,8 +2,7 @@ echo "Checking for updates"
     cd /var/www/drink-maker
     REMOTES="$(sudo git remote show origin)"
     #ONLY IF UPDATES ARE ENABLED
-    #https://github.com/open-electronics/drink-maker.git
-    if [[ "$REMOTES" == *"Fetch URL: https://Marco_Bellan@bitbucket.org/Marco_Bellan/drink-maker.git"* ]]
+    if [[ "$REMOTES" == *"Fetch URL: https://github.com/open-electronics/drink-maker.git"* ]]
     then
       echo "Updates enabled"
       sudo git reset --hard

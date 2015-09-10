@@ -4,6 +4,7 @@ import time
 import serial
 import math
 import os
+import signal
 from subprocess import *
 
 global data,ser,base_url
@@ -93,8 +94,19 @@ def write_data(data):
 def connect_wifi(ssid,password):
 	os.system("sudo bash /var/www/drink-maker/utils/connect.sh "+ssid + " " + password)
 
+def load_sketch:
+	count = 0
+	p = subprocess.Popen(["bash","/home/pi/bin/ArduLoad","/var/www/drink-maker/utils/drink_maker.cpp.hex"], shell = False)
+	while p.poll() == None and count < 20
+		count = count + 1
+		time.sleep(1)
+	if p.poll() == None
+		try:
+			p.terminate()
+		except:
+			print("Error")
 
-os.system("bash /home/pi/bin/ArduLoad /var/www/drink-maker/utils/drink_maker.cpp.hex")
+load_sketch()
 
 time.sleep(3)
 base_url="http://127.0.0.1/"

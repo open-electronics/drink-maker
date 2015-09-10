@@ -41,7 +41,7 @@ echo "Checking for updates"
         fi
       elif [[ "$OUTPUT" == *"Already up-to-date."* ]]
       then
-        echo "Already up-to-date."
+        echo "Already up to date."
       else #Strange output
         echo "Updates disabled"
       fi

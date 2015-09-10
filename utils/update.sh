@@ -8,7 +8,7 @@ echo "Checking for updates"
       echo "Updates enabled"
       sudo git reset --hard
       OUTPUT="$(sudo git pull origin master)"
-      if [[ "$OUTPUT" == *"files changed"* ]]
+      if [[ "$OUTPUT" == *"files changed"* -o "$OUTPUT" == *"file changed"* ]]
       then
         echo "Updates found"
         if [[ "$OUTPUT" == *"install/default"* ]]

@@ -96,15 +96,20 @@ def connect_wifi(ssid,password):
 
 def load_sketch:
 	count = 0
-	p = subprocess.Popen(["bash","/home/pi/bin/ArduLoad","/var/www/drink-maker/utils/drink_maker.cpp.hex"], shell = False)
-	while p.poll() == None and count < 20
-		count = count + 1
-		time.sleep(1)
-	if p.poll() == None
-		try:
-			p.terminate()
-		except:
-			print("Error")
+	success = False
+	
+	while success == False
+		p = subprocess.Popen(["bash","/home/pi/bin/ArduLoad","/var/www/drink-maker/utils/drink_maker.cpp.hex"], shell = False)
+		while p.poll() == None and count < 20
+			count = count + 1
+			time.sleep(1)
+		if p.poll() == None
+			try:
+				p.terminate()
+			except:
+				print("Error")
+		else:
+			success = True
 
 load_sketch()
 

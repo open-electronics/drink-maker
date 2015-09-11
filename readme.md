@@ -29,6 +29,9 @@ Don't forget to later expand your RaspBian filesystem to fit all your SD card sp
 ##Read more
 You can read more about this on the [OpenElectronics website](http://www.open-electronics.org/the-drink-maker-open-sourcing-your-cocktail/)
 
+##Where to Buy
+You can buy the hardware needed to realize the Drink Maker machine on [Futura Elettronica website](https://www.futurashop.it/drinkmaker-con-5-dosatori-in-kit-7800-drinkmaker?filter_name=drink%20maker)
+
 ##Feature requests and Bugs
 You can send us feature requests and bugs via the "Issues" section of our GitHub repository!
 

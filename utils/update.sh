@@ -38,6 +38,8 @@ echo "Checking for updates"
           sudo chmod +x /etc/init.d/drink-maker.sh
           sudo update-rc.d drink-maker.sh defaults 
         fi
+        sudo chown www-data:www-data /var/www/drink-maker -R
+        sudo chmod 0775 /var/www/drink-maker/storage -R
       elif [[ "$OUTPUT" == *"Already up-to-date."* ]]
       then
         echo "Already up to date."

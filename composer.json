@@ -19,7 +19,7 @@
     "config": {
         "preferred-install": "dist",
         "github-oauth": {
-            "github.com": "fac10e6af70fdfeec66a5bb0b864f1d198af4e09"
+            "github.com": "YOURGITHUBPERSONALACCESSTOKENHERE"
          } 
     }
 }

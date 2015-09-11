@@ -26,9 +26,6 @@ if [ $# -eq 0 ]
     exit 1
 fi
 
-echo "Saving the access token"
-sudo sed -i "s/YOURGITHUBPERSONALACCESSTOKENHERE/$1/g" /home/pi/drink-maker/composer.json
-
 echo "Cleaning environment"
 
 echo "Removing GUI"
@@ -125,6 +122,9 @@ echo "Adding python to startup"
 sudo cp /var/www/drink-maker/utils/drink-makerController.sh /etc/init.d/drink-maker.sh
 sudo chmod +x /etc/init.d/drink-maker.sh
 sudo update-rc.d drink-maker.sh defaults
+
+echo "Saving the access token"
+sudo sed -i "s/YOURGITHUBPERSONALACCESSTOKENHERE/$1/g" /home/pi/drink-maker/composer.json
 
 echo "Installing RandA"
 cp /var/www/drink-maker/utils/install/RandAinstall.sh /home/pi/RandAinstall.sh

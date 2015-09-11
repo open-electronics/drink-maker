@@ -27,7 +27,7 @@ If you prefer a faster setup you can download the .img file and write it to an S
 Don't forget to later expand your RaspBian filesystem to fit all your SD card space!
 
 ##Read more
-You can read more about this on the [OpenElectronics website](http://www.open-electronics.org/the-drink-maker-open-sourcing-your-cocktail/)
+You can read more about this on the [OpenElectronics website](http://www.open-electronics.org/tag/drinkmaker/)
 
 ##Where to Buy
 You can buy the hardware needed to realize the Drink Maker machine on [Futura Elettronica website](https://www.futurashop.it/drinkmaker-con-5-dosatori-in-kit-7800-drinkmaker?filter_name=drink%20maker)

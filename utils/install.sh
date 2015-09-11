@@ -13,7 +13,7 @@ if [ $# -eq 0 ]
     echo "Where TOKEN is your GitHub personal access token"
     echo "An access token is needed to perform automatic operations and link them to an account."
     echo ""
-    echo "If you don't know how to create an access token follow there steps:"
+    echo "If you don't know how to create an access token follow these simple steps:"
     echo "1- In the top right corner of any page, click your profile photo, then click Settings."
     echo "2- In the user settings sidebar, click Personal access tokens."
     echo "3- Click Generate new token."

@@ -124,7 +124,7 @@ sudo chmod +x /etc/init.d/drink-maker.sh
 sudo update-rc.d drink-maker.sh defaults
 
 echo "Saving the access token"
-sudo sed -i "s/YOURGITHUBPERSONALACCESSTOKENHERE/$1/g" /home/pi/drink-maker/composer.json
+sudo sed -i "s/YOURGITHUBPERSONALACCESSTOKENHERE/$1/g" /var/www/drink-maker/composer.json
 
 echo "Installing RandA"
 cp /var/www/drink-maker/utils/install/RandAinstall.sh /home/pi/RandAinstall.sh

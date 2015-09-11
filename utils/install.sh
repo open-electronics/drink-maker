@@ -1,5 +1,33 @@
 #!/bin/bash
 
+#check if root
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied"
+    echo "Run this script like sudo bash install.sh TOKEN"
+    echo "Where TOKEN is your GitHub personal access token"
+    echo "An access token is needed to perform automatic operations and link them to an account."
+    echo ""
+    echo "If you don't know how to create an access token follow there steps:"
+    echo "1- In the top right corner of any page, click your profile photo, then click Settings."
+    echo "2- In the user settings sidebar, click Personal access tokens."
+    echo "3- Click Generate new token."
+    echo "4- Give your token a descriptive name."
+    echo "5- Select the scopes you wish to grant to this token."
+    echo "The default scopes allow you to interact with public and private repositories, user data, and gists."
+    echo "6- Click Generate token."
+    echo "Run this script like sudo bash install.sh TOKEN"
+    exit 1
+fi
+
+echo "Saving the access token"
+sudo sed -i "s/YOURGITHUBPERSONALACCESSTOKENHERE/$1/g" /home/pi/drink-maker/composer.json
+
 echo "Cleaning environment"
 
 echo "Removing GUI"

@@ -107,6 +107,11 @@ sudo cp /home/pi/drink-maker/.env.deploy /home/pi/drink-maker/.env
 
 echo "Moving all in /var/www"
 sudo mv /home/pi/drink-maker /var/www
+
+echo "Saving the access token"
+sudo bash /var/www/drink-maker/utils/setToken.sh $1
+
+echo "Assigning folders to www-data"
 sudo chown www-data:www-data /var/www/drink-maker -R
 sudo chmod 0775 /var/www/drink-maker/storage -R
 
@@ -122,9 +127,6 @@ echo "Adding python to startup"
 sudo cp /var/www/drink-maker/utils/drink-makerController.sh /etc/init.d/drink-maker.sh
 sudo chmod +x /etc/init.d/drink-maker.sh
 sudo update-rc.d drink-maker.sh defaults
-
-echo "Saving the access token"
-sudo bash /var/www/drink-maker/utils/setToken.sh $1
 
 echo "Installing RandA"
 cp /var/www/drink-maker/utils/install/RandAinstall.sh /home/pi/RandAinstall.sh

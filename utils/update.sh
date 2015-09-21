@@ -1,4 +1,5 @@
 echo "Checking for updates"
+sleep 20
     cd /var/www/drink-maker
     REMOTES="$(sudo git remote show origin)"
     #ONLY IF UPDATES ARE ENABLED

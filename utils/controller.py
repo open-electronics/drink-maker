@@ -95,10 +95,11 @@ def connect_wifi(ssid,password):
 	os.system("sudo bash /var/www/drink-maker/utils/connect.sh "+ssid + " " + password)
 
 def load_sketch():
-	count = 0
+	globalCount = 0
 	success = False
 	
 	while success == False:
+		count = 0
 		p = subprocess.Popen(["bash","/home/pi/bin/ArduLoad","/var/www/drink-maker/utils/drink_maker.cpp.hex"], shell = False)
 		while p.poll() == None and count < 20:
 			count = count + 1
@@ -110,6 +111,11 @@ def load_sketch():
 				print("Error")
 		else:
 			success = True
+			return
+		globalCount = globalCount+1
+		time.sleep(4)
+		if globalCount == 15:
+			os.system("sudo reboot")
 
 load_sketch()
 

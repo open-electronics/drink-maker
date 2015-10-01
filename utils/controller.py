@@ -116,7 +116,7 @@ def load_sketch():
 		time.sleep(4)
 		if globalCount == 15:
 			os.system("sudo reboot")
-
+time.sleep(20)
 load_sketch()
 
 time.sleep(3)

@@ -117,9 +117,9 @@ def load_sketch():
 		if globalCount == 15:
 			os.system("sudo reboot")
 time.sleep(20)
-load_sketch()
+#load_sketch()
 
-time.sleep(3)
+#time.sleep(3)
 base_url="http://127.0.0.1/"
 connected = False
 while not connected:

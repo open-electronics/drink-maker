@@ -25,6 +25,7 @@ sudo bash install.sh
 This will take some time and it will install all the dependencies necessary to make the machine work.
 If you prefer a faster setup you can download the .img file and write it to an SD card with at least 8GB of free space.
 Don't forget to later expand your RaspBian filesystem to fit all your SD card space!
+In any case you should upload the .ino sketch you find in utils to your microcontroller!
 
 ##Credentials
 Default username is "User" and password is "password".

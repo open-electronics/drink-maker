@@ -89,18 +89,18 @@
         </div>
         <div class="row">
             <div class=" col offset-s8 s3">
-                {{--<script>--}}
-                    {{--$( document ).ready(function() {--}}
-                        {{--$("#submit").click(function(){--}}
-                            {{--event.preventDefault();--}}
-                            {{--if( $("#ssid").val()==""){--}}
-                                {{--Materialize.toast('Choose a wifi network!',3000,'rounded');--}}
-                            {{--}else{--}}
-                                {{--$("#form").submit();--}}
-                            {{--}--}}
-                        {{--});--}}
-                    {{--});--}}
-                {{--</script>--}}
+                <script>
+                    $( document ).ready(function() {
+                    $("#submit").click(function(){
+                        event.preventDefault();
+                            if( $("#ssid").val()==""){
+                                Materialize.toast('Choose a wifi network!',3000,'rounded');
+                            }else{
+                                $("#form").submit();
+                            }
+                        );
+                    );
+                </script>
                 <button id="submit" type="submit" class="btn waves-effect waves-light">
                     <i class="mdi-content-send right"></i>
                     Save

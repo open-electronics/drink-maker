@@ -81,7 +81,7 @@
         <div id = "warner" style="display: none" class="row">
             <div class="col s10 offset-s1">
                 <div class="card-panel yellow">
-                    The machine will try to connect to the specified network as soon as you save the settings!\n The website may become unresponsive. In case of error the macine will fallback to this connection.
+                    The machine will try to connect to the specified network as soon as you save the settings! The website may become unresponsive. In case of error the macine will fallback to this connection.
                 </div>
             </div>
         </div>

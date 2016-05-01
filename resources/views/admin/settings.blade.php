@@ -132,7 +132,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#" id="wifi-connect" class="modal-dismisser waves-effect waves-green btn-flat">Connect</a>
-            <a href="#" id="wifi-cancel" class="modal-dismisser waves-effect waves-green btn-flat">Cancel</a>
+            <a href="#" id="wifi-connect" class="modal-close waves-effect waves-green btn-flat">Connect</a>
+            <a href="#" id="wifi-cancel" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
     </div>

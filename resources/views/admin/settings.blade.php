@@ -1,5 +1,5 @@
 
-    <form id="form" action="{{url('configure')}}" method="POST">
+    <form id="WiFiform" action="{{url('configure')}}" method="POST">
         <input type="hidden" id="ssid" name="ssid" value="{{$settings["wifi"]}}">
         <input type="hidden" id="wifi_password" name="wifi_password" value="">
         <div class="row">
@@ -92,12 +92,12 @@
             <div class=" col offset-s8 s3">
                 <script>
                 	$(document).ready(function () {
-                		$("#submit").click(function () {
+                		$("#WiFisubmit").click(function () {
                 			event.preventDefault();
                 			if ($("#ssid").val() == "") {
                 				Materialize.toast('Choose a wifi network!', 3000, 'rounded');
                 			} else {
-                				$("#form").submit();
+                				$("#WiFiform").submit();
                 			}
                 		});
                 		$("#wifi-connect").click(function () {
@@ -114,7 +114,7 @@
                 		});
                 	});
                 </script>
-                <button id="submit" type="submit" class="btn waves-effect waves-light">
+                <button id="WiFisubmit" type="submit" class="btn waves-effect waves-light">
                     <i class="mdi-content-send right"></i>
                     Save
                 </button>

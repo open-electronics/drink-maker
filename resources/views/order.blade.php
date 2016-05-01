@@ -48,12 +48,12 @@
             $.get(id+"/async", function(response){
                 var played = $("#played");
                 var shouldPlay = $("#shouldPlay");
-                if(played.data("hasplayed")=="false" && shouldPlay.data("sound")=="true"){
-                    played.data("hasplayed","true");
+                if (played.getAttribure("data-hasplayed") == "false" && shouldPlay.getAttribure("data-sound") == "true") {
+                    played.setAttribute("data-hasplayed","true");
                     $("#sound").play();
                 }
                 $("#target").html(response);
-                if(!$.inArray(shouldPlay.data("status"),[0,1,5,6])){
+                if (!$.inArray(shouldPlay.getAttribure("data-status"), [0, 1, 5, 6])) {
                     $("#delete").hide();
                 }
                 setTimeout(doPool, 5000);

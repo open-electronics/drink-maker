@@ -7,7 +7,7 @@
                 $(document).ready(function () {
                 	console.log("I'm ready already");
                 	$('.modal-trigger').leanModal();
-                	$('.model-trigger').click(function () {
+                	$('.modal-trigger').click(function () {
                 		console.log(this.getAttribute('data-network'));
                 		window.network = this.getAttribute('data-network');
                 	});

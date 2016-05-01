@@ -1,6 +1,7 @@
 
     <form id="form" action="{{url('configure')}}" method="POST">
         <input type="hidden" id="ssid" name="ssid" value="{{$settings["wifi"]}}">
+        <input type="hidden" id="wifi_password" name="wifi_password" value="">
         <div class="row">
             <div class="col offset-s1 s5 input-field">
                 <input type="text" value="{{$settings['username']}}" name="username" id="username" >
@@ -89,18 +90,30 @@
         </div>
         <div class="row">
             <div class=" col offset-s8 s3">
-                {{--<script>--}}
-                    {{--$( document ).ready(function() {--}}
-                        {{--$("#submit").click(function(){--}}
-                            {{--event.preventDefault();--}}
-                            {{--if( $("#ssid").val()==""){--}}
-                                {{--Materialize.toast('Choose a wifi network!',3000,'rounded');--}}
-                            {{--}else{--}}
-                                {{--$("#form").submit();--}}
-                            {{--}--}}
-                        {{--});--}}
-                    {{--});--}}
-                {{--</script>--}}
+                <script>
+                	$(document).ready(function () {
+                		$("#submit").click(function () {
+                			event.preventDefault();
+                			if ($("#ssid").val() == "") {
+                				Materialize.toast('Choose a wifi network!', 3000, 'rounded');
+                			} else {
+                				$("#form").submit();
+                			}
+                		});
+                		$("#wifi-connect").click(function () {
+                			$("#warner").show();
+                			$("#wifi_password").val($("#tmp_wifi_password").val());
+                			$("#ssid").val(window.network);
+                		});
+                		$("#wifi-cancel").click(function () {
+                			if ($("#wifi_password").val() == "") {
+                				$("#warner").hide();
+                			}
+                			$("#tmp_wifi_password").val('');
+                			window.network = "";
+                		});
+                	});
+                </script>
                 <button id="submit" type="submit" class="btn waves-effect waves-light">
                     <i class="mdi-content-send right"></i>
                     Save
@@ -113,13 +126,13 @@
             <h4>Insert password</h4>
             <div class="row">
                 <div class="col s10 offset-s1 input-field">
-                    <input type="password" id="password" name="wifi_password">
+                    <input type="password" id="tmp_wifi_password" name="tmp_wifi_password">
                     <label for="password">WiFi passowrd:</label>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#" onclick="$('#warner').show()" class=" modal-dismisser waves-effect waves-green btn-flat">Connect</a>
-            <a href="#" onclick="$('#password').val('');" class=" modal-dismisser waves-effect waves-green btn-flat">Cancel</a>
+            <a href="#" id="wifi-connect" class="modal-dismisser waves-effect waves-green btn-flat">Connect</a>
+            <a href="#" id="wifi-cancel" class="modal-dismisser waves-effect waves-green btn-flat">Cancel</a>
         </div>
     </div>

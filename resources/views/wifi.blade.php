@@ -3,14 +3,17 @@
         <div align="center">
             <h5>WiFi networks</h5>
         </div>
-        <ul class="collection">
-            <script>
+		<script>
                 $(document).ready(function () {
-                   $('.modal-trigger').leanModal();
+                	$('.modal-trigger').leanModal();
+                	$('.model-trigger').click(function () {
+                		window.network = $(this).data('network');
+                	});
                 });
-            </script>
+		</script>
+        <ul class="collection">
         @forelse($wifi as $w)
-            <li class="collection-item {{$w!=$settings['wifi']?'modal-trigger':''}}" style="cursor: pointer" data-target="passwordModal" >
+            <li class="collection-item {{$w!=$settings['wifi']?'modal-trigger':''}}" style="cursor: pointer" data-target="passwordModal" data-network="{{$w}}" >
                 {{$w}}
                 @if($w!=$settings["wifi"])
                     <i data-target="passwordModal" style="color: dodgerblue;" class="mdi-device-signal-wifi-4-bar right"></i>

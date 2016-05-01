@@ -5,10 +5,8 @@
         </div>
 		<script>
                 $(document).ready(function () {
-                	console.log("I'm ready already");
                 	$('.modal-trigger').leanModal();
                 	$('.modal-trigger').click(function () {
-                		console.log(this.getAttribute('data-network'));
                 		window.network = this.getAttribute('data-network');
                 	});
                 });

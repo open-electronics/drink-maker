@@ -7,7 +7,7 @@
                 $(document).ready(function () {
                 	$('.modal-trigger').leanModal();
                 	$('.model-trigger').click(function () {
-                		window.network = $(this).data('network');
+                		window.network = $(this).getAttribute('data-network');
                 	});
                 });
 		</script>

@@ -5,6 +5,7 @@
         </div>
 		<script>
                 $(document).ready(function () {
+                	console.log("I'm ready already");
                 	$('.modal-trigger').leanModal();
                 	$('.model-trigger').click(function () {
                 		console.log($(this).getAttribute('data-network'));

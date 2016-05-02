@@ -9,8 +9,8 @@ sudo cp "${target}" "${backup}"
 echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev " > "${target}"
 echo "update_config=1" >> "${target}"
 echo "network={" >> "${target}"
-echo "  ssid=\""$1"\"" >> "${target}"
-echo "  psk=\""$2"\"" >> "${target}"
+echo "  ssid=\"'$1'\"" >> "${target}"
+echo "  psk=\"'$2'\"" >> "${target}"
 echo "}" >> "${target}"
 
 #Connect interfaces

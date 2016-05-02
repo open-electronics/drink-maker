@@ -18,7 +18,7 @@
                 @if($w!=$settings["wifi"])
                     <i data-target="passwordModal" style="color: dodgerblue;" class="mdi-device-signal-wifi-4-bar right"></i>
                 @else
-                    <i target="passwordModal" class="mdi-action-done right"></i>
+                    <i data-target="passwordModal" class="mdi-action-done right"></i>
                 @endif
             </li>
         @empty

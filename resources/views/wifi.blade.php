@@ -13,12 +13,12 @@
 		</script>
         <ul class="collection">
         @forelse($wifi as $w)
-            <li class="collection-item {{$w!=$settings['wifi']?'modal-trigger':''}}" style="cursor: pointer" data-target="passwordModal" data-network="{{$w}}" >
+            <li class="collection-item modal-trigger" style="cursor: pointer" data-target="passwordModal" data-network="{{$w}}" >
                 {{$w}}
                 @if($w!=$settings["wifi"])
                     <i data-target="passwordModal" style="color: dodgerblue;" class="mdi-device-signal-wifi-4-bar right"></i>
                 @else
-                    <i class ="mdi-action-done right"></i>
+                    <i target="passwordModal" class="mdi-action-done right"></i>
                 @endif
             </li>
         @empty

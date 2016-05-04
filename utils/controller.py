@@ -92,7 +92,9 @@ def write_data(data):
                         success = False
                         
 def connect_wifi(ssid,password):
-	os.system("sudo bash /var/www/drink-maker/utils/connect.sh "+ssid + " " + password)
+	ssid = ssid.replace("'", "'\"'\"'")
+	password = password.replace("'", "'\"'\"'")
+	os.system("sudo bash /var/www/drink-maker/utils/connect.sh '"+ssid + "' '" + password + "'")
 
 def load_sketch():
 	globalCount = 0

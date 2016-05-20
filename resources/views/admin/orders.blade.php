@@ -49,9 +49,17 @@
                                 Making
                             </td>
                             <td>
+                                <script>
+                                    function requestConfirm(form){
+                                        if(confirm("Delete order? The machine will continue preparing it. Use in case of emergency")){
+                                            form.submit();
+                                            
+                                        }
+                                    }
+                                </script>
                                 <form action="{{url("orders/".$o["id"])}}" method="post" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete">
                                     <input name="_method" type="hidden" value="delete"/>
-                                    <i style="cursor: pointer" onclick="$(this).closest('form').submit();" class="mdi-content-clear"></i>
+                                    <i style="cursor: pointer" onclick="requestConfirm($(this).closest('form'));" class="mdi-content-clear"></i>
                                 </form>
                             </td>
                         @elseif($o["status"]==5)

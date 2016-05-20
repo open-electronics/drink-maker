@@ -170,7 +170,7 @@ class OrderController extends Controller {
      */
     public function delete($id){
         $order = Order::find($id);
-        if(in_array($order->status,[0,1,5,6])) {
+        if(in_array($order->status,[0,1,2,5,6])) {
             $order->deleteOrder();
             flasher::success('Order deleted correctly');
         }else{
